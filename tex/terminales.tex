@@ -1,0 +1,18 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ encoding:\ utf-8}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ cambio\ \textcolor{BrickRed}{(}monedas\textcolor{BrickRed}{,}\ precio\textcolor{BrickRed}{)} \\
+\mbox{}\ \ vuelta\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{} \\
+\mbox{}\ \ monedas\textcolor{BrickRed}{.}sort\textcolor{BrickRed}{.}reverse\textcolor{BrickRed}{.}each\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}moneda\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ numero$\_$monedas\ \textcolor{BrickRed}{=}\ precio\ \textcolor{BrickRed}{/}\ moneda \\
+\mbox{}\ \ \ \ precio\ \textcolor{BrickRed}{=}\ precio\ \textcolor{BrickRed}{-}\ numero$\_$monedas\textcolor{BrickRed}{*}moneda \\
+\mbox{} \\
+\mbox{}\ \ \ \ vuelta\textcolor{BrickRed}{.}push\ \textcolor{BrickRed}{[}moneda\textcolor{BrickRed}{,}\ numero$\_$monedas\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \textbf{\textcolor{Blue}{return}}\ vuelta \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{}
