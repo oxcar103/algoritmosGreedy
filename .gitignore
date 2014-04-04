@@ -1,0 +1,6 @@
+# Latex backup files
+*.aux
+*.log
+*.toc
+*.backup
+*.directory
