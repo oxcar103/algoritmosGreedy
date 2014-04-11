@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 import numpy
 import matplotlib.pyplot as pplt
 from scipy.spatial import Delaunay
 import fileinput
 import re
+
 
 def showDelaunay(points):
     """ 
@@ -10,6 +14,7 @@ def showDelaunay(points):
     I uses the Scipy library.
     docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.spatial.Delaunay.html
     """
+    points = numpy.array(points)
 
     # Compute Delaunay
     triangulation = Delaunay(points)
@@ -20,10 +25,26 @@ def showDelaunay(points):
     pplt.show()
 
 
+def readPoints():
+    """
+    Lee puntos con el formato de entrada siguiente:
+      n
+      x y
+      x y
+      x y
+      (...)
+    donde n es el número de puntos y [x,y] son las coordenadas de un punto.
+    """
+
+    points = []
+    n = input()
+    for x in range(n):
+        a,b = raw_input().strip().split()
+        a,b = int(a), int(b)
+        points.append([a,b])
+    return points
+
 
 if __name__ == "__main__":
-    for line in fileinput.input():
-        points = re.findall("\[[0-9]*,[0-9]*\]", line)
-        readPoints = [[int(s) for s in point.split() if s.isdigit()] for point in points]
-        print readPoints
-        
+    points = readPoints()
+    showDelaunay(points)
