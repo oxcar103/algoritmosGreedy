@@ -2,7 +2,7 @@ import numpy
 import matplotlib.pyplot as pplt
 from scipy.spatial import Delaunay
 import fileinput
-
+import re
 
 def showDelaunay(points):
     """ 
@@ -14,7 +14,7 @@ def showDelaunay(points):
     # Compute Delaunay
     triangulation = Delaunay(points)
 
-    # Plots Delaunay
+    # Plot Delaunay
     pplt.triplot(points[:,0], points[:,1], triangulation.simplices.copy())
     pplt.plot(points[:,0], points[:,1], 'o')
     pplt.show()
@@ -22,5 +22,8 @@ def showDelaunay(points):
 
 
 if __name__ == "__main__":
-    pass
-
+    for line in fileinput.input():
+        points = re.findall("\[[0-9]*,[0-9]*\]", line)
+        readPoints = [[int(s) for s in point.split() if s.isdigit()] for point in points]
+        print readPoints
+        
