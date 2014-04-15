@@ -24,7 +24,6 @@ def showDelaunay(points):
     pplt.plot(points[:,0], points[:,1], 'o')
     pplt.show()
 
-
 def readPoints():
     """
     Lee puntos con el formato de entrada siguiente:
@@ -44,6 +43,28 @@ def readPoints():
         points.append([a,b])
     return points
 
+
+def euclideanDistance(a,b):
+    return (a[0]-b[0])**2 + (a[1]-b[1])**2
+
+
+import graph
+import itertools
+def triangulationToGraph (triangulation):
+    trigraph = graph.Graph()
+    points = triangulation.points.tolist()
+    
+    for p in points:
+        trigraph.addVertex(p)
+        
+    for t in triangulation.simplices:
+        for pair in itertools.permutations(t,2):
+            a = trigraph.getVertex(pair[0])
+            b = trigraph.getVertex(pair[1])
+            distance = euclideanDistance(pair[0],pair[1])
+            a.addNeighbor(b, distance)
+
+    return trigraph
 
 if __name__ == "__main__":
     points = readPoints()
