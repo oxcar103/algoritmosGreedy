@@ -10,18 +10,16 @@ module QAP
             # Lectura del archivo del problema QAP.
             File.open(filename, "r") do |file|
                 lines = file.readlines
-                @size = lines[0]
+                @size = lines[0].to_i
                 @permutation = (0..(size-1)).to_a
-                @distances = Matrix.zero(size)
-                @weights = Matrix.zero(size)
-
-                distances.each do |a|
+                
+                @distances = Matrix.build{|a|
                     a = file.read().to_i
-                end
+                }
 
-                weights.each do |a|
+                @weights = Matrix.build{|a|
                     a = file.read().to_i
-                end
+                }
             end
         end
 
@@ -50,7 +48,7 @@ module QAP
     end
     
 
-    def 2opt(qap)
+    def self._2opt(qap)
         continue = True
         
         while continue
@@ -70,6 +68,11 @@ module QAP
             end
         end
     end
+    
+    if __FILE__ == $0
+        puts "Introduce nombre de archivo: "
+        file = gets.chomp
+        #puts "leído: #{file}"
+        instancia = QAP.new(file)
+    end
 end
-
-
