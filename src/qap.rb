@@ -2,24 +2,39 @@
 # encoding: utf-8
 require 'matrix'
 
+class File
+    def eat_empty_lines
+        while true
+            if ((c=getc) != "\n")
+                ungetc(c)
+                break
+            end
+        end
+    end
+end
 
 module QAP
-    
     class QAP
         def initialize(filename)
             # Lectura del archivo del problema QAP.
             File.open(filename, "r") do |file|
-                lines = file.readlines
-                @size = lines[0].to_i
-                @permutation = (0..(size-1)).to_a
-                
-                @distances = Matrix.build{|a|
-                    a = file.read().to_i
-                }
+                @size = file.readline.to_i
+                file.eat_empty_lines
 
-                @weights = Matrix.build{|a|
-                    a = file.read().to_i
+                @permutation = (0..(size-1)).to_a
+                @distances = Array.new(size)
+                @weights = Array.new(size)
+                
+                (0..(size-1)).to_a.each{|i|
+                    @distances[i]=file.readline.chomp.split(" ").map &:to_i
                 }
+      
+                file.eat_empty_lines
+                
+                (0..(size-1)).to_a.each{|i|
+                    @weights[i]=file.readline.chomp.split(" ").map &:to_i
+                }
+                puts @weights.to_s
             end
         end
 
@@ -29,7 +44,7 @@ module QAP
 
         # Lectura de distancias y pesos.
         def distance(i,j)
-            @distances[i,j]
+            @distances[i][j]
         end
         def weigth(i,j)
             @weights[i,j]
@@ -45,34 +60,34 @@ module QAP
             end
             return total_cost
         end
-    end
     
 
-    def self._2opt(qap)
-        continue = True
-        
-        while continue
-            continue = False
+        def self.opt2(qap)
+            continue = true
             
-            (0..(qap.size-1)).each do |i|
-                ((i+1)..(qap.size-1)).each do |j|
-                    old_cost = qap.cost
-                    qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i] 
-                    
-                    if old_cost <= qap.cost
-                        qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i]
-                    else    
-                        continue = True
+            while continue
+                continue = false
+                
+                (0..(qap.size-1)).each do |i|
+                    ((i+1)..(qap.size-1)).each do |j|
+                        old_cost = qap.cost
+                        qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i] 
+                        
+                        if old_cost <= qap.cost
+                            qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i]
+                        else    
+                            continue = true
+                        end
                     end
                 end
             end
         end
     end
-    
+
     if __FILE__ == $0
         puts "Introduce nombre de archivo: "
         file = gets.chomp
-        #puts "leído: #{file}"
         instancia = QAP.new(file)
+        QAP.opt2 instancia
     end
 end
