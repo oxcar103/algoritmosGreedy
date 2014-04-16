@@ -5,3 +5,5 @@
 *.directory
 *.zip
 *.pdf
+*.directory
+*.fuse_hidden*
