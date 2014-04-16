@@ -34,7 +34,6 @@ module QAP
                 (0..(size-1)).to_a.each{|i|
                     @weights[i]=file.readline.chomp.split(" ").map &:to_i
                 }
-                puts @weights.to_s
             end
         end
 
@@ -46,8 +45,8 @@ module QAP
         def distance(i,j)
             @distances[i][j]
         end
-        def weigth(i,j)
-            @weights[i,j]
+        def weight(i,j)
+            @weights[i][j]
         end
 
         # Coste actual.
