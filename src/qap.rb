@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-require 'matrix'
 
 class File
     def eat_empty_lines
