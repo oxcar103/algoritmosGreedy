@@ -51,15 +51,19 @@ module QAP
     
 
     def 2opt(qap)
+        continue = True
+        
         while continue
             continue = False
+            
             (0..(qap.size-1)).each do |i|
                 ((i+1)..(qap.size-1)).each do |j|
                     old_cost = qap.cost
                     qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i] 
-                    new_cost = weight(i,j)*distance(permutation[j],permutation[i])
-                    if old_cost <= new_cost
+                    
+                    if old_cost <= qap.cost
                         qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i]
+                    else    
                         continue = True
                     end
                 end
