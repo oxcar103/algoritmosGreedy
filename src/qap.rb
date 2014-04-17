@@ -24,13 +24,13 @@ module QAP
                 @distances = Array.new(size)
                 @weights = Array.new(size)
                 
-                (0..(size-1)).to_a.each{|i|
+                (0..(size-1)).each{|i|
                     @distances[i]=file.readline.chomp.split(" ").map &:to_i
                 }
       
                 file.eat_empty_lines
                 
-                (0..(size-1)).to_a.each{|i|
+                (0..(size-1)).each{|i|
                     @weights[i]=file.readline.chomp.split(" ").map &:to_i
                 }
             end
@@ -58,7 +58,6 @@ module QAP
             end
             return total_cost
         end
-    
 
         def self.opt2(qap)
             continue = true
@@ -80,12 +79,48 @@ module QAP
                 end
             end
         end
+        
+        def self.greedy_v1(qap)
+            min = qap.cost
+            result = qap
+            s = qap.size-1
+
+            (0..s).each do |k|
+                fab_asignada = Array.new(s+1){false}
+                loc_asignada = Array.new(s+1){false}
+                actual = qap.clone
+                
+                (1..s).inject(k) do |i|
+                    fab_asignada[i] = true
+                    loc_asignada[actual.permutation[i]] = true
+                    
+                    max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [actual.weight(k,j[0]),j[-1]]}.min[-1]
+                    min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j| [actual.distance(actual.permutation[k],j[0]),j[-1]]}.min[-1]
+ 
+                    actual.permutation[max_w_index] = min_d_index
+                    max_w_index
+                end
+                
+                if actual.cost < min
+                    result = actual
+                end
+            end
+            qap = result
+        end
     end
 
     if __FILE__ == $0
         puts "Introduce nombre de archivo: "
         file = gets.chomp
         instancia = QAP.new(file)
+        puts "\t Coste inicial: #{instancia.cost}"
+        
+        QAP.greedy_v1 instancia
+        puts "Instancia tras greedy: \n\t #{instancia.permutation.to_s}"
+        puts "\t Coste: #{instancia.cost}"
+        
         QAP.opt2 instancia
+        puts "Instancia tras 2-opt: \n\t #{instancia.permutation.to_s}"
+        puts "\t Coste: #{instancia.cost}"
     end
 end
