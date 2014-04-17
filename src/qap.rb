@@ -3,12 +3,9 @@
 
 class File
     def eat_empty_lines
-        while true
-            if ((c=getc) != "\n")
-                ungetc(c)
-                break
-            end
+        while (c=getc) == "\n"
         end
+        ungetc(c)
     end
 end
 
