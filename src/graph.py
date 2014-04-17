@@ -1,4 +1,5 @@
-#encoding: utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 
 # Implementación de grafos en Python.
 # Usando diccionarios como lista de adyacencia.
@@ -69,3 +70,6 @@ class Graph:
     def __iter__(self):
         """ El iterador sobre el grafo es el iterador sobre la lista de vértices. """
         return iter(self.vertList.values())
+
+
+

@@ -5,8 +5,7 @@ import numpy
 import matplotlib.pyplot as pplt
 from scipy.spatial import Delaunay
 import fileinput
-import re
-
+import point
 
 def showDelaunay(points):
     """ 
@@ -14,39 +13,18 @@ def showDelaunay(points):
     I uses the Scipy library.
     docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.spatial.Delaunay.html
     """
-    points = numpy.array(points)
+    array = []
+    for point in points:
+        array.append([point.getX(), point.getY()])
+    array = numpy.array(array)
 
     # Compute Delaunay
-    triangulation = Delaunay(points)
+    triangulation = Delaunay(array)
 
     # Plot Delaunay
-    pplt.triplot(points[:,0], points[:,1], triangulation.simplices.copy())
-    pplt.plot(points[:,0], points[:,1], 'o')
+    pplt.triplot(array[:,0], array[:,1], triangulation.simplices.copy())
+    pplt.plot(array[:,0], array[:,1], 'o')
     pplt.show()
-
-def readPoints():
-    """
-    Lee puntos con el formato de entrada siguiente:
-      n
-      x y
-      x y
-      x y
-      (...)
-    donde n es el número de puntos y [x,y] son las coordenadas de un punto.
-    """
-
-    points = []
-    n = input()
-    for x in range(n):
-        a,b = raw_input().strip().split()
-        a,b = int(a), int(b)
-        points.append([a,b])
-    return points
-
-
-def euclideanDistance(a,b):
-    """ Distancia euclídea entre dos puntos. """
-    return (a[0]-b[0])**2 + (a[1]-b[1])**2
 
 
 import graph
@@ -59,7 +37,7 @@ def triangulationToGraph (triangulation):
     
     # Añade los puntos al grafo.
     for p in points:
-        trigraph.addVertex(p)
+        trigraph.addVertex(Point(p[0], p[1]))
     
     # Para cada punto del grafo, añade sus vecinos.
     for t in triangulation.simplices:
@@ -71,6 +49,28 @@ def triangulationToGraph (triangulation):
 
     return trigraph
 
+
+
+
+
+# Dibujando grafos de puntos bidimensionales.
+import networkx
+def draw_graph(graph):
+    # Genera un grafo de Networkx
+    g = networkx.Graph()
+
+    for node in graph.getVertices():
+        g.add_node(node.getId().getX(), node.getId().getY())
+        for neighbor in node.getConnections():
+            g.add_edge(node, neighbor)
+
+    # Dibuja este grafo
+    networkx.draw(g)
+    plt.show()
+
+
 if __name__ == "__main__":
-    points = readPoints()
+    points = point.readPoints()
     showDelaunay(points)
+    #graph = triangulationToGraph(Delaunay(points))
+    draw_graph(graph)
