@@ -45,24 +45,29 @@ def readPoints():
 
 
 def euclideanDistance(a,b):
+    """ Distancia euclídea entre dos puntos. """
     return (a[0]-b[0])**2 + (a[1]-b[1])**2
 
 
 import graph
 import itertools
 def triangulationToGraph (triangulation):
+    """ Convierte una triangulación en un grafo. """
+
     trigraph = graph.Graph()
     points = triangulation.points.tolist()
     
+    # Añade los puntos al grafo.
     for p in points:
         trigraph.addVertex(p)
-        
+    
+    # Para cada punto del grafo, añade sus vecinos.
     for t in triangulation.simplices:
         for pair in itertools.permutations(t,2):
             a = trigraph.getVertex(pair[0])
             b = trigraph.getVertex(pair[1])
             distance = euclideanDistance(pair[0],pair[1])
-            a.addNeighbor(b, distance)
+            getVertex(a).addNeighbor(b, distance)
 
     return trigraph
 
