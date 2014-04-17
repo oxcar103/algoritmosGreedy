@@ -9,6 +9,30 @@ class File
     end
 end
 
+class Object
+    # http://stackoverflow.com/questions/8206523/how-to-create-a-deep-copy-of-an-object-in-ruby
+    def deep_clone
+        return @deep_cloning_obj if @deep_cloning
+        @deep_cloning_obj = clone
+        @deep_cloning_obj.instance_variables.each do |var|
+            val = @deep_cloning_obj.instance_variable_get(var)
+            begin
+                @deep_cloning = true
+                val = val.deep_clone
+            rescue TypeError
+                next
+            ensure
+                @deep_cloning = false
+            end
+            @deep_cloning_obj.instance_variable_set(var, val)
+        end
+        deep_cloning_obj = @deep_cloning_obj
+        @deep_cloning_obj = nil
+        deep_cloning_obj
+    end
+end
+
+
 module QAP
     class QAP
         def initialize(filename)
@@ -93,8 +117,8 @@ module QAP
             (0..s).each do |k|
                 fab_asignada = Array.new(s+1){false}
                 loc_asignada = Array.new(s+1){false}
-                actual = qap.clone
-                actual.permutation=qap.permutation.clone
+                actual = qap.deep_clone
+                # actual.permutation=qap.permutation.clone
                 
                 (1..s).inject(k) do |i|
                     fab_asignada[i] = true
@@ -148,6 +172,10 @@ module QAP
         
         QAP.greedy_v1 instancia
         puts "Instancia tras greedy: \n\t #{instancia.permutation.to_s}"
+        puts "\t Coste: #{instancia.cost}"
+
+        QAP.greedy_v2 instancia
+        puts "Instancia tras greedy 2: \n\t #{instancia.permutation.to_s}"
         puts "\t Coste: #{instancia.cost}"
         
         QAP.opt2 instancia
