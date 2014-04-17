@@ -24,15 +24,15 @@ module QAP
                 @distances = Array.new(size)
                 @weights = Array.new(size)
                 
-                (0..(size-1)).each{|i|
+                (0..(size-1)).each do |i|
                     @distances[i]=file.readline.chomp.split(" ").map &:to_i
-                }
+                end
       
                 file.eat_empty_lines
                 
-                (0..(size-1)).each{|i|
+                (0..(size-1)).each do |i|
                     @weights[i]=file.readline.chomp.split(" ").map &:to_i
-                }
+                end
             end
         end
 
