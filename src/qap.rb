@@ -59,12 +59,19 @@ module QAP
             return total_cost
         end
 
+        ##
+        # Heurísticas
+        ##
+
+        # Heurística 2-opt.
         def self.opt2(qap)
             continue = true
             
             while continue
                 continue = false
                 
+                # Realiza una permutación simple y comprueba si mejora el coste total.
+                # Termina el proceso cuando no encuentra mejoras en una iteración.
                 (0..(qap.size-1)).each do |i|
                     ((i+1)..(qap.size-1)).each do |j|
                         old_cost = qap.cost
@@ -80,6 +87,7 @@ module QAP
             end
         end
         
+        # Heurística Greedy.
         def self.greedy_v1(qap)
             min = qap.cost
             result = qap
