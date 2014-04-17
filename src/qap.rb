@@ -3,12 +3,9 @@
 
 class File
     def eat_empty_lines
-        while true
-            if ((c=getc) != "\n")
-                ungetc(c)
-                break
-            end
+        while (c=getc) == "\n"
         end
+        ungetc(c)
     end
 end
 
@@ -24,15 +21,15 @@ module QAP
                 @distances = Array.new(size)
                 @weights = Array.new(size)
                 
-                (0..(size-1)).each{|i|
+                (0..(size-1)).each do |i|
                     @distances[i]=file.readline.chomp.split(" ").map &:to_i
-                }
+                end
       
                 file.eat_empty_lines
                 
-                (0..(size-1)).each{|i|
+                (0..(size-1)).each do |i|
                     @weights[i]=file.readline.chomp.split(" ").map &:to_i
-                }
+                end
             end
         end
 
@@ -59,12 +56,19 @@ module QAP
             return total_cost
         end
 
+        ##
+        # Heurísticas
+        ##
+
+        # Heurística 2-opt.
         def self.opt2(qap)
             continue = true
             
             while continue
                 continue = false
                 
+                # Realiza una permutación simple y comprueba si mejora el coste total.
+                # Termina el proceso cuando no encuentra mejoras en una iteración.
                 (0..(qap.size-1)).each do |i|
                     ((i+1)..(qap.size-1)).each do |j|
                         old_cost = qap.cost
@@ -80,6 +84,7 @@ module QAP
             end
         end
         
+        # Heurística Greedy.
         def self.greedy_v1(qap)
             min = qap.cost
             result = qap
