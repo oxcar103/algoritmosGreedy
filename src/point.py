@@ -17,6 +17,9 @@ class Point:
     def getY(self):
         """ Devuelve la coordenada Y. """
         return self.y
+        
+    def __hash__(self):
+        return hash((self.x, self.y))
 
 
 def readPoints():
