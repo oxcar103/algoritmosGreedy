@@ -94,7 +94,7 @@ module QAP
                     fab_asignada[i] = true
                     loc_asignada[actual.permutation[i]] = true
                     
-                    max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [actual.weight(k,j[0]),j[-1]]}.min[-1]
+                    max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [actual.weight(k,j[0]),j[-1]]}.max[-1]
                     min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j| [actual.distance(actual.permutation[k],j[0]),j[-1]]}.min[-1]
  
                     actual.permutation[max_w_index] = min_d_index
@@ -106,6 +106,29 @@ module QAP
                 end
             end
             qap = result
+        end
+        
+        def self.greedy_v2(qap)
+            s = qap.size-1
+            fab_asignada = Array.new(s+1){false}
+            loc_asignada = Array.new(s+1){false}
+            w = Array.new(s+1)
+            d = Array.new(s+1)
+            
+            # Calculamos vectores sumas de pesos y sumas de distancias
+            (0..s).each{|i| 
+                w[i]=(0..s).collect{|j| qap.weight(i,j)}.inject(0){|sum,x| sum + x}
+                d[i]=(0..s).collect{|j| qap.distance(i,j)}.inject(0){|sum,x| sum + x}
+            }
+            
+            (s+1).times do
+                max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [w[j[0]],j[-1]]}.max[-1]
+                min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j| [d[j[0]],j[-1]]}.min[-1]
+                
+                qap.permutation[max_w_index] = min_d_index
+                fab_asignada[max_w_index] = true
+                loc_asignada[min_d_index] = true
+            end
         end
     end
 
