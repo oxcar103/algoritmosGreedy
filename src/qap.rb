@@ -94,6 +94,7 @@ module QAP
                 fab_asignada = Array.new(s+1){false}
                 loc_asignada = Array.new(s+1){false}
                 actual = qap.clone
+                actual.permutation=qap.permutation.clone
                 
                 (1..s).inject(k) do |i|
                     fab_asignada[i] = true
@@ -107,10 +108,11 @@ module QAP
                 end
                 
                 if actual.cost < min
+                    min = actual.cost
                     result = actual
                 end
             end
-            qap = result
+            qap.permutation = result.permutation
         end
         
         def self.greedy_v2(qap)
@@ -141,6 +143,7 @@ module QAP
         puts "Introduce nombre de archivo: "
         file = gets.chomp
         instancia = QAP.new(file)
+        #instancia = QAP.new("../datos.qap/bur26a.dat")
         puts "\t Coste inicial: #{instancia.cost}"
         
         QAP.greedy_v1 instancia
