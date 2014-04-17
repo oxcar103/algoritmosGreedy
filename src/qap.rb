@@ -161,6 +161,10 @@ module QAP
                 loc_asignada[min_d_index] = true
             end
         end
+        
+        def to_s
+            "Permutación: " + permutation.to_s + "\nCoste: #{cost}\n"
+        end
     end
 
     if __FILE__ == $0
@@ -168,18 +172,15 @@ module QAP
         file = gets.chomp
         instancia = QAP.new(file)
         #instancia = QAP.new("../datos.qap/bur26a.dat")
-        puts "\t Coste inicial: #{instancia.cost}"
+        puts "\nPermutación inicial: \n#{instancia}\n"
         
         QAP.greedy_v1 instancia
-        puts "Instancia tras greedy: \n\t #{instancia.permutation.to_s}"
-        puts "\t Coste: #{instancia.cost}"
-
+        puts "Instancia tras greedy: \n#{instancia}\n"
+        
         QAP.greedy_v2 instancia
-        puts "Instancia tras greedy 2: \n\t #{instancia.permutation.to_s}"
-        puts "\t Coste: #{instancia.cost}"
+        puts "Instancia tras greedy 2: \n#{instancia}\n"
         
         QAP.opt2 instancia
-        puts "Instancia tras 2-opt: \n\t #{instancia.permutation.to_s}"
-        puts "\t Coste: #{instancia.cost}"
+        puts "Instancia tras 2-opt: \n#{instancia}\n"
     end
 end
