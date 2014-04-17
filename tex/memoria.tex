@@ -117,9 +117,19 @@ Algoritmos Greedy} % Subtitle
   
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
+    Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. Modelizaremos el problema como un grafo completo $G$
+    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
+    \begin{equation}
+     \forall [a,b]\in V:\quad  w([a,b]) = dist (a,b)
+    \end{equation}
+
+  
     Pretendemos interconectar ciudades de manera que la suma total de las distancias de los caminos hechos sea mínima.
-    Es decir, buscamos el arbol recubridor mínimo del árbol. Para encontrarlo, podemos aplicar el algoritmo de Prim o el algoritmo de Kruskal al
-    grafo completo con todas las ciudades y aristas pesadas según la distancia.
+    Es decir, buscamos el subgrafo recubridor de menor peso. Como un grafo recubridor con ciclos tiene siempre un subgrafo recubridor estrictamente contenido en él,
+    buscamos sólo entre los grafos acíclicos. El subgrafo acíclico recubridor de menor costo es el árbol recubridor minimal.
+    
+    Varios algoritmos para calcular el árbol recubridor minimal son conocidos. Ambos alcanzan una complejidad temporal de $\mathcal{O}(|E|log|V|)$ usando árboles binarios y
+    listas de adyacencia para representar el grafo.
     
   \subsection{Triangulación de Delaunay}
     Para reducir la complejidad temporal del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
