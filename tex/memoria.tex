@@ -128,11 +128,15 @@ Algoritmos Greedy} % Subtitle
     Es decir, buscamos el subgrafo recubridor de menor peso. Como un grafo recubridor con ciclos tiene siempre un subgrafo recubridor estrictamente contenido en él,
     buscamos sólo entre los grafos acíclicos. El subgrafo acíclico recubridor de menor costo es el árbol recubridor minimal.
     
-    Varios algoritmos para calcular el árbol recubridor minimal son conocidos. Ambos alcanzan una complejidad temporal de $\mathcal{O}(|E|log|V|)$ usando árboles binarios y
+    Son conocidos los algoritmos de Prim y Kruskal para calcular el árbol recubridor minimal. Ambos alcanzan una complejidad temporal de $\mathcal{O}(|E|log|V|)$ usando árboles binarios y
     listas de adyacencia para representar el grafo.
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la complejidad temporal del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
+    ciudad es suceptible de ser comunicada con cualquiera otra. Por lo tanto, buscamos el árbol generador minimal en todas las aristas posibles.
+    
+    Sin embargo, podemos demostrar que el árbol generador minimal está contenido la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
+    al subgrafo resultante de la triangulación.
 
 \section{Segmentación de clientes}
 
