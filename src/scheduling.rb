@@ -27,9 +27,30 @@ class Scheduling
             adyacentes[i][i] = false
             (i+1,...,clases.size-1).each do |j|
                 adyacentes[i][j] = adyacentes[j][i] = clases[i].solapa clases[j]
-            # Continuará...
             end
         end
+        
+        sin_colorear = (0..clases.size-1).to_a
+        vertices = []
+        index = 0
+        
+        while !sin_colorear.empty?
+            vertices[index] = [sin_colorear.shift]
+            
+            actualizados = []
+            
+            sin_colorear.each do |v|
+                if !(vertices[index].collect{ |u| adyacentes[v][u] }.member? true)
+                    vertices[index] << v
+                    actualizados << v
+                end
+            end
+            
+            sin_colorear = sin_colorear - actualizados
+            index+=1
+        end
+        
+        vertices.map{ |i| i.map{ |j| clases[j] } }  
     end
 end
 
@@ -43,7 +64,10 @@ if __FILE__==$0
         c.split!(/[:," "]/)
         clases << Lesson.new(c[0],c[1],c[2],c[3])
     end
-    
     # Línea de prueba para depuración:
     #clases= [Lesson.new(7,30,10,30), Lesson.new(7,45,8,50), Lesson.new(11,30,12,45),Lesson.new(12,30,13,40)]
+    
+        
+    centro_educativo = Scheduling.new(clases)
+    p "Se necesitan  #{centro_educativo.planifica.to_s.size} aulas para albergar las clases"
 end
