@@ -119,7 +119,7 @@ Algoritmos Greedy} % Subtitle
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. Modelizaremos el problema como un grafo completo $G$
-    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
+    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in E \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
     \begin{equation}
      \forall [a,b]\in V:\quad  w([a,b]) = dist (a,b)
     \end{equation}
@@ -132,10 +132,10 @@ Algoritmos Greedy} % Subtitle
     listas de adyacencia para representar el grafo.
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
     ciudad es suceptible de ser comunicada con cualquiera otra. Por lo tanto, buscamos el árbol generador minimal en todas las aristas posibles.
     
-    Sin embargo, podemos demostrar que el árbol generador minimal está contenido la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
+    Sin embargo, podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
     al subgrafo resultante de la triangulación.
     
     \begin{proof}
