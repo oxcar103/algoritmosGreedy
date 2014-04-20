@@ -11,8 +11,8 @@ class Lesson < Array
     def solapa(otra)
         (self[0] <= otra[0] && otra[0] <= self[1]) || (self[0] <= otra[1] && otra[1] <= self[1]) ||
         (self[0] >= otra[0] && otra[0] >= self[1]) || (self[0] >= otra[1] && otra[1] >= self[1])
+    end
 end
-
 
 class Scheduling
     def initialize(clases)
@@ -20,17 +20,17 @@ class Scheduling
     end
     
     def planifica
-        adyacentes = Array.new(clases.size){Array.new(clases.size)}
+        adyacentes = Array.new(@clases.size){Array.new(@clases.size)}
         
-        (0,..,clases.size-1).each do |i|
+        (0..@clases.size-1).each do |i|
             # Hacemos 0 en la diagonal de la matriz de adyacencia...
-            adyacentes[i][i] = false
-            (i+1,...,clases.size-1).each do |j|
-                adyacentes[i][j] = adyacentes[j][i] = clases[i].solapa clases[j]
+            adyacentes[i][i] = false       
+            (i+1..@clases.size-1).each do |j|
+                adyacentes[i][j] = adyacentes[j][i] = @clases[i].solapa @clases[j]
             end
         end
         
-        sin_colorear = (0..clases.size-1).to_a
+        sin_colorear = (0..@clases.size-1).to_a
         vertices = []
         index = 0
         
@@ -45,12 +45,11 @@ class Scheduling
                     actualizados << v
                 end
             end
-            
             sin_colorear = sin_colorear - actualizados
             index+=1
         end
         
-        vertices.map{ |i| i.map{ |j| clases[j] } }  
+        vertices.map{ |i| i.map{ |j| @clases[j] } }       
     end
 end
 
@@ -60,14 +59,16 @@ if __FILE__==$0
     # Forma de entrada de datos: 
     #           8:30 9:30
     #           10:50 11:50       
-    while c=gets.chomp
-        c.split!(/[:," "]/)
+#=begin
+    while c=gets
+        c = c.chomp.split(/[:," "]/)
         clases << Lesson.new(c[0],c[1],c[2],c[3])
     end
-    # Línea de prueba para depuración:
-    #clases= [Lesson.new(7,30,10,30), Lesson.new(7,45,8,50), Lesson.new(11,30,12,45),Lesson.new(12,30,13,40)]
+#=end
     
+    # Línea de prueba para depuración:
+    # clases= [Lesson.new(7,30,10,30), Lesson.new(7,45,8,50), Lesson.new(11,30,12,45),Lesson.new(12,30,13,40)]
         
     centro_educativo = Scheduling.new(clases)
-    p "Se necesitan  #{centro_educativo.planifica.to_s.size} aulas para albergar las clases"
+    p "Se necesitan  #{centro_educativo.planifica.size} aulas para albergar las clases"
 end
