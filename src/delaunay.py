@@ -7,11 +7,14 @@ from scipy.spatial import Delaunay
 import fileinput
 import point
 
+
 def showDelaunay(points):
     """ 
     Plots the Delaunay diagram of a given set of points.
     I uses the Scipy library.
     docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.spatial.Delaunay.html
+
+    Returns Delaunay triangulation.
     """
     array = []
     for point in points:
@@ -26,6 +29,9 @@ def showDelaunay(points):
     pplt.plot(array[:,0], array[:,1], 'o')
     pplt.show()
 
+    return triangulation
+
+
 
 import graph
 import itertools
@@ -37,19 +43,32 @@ def triangulationToGraph (triangulation):
     
     # Añade los puntos al grafo.
     for p in points:
-        trigraph.addVertex(Point(p[0], p[1]))
+        trigraph.addVertex(point.Point(p[0], p[1]))
+        print point.Point(p[0],p[1])
     
     # Para cada punto del grafo, añade sus vecinos.
     for t in triangulation.simplices:
-        for pair in itertools.permutations(t,2):
-            a = trigraph.getVertex(pair[0])
-            b = trigraph.getVertex(pair[1])
-            distance = euclideanDistance(pair[0],pair[1])
-            getVertex(a).addNeighbor(b, distance)
+        da = points[t[0]]
+        db = points[t[1]]
+        dc = points[t[2]]
+
+        pa = point.Point(da[0], da[1])
+        pb = point.Point(db[0], db[1])
+        pc = point.Point(dc[0], dc[1])
+
+        a = trigraph.getVertex(pa)
+        b = trigraph.getVertex(pb)
+        c = trigraph.getVertex(pc)
+
+        distance_ab = a.getId.euclideanDistance(b.getId)
+        distance_bc = b.getId.euclideanDistance(c.getId)
+        distance_ca = c.getId.euclideanDistance(a.getId)
+
+        getVertex(a).addNeighbor(b, distance_ab)
+        getvertex(b).addNeighbor(c, distance_bc)
+        getvertex(c).addNeighbor(a, distance_ca)
 
     return trigraph
-
-
 
 
 
@@ -69,8 +88,9 @@ def draw_graph(graph):
     plt.show()
 
 
+
 if __name__ == "__main__":
     points = point.readPoints()
-    showDelaunay(points)
-    #graph = triangulationToGraph(Delaunay(points))
+    triangulation = showDelaunay(points)
+    graph = triangulationToGraph(triangulation)
     draw_graph(graph)

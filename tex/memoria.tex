@@ -52,6 +52,7 @@
 % Para algoritmos
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{amsthm}
 \input{spanishAlgorithmic.tex}
 
 \usepackage[section]{placeins} % Para gráficas en su sección.
@@ -117,13 +118,41 @@ Algoritmos Greedy} % Subtitle
   
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
+    Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. Modelizaremos el problema como un grafo completo $G$
+    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
+    \begin{equation}
+     \forall [a,b]\in V:\quad  w([a,b]) = dist (a,b)
+    \end{equation}
+
     Pretendemos interconectar ciudades de manera que la suma total de las distancias de los caminos hechos sea mínima.
-    Es decir, buscamos el arbol recubridor mínimo del árbol. Para encontrarlo, podemos aplicar el algoritmo de Prim o el algoritmo de Kruskal al
-    grafo completo con todas las ciudades y aristas pesadas según la distancia.
+    Es decir, buscamos el subgrafo recubridor de menor peso. Como un grafo recubridor con ciclos tiene siempre un subgrafo recubridor estrictamente contenido en él,
+    buscamos sólo entre los grafos acíclicos. El subgrafo acíclico recubridor de menor costo es el árbol recubridor minimal.
+    
+    Son conocidos los algoritmos de Prim y Kruskal para calcular el árbol recubridor minimal. Ambos alcanzan una complejidad temporal de $\mathcal{O}(|E|log|V|)$ usando árboles binarios y
+    listas de adyacencia para representar el grafo.
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la complejidad temporal del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
+    ciudad es suceptible de ser comunicada con cualquiera otra. Por lo tanto, buscamos el árbol generador minimal en todas las aristas posibles.
+    
+    Sin embargo, podemos demostrar que el árbol generador minimal está contenido la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
+    al subgrafo resultante de la triangulación.
+    
+    \begin{proof}
+    
+      Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
+      Sea $(p,q)$ una arista arbitraria del árbol generador. 
+      Consideramos el círculo que tiene como diámetro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
+      \begin{equation}
+       \overrightarrow{pr} \leq \overrightarrow{pq} \qquad \overrightarrow{rq} \leq \overrightarrow{pq}
+      \end{equation}
 
+      Y entonces podríamos formar el ciclo $p,r,q,p$. Sabemos que la arista de mayor peso en un ciclo no forma parte del árbol generador minimal y por tanto $\overline{pq}$
+      no pertenecería a él, llegando a contradicción.
+
+      Así, no puede haber ningún punto en el círculo que tiene como diámetro a $\overline{pq}$. Una arista que cumple esto está forzosamente en el diagrama de Delaunay.
+    \end{proof}
+    
 \section{Segmentación de clientes}
 
 \section{Asignación de trabajos}
