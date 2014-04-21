@@ -140,6 +140,14 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
     \texttt{\input{terminales.tex}}
   \normalsize
 
+\subsection{Contraejemplo: Sellos} % Contraejemplo?
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+\begin{itemize}
+	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
+	\item Solución óptima: 0.17 + 0.17 (2 sellos)
+\end{itemize}
+
+Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
   
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
