@@ -109,8 +109,33 @@ Algoritmos Greedy} % Subtitle
 
 
 \section{Terminales de venta}
+El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente. Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+\subsection{Algoritmo}
+La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
+
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{monedas}, vector con los valores de monedas disponibles \\
+        	\texttt{precio}, cantidad de dinero a devolver\\\
+     	\STATE{Ordenar \texttt{monedas} de mayor a menor}
+     	%  He usado un vector aunque en el código final usábamos 
+     	%  un diccionario, si queréis lo cambio -David
+     	\STATE{Crear un vector \texttt{vuelta}}
+		\FORALL{\texttt{moneda} en \texttt{monedas}}
+			\STATE{\texttt{cantidad} $\gets$ \texttt{precio} / \texttt{moneda}}
+			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} \* \texttt{moneda}}
+			\STATE{Añadir [\texttt{moneda}, \texttt{cantidad}] a \texttt{vuelta}}
+		\ENDFOR
+		\RETURN{vuelta}
+	\end{algorithmic}
+    \caption{Devolución en mínimo número de monedas}
+    \label{monedas}
+\end{algorithm}
+
 \subsection{Implementación}
-  Implementamos en Ruby la heurítica pedida.\\
+  Implementamos el algoritmo diseñado en Ruby.
+  
   \small
     \texttt{\input{terminales.tex}}
   \normalsize
