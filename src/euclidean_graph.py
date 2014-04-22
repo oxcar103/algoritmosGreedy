@@ -72,14 +72,19 @@ def kruskal(graph):
     # Considera cada arista del vértice.
     for edge in edgesList:
         node1, node2, weight = edge
-        if component[node1] != component[node2]:
+        if components[node1] != components[node2]:
             # Realiza la unión de las componentes.
             # Los nodos del segundo componente pasan al primero.
-            for node in component[node2]:
-                component[node] = component[node1]
-                component[node1].add(node)
+            for node in components[node2]:
+                components[node] = components[node1]
+                components[node1].add(node)
             
             # Añade la arista al árbol generador.
             minimum_spanning_tree.add((node1, node2, weight))
     
-    return minimum_spanning_tree
+    mstree = {
+        'vertices': graph['vertices'],
+        'edges': minimum_spanning_tree
+    }
+
+    return mstree
