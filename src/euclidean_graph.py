@@ -41,9 +41,18 @@ def dist(p,q):
 # Dibujando grafos euclídeos.
 from pylab import plot, show
 def draw_graph(graph):
+    # Dibuja puntos
     for point in graph['vertices']:
         x,y = point
-        plot(x,y,'.')
+        plot(x,y, 'r.',markersize=20)
+
+    # Dibuja líneas
+    for edge in graph['edges']:
+        p,q,weight = edge
+        x1,y1 = p
+        x2,y2 = q
+        plot(x1,y1,x2,y2,'-')
+
     show()
 
 
