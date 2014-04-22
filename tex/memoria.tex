@@ -151,15 +151,11 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
   
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
-<<<<<<< HEAD
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. 
     Modelizaremos el problema como un grafo completo $G$ del conjunto de ciudades $E$. Con aristas 
     $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso 
     igual a la distancia que los separa:
-=======
-    Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. Modelizaremos el problema como un grafo completo $G$
-    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in E \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
->>>>>>> 3e57f70b93d4f7ce2c1316765a384e750f702ffa
+
     \begin{equation}
      \forall [a,b]\in V:\quad  w([a,b]) = dist (a,b)
     \end{equation}
@@ -175,17 +171,10 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     representar el grafo.
     
   \subsection{Triangulación de Delaunay}
-<<<<<<< HEAD
     Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
     El grafo inicial es completo, ya que toda ciudad es suceptible de ser comunicada con cualquiera otra. Pero al 
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
-    
-    
-=======
-    Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
-    ciudad es suceptible de ser comunicada con cualquiera otra. Por lo tanto, buscamos el árbol generador minimal en todas las aristas posibles.
->>>>>>> 3e57f70b93d4f7ce2c1316765a384e750f702ffa
     
     Sin embargo, podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
     al subgrafo resultante de la triangulación.
