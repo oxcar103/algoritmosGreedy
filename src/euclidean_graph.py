@@ -38,6 +38,15 @@ def dist(p,q):
     return sqrt((x1-x2)**2 + (y1-y2)**2)
 
 
+# Dibujando grafos euclídeos.
+from pylab import plot, show
+def draw_graph(graph):
+    for point in graph['vertices']:
+        x,y = point
+        plot(x,y,'.')
+    show()
+
+
 def kruskal(graph):
     # Árbol generador minimal.
     minimum_spanning_tree = set()
