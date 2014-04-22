@@ -40,20 +40,18 @@ def dist(p,q):
 
 # Dibujando grafos euclídeos.
 from pylab import plot, show
-def draw_graph(graph):
+def plotGraph(graph, clr='k'):
     # Dibuja líneas
     for edge in graph['edges']:
         p,q,weight = edge
         x1,y1 = p
         x2,y2 = q
-        plot([x1,x2],[y1,y2],linestyle='-',linewidth=3, color='k')
+        plot([x1,x2],[y1,y2],linestyle='-',linewidth=3, color=clr)
 
     # Dibuja puntos
     for point in graph['vertices']:
         x,y = point
         plot(x,y, 'ro',markersize=20)
-
-    show()
 
 
 def kruskal(graph):
@@ -67,7 +65,7 @@ def kruskal(graph):
     
     # Toma el mínimo de la lista de vértices.
     edgesList = list(graph['edges'])
-    edgesList.sort()
+    edgesList.sort(key=lambda edge:edge[2])
 
     # Considera cada arista del vértice.
     for edge in edgesList:
@@ -81,10 +79,41 @@ def kruskal(graph):
             
             # Añade la arista al árbol generador.
             minimum_spanning_tree.add((node1, node2, weight))
-    
+
+    # Genera el grafo pedido
     mstree = {
         'vertices': graph['vertices'],
         'edges': minimum_spanning_tree
     }
 
     return mstree
+
+
+def readPoints():
+    """
+    Lee puntos con el formato de entrada siguiente:
+      n
+      x y
+      x y
+      x y
+      (...)
+    donde n es el número de puntos y [x,y] son las coordenadas de un punto.
+    """
+    points = []
+
+    for i in range(int(input())):
+        x,y = raw_input().strip().split()
+        x,y = int(x), int(y)
+        points.append((x,y))
+
+    return points
+
+
+if __name__ == "__main__":
+    points = readPoints()
+    graph = euclideanGraph(points)
+    solution = kruskal(graph)
+    
+    plotGraph(graph,'k')
+    plotGraph(solution,'g')
+    show()
