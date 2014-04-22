@@ -124,10 +124,14 @@ module QAP
                     fab_asignada[i] = true
                     loc_asignada[actual.permutation[i]] = true
                     
+                    # Busca el índice de la fábrica no asignada con más flujo a la k-ésima
                     max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [actual.weight(k,j[0]),j[-1]]}.max[-1]
-                    min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j| [actual.distance(actual.permutation[k],j[0]),j[-1]]}.min[-1]
+                    # Busca la posición más cercana a la fábrica k-ésima aún no asignada
+                    min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j|                                    [actual.distance(actual.permutation[k],j[0]),j[-1]]}.min[-1]
  
+                    # Coloca la fábrica en dicha posición
                     actual.permutation[max_w_index] = min_d_index
+                    # En la próxima iteración, fábrica y localización se marcarán como asignadas
                     max_w_index
                 end
                 
