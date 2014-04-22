@@ -109,17 +109,50 @@ Algoritmos Greedy} % Subtitle
 
 
 \section{Terminales de venta}
+El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente. Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+\subsection{Algoritmo}
+La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
+
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{monedas}, vector con los valores de monedas disponibles \\
+        	\texttt{precio}, cantidad de dinero a devolver\\\
+     	\STATE{Ordenar \texttt{monedas} de mayor a menor}
+     	%  He usado un vector aunque en el código final usábamos 
+     	%  un diccionario, si queréis lo cambio -David
+     	\STATE{Crear un vector \texttt{vuelta}}
+		\FORALL{\texttt{moneda} en \texttt{monedas}}
+			\STATE{\texttt{cantidad} $\gets$ \texttt{precio} / \texttt{moneda}}
+			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} \* \texttt{moneda}}
+			\STATE{Añadir [\texttt{moneda}, \texttt{cantidad}] a \texttt{vuelta}}
+		\ENDFOR
+		\RETURN{vuelta}
+	\end{algorithmic}
+    \caption{Devolución en mínimo número de monedas}
+    \label{monedas}
+\end{algorithm}
+
 \subsection{Implementación}
-  Implementamos en Ruby la heurítica pedida.\\
+  Implementamos el algoritmo diseñado en Ruby.
+  
   \small
     \texttt{\input{terminales.tex}}
   \normalsize
 
+\subsection{Contraejemplo: Sellos} % Contraejemplo?
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+\begin{itemize}
+	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
+	\item Solución óptima: 0.17 + 0.17 (2 sellos)
+\end{itemize}
+
+Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
   
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. Modelizaremos el problema como un grafo completo $G$
-    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
+    del conjunto de ciudades $E$. Con aristas $V = \left\{ [a,b] |\ a,b \in E \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso igual a la distancia que los separa:
     \begin{equation}
      \forall [a,b]\in V:\quad  w([a,b]) = dist (a,b)
     \end{equation}
@@ -132,10 +165,10 @@ Algoritmos Greedy} % Subtitle
     listas de adyacencia para representar el grafo.
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal. El grafo inicial es completo, ya que toda
     ciudad es suceptible de ser comunicada con cualquiera otra. Por lo tanto, buscamos el árbol generador minimal en todas las aristas posibles.
     
-    Sin embargo, podemos demostrar que el árbol generador minimal está contenido la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
+    Sin embargo, podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
     al subgrafo resultante de la triangulación.
     
     \begin{proof}
