@@ -32,7 +32,6 @@ def readPoints():
       (...)
     donde n es el número de puntos y [x,y] son las coordenadas de un punto.
     """
-
     points = []
 
     for i in range(int(input())):
