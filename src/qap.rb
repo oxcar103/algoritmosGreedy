@@ -7,7 +7,7 @@ class Object
     def deep_clone
         return @deep_cloning_obj if @deep_cloning
         @deep_cloning_obj = clone
-        @deep_cloning_obj.instance_variables.each do |var|
+        @deep_cloning_obj.instance_variables.each { |var|
             val = @deep_cloning_obj.instance_variable_get(var)
             begin
                 @deep_cloning = true
@@ -18,7 +18,7 @@ class Object
                 @deep_cloning = false
             end
             @deep_cloning_obj.instance_variable_set(var, val)
-        end
+        }
         deep_cloning_obj = @deep_cloning_obj
         @deep_cloning_obj = nil
         deep_cloning_obj
@@ -66,11 +66,11 @@ module QAP
         # Coste actual.
         def cost
             total_cost = 0
-            @distances.each_index do |i|
-                @distances[i].each_index do |j|
+            @distances.each_index { |i|
+                @distances[i].each_index { |j|
                     total_cost += weight(i,j)*distance(permutation[i], permutation[j])
-                end
-            end
+                }
+            }
             return total_cost
         end
         
@@ -92,18 +92,19 @@ module QAP
                 
                 # Realiza una permutación simple y comprueba si mejora el coste total.
                 # Termina el proceso cuando no encuentra mejoras en una iteración.
-                (0..(qap.size-1)).each do |i|
-                    ((i+1)..(qap.size-1)).each do |j|
+                (0..(qap.size-1)).each { |i|
+                    ((i+1)..(qap.size-1)).each { |j|
                         old_cost = qap.cost
                         qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i] 
                         
                         if old_cost <= qap.cost
+                            # Deshacemos el cambio
                             qap.permutation[i], qap.permutation[j] = qap.permutation[j],qap.permutation[i]
                         else    
                             continue = true
                         end
-                    end
-                end
+                    }
+                }
             end
         end
         
@@ -113,12 +114,12 @@ module QAP
             result = qap
             s = qap.size-1
 
-            (0..s).each do |k|
+            (0..s).each { |k|
                 fab_asignada = Array.new(s+1){false}
                 loc_asignada = Array.new(s+1){false}
                 actual = qap.deep_clone
                 
-                (1..s).inject(k) do |i|
+                (1..s).inject(k) { |i|
                     fab_asignada[i] = true
                     loc_asignada[actual.permutation[i]] = true
                     
@@ -140,13 +141,13 @@ module QAP
                     actual.permutation[max_w_index] = min_d_index
                     # En la próxima iteración, fábrica y localización se marcarán como asignadas
                     max_w_index
-                end
+                }
                 
                 if actual.cost < min
                     min = actual.cost
                     result = actual
                 end
-            end
+            }
             qap.permutation = result.permutation
         end
         
@@ -158,11 +159,11 @@ module QAP
             d = Array.new(s+1)
             
             # Calculamos vectores sumas de pesos y sumas de distancias
-            (0..s).each{|i| 
+            (0..s).each { |i| 
                 w[i] = (0..s).collect { |j|
                     qap.weight(i,j)
-                }.inject(0) { 
-                    |sum,x| sum + x
+                }.inject(0) { |sum,x| 
+                    sum + x
                 }
                 
                 d[i] = (0..s).collect { |j|
@@ -172,7 +173,7 @@ module QAP
                 }
             }
             
-            (s+1).times do
+            (s+1).times {
                 max_w_index = (0..s).each_with_index.select { |j|
                     !fab_asignada[j[0]]
                 }.collect { |j| 
@@ -188,7 +189,7 @@ module QAP
                 qap.permutation[max_w_index] = min_d_index
                 fab_asignada[max_w_index] = true
                 loc_asignada[min_d_index] = true
-            end
+            }
         end
     end
 
@@ -196,7 +197,7 @@ module QAP
         puts "Introduce nombre de archivo: "
         #file = gets.chomp
         #problema = Instancia.new(file)
-        problema = Instancia.new("datos.qap/lipa50a.dat")
+        problema = Instancia.new("datos.qap/bur26a.dat")
         puts "\nPermutación inicial: \n#{problema}\n"
         
         res = problema.deep_clone
