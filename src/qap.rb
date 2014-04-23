@@ -1,15 +1,8 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-class File
-    def eat_empty_lines
-        while (c=getc) == "\n"
-        end
-        ungetc(c)
-    end
-end
-
 class Object
+    # Copia profunda de objetos
     # http://stackoverflow.com/questions/8206523/how-to-create-a-deep-copy-of-an-object-in-ruby
     def deep_clone
         return @deep_cloning_obj if @deep_cloning
@@ -37,58 +30,25 @@ module QAP
     class QAP
         def initialize(filename)
             # Lectura del archivo del problema QAP.
-            File.open(filename, "r") do |file|
-                @size = file.readline.to_i
-                file.eat_empty_lines
-
-                @permutation = (0..(size-1)).to_a
-                @distances = Array.new(size)
-                @weights = Array.new(size)
-                
-                (0..(size-1)).each do |i|
-                    @distances[i]=file.readline.chomp.split(" ").map &:to_i
-                end
-      
-                file.eat_empty_lines
-              
-                (0..(size-1)).each do |i|
-                    @weights[i]=file.readline.chomp.split(" ").map &:to_i
-                end
-            end
-
-=begin
-            @size = 0
+            @size = -1
             distancedata = []
-            weightdata = []
+            weightdata = false
 
-            enumlin = File.foreach(filename)
-            @size = enumlin.next.to_i
-            while enumlin.next =~ /^\s*$/; end
-            while !(enumlin.peek =~ /^\s*$/)
-                distancedata += enumlin.next.split(/\s/).map(&:to_i)
-            end
-            while enumlin.next =~ /^\s*$/; end
-            while !(enumlin.peek =~ /^\s*$/)
-                weightdata += enumlin.next.split(/\s/).map(&:to_i)
-            end
-
-            File.foreach(filename) { |x|
-                if @size == 0
-                    @size = x.to_i 
-                elsif x =~ /^\s*$/ && distancedata.any? # Línea separando distancias y pesos
-                    weightdata = [] if !weightdata
-                elsif !weightdata # Añadiendo distancias
-                    distancedata += x.split(/\s/).map(&:to_i)
-                else # Añadiendo pesos
-                    weightdata += x.split(/\s/).map(&:to_i)
+            File.foreach(filename) { |l|
+                if @size < 0
+                    @size = l.to_i 
+                elsif l =~ /^\s*$/ && distancedata.any? && !weightdata  # Línea separando distancias y pesos
+                    weightdata = []
+                elsif !weightdata  # Añadiendo distancias
+                    distancedata += l.split(" ").map(&:to_i)
+                else  # Añadiendo pesos
+                    weightdata += l.split(" ").map(&:to_i)
                 end
             }
 
-            @permutation = (0..(size-1)).to_a
-            @distances = distancedata.each_slice(@size).to_a
-            @weights = weightdata.each_slice(@size).to_a
-            puts "#{@distances.inspect}"
-=end
+            @permutation = (0..(@size-1)).to_a  # Genera un array con valores de 0 a size-1
+            @distances = distancedata.each_slice(@size).to_a  # Matriz de distancias
+            @weights = weightdata.each_slice(@size).to_a  # Matriz de pesos
         end
 
         # Acceso público a la permutación.
@@ -106,9 +66,9 @@ module QAP
         # Coste actual.
         def cost
             total_cost = 0
-            (0..(size-1)).each do |i|
-                (0..(size-1)).each do |j|
-                    total_cost = total_cost + weight(i,j)*distance(permutation[i], permutation[j])
+            @distances.each_index do |i|
+                @distances[i].each_index do |j|
+                    total_cost += weight(i,j)*distance(permutation[i], permutation[j])
                 end
             end
             return total_cost
