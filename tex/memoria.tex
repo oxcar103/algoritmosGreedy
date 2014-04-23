@@ -287,6 +287,35 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 \subsection{Implementación}
 \subsection{Contraejemplo:}
 \section{Memorias caché}
+%Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
+Tenemos una memoria caché con capacidad para $k$ datos.
+
+Cuando la caché recibe una solicitud $p_i$ , puede que el dato ya esté[hit] o no[miss] y tengamos que buscarlo en memoria y reemplazar alguno de los datos ya almacenados por el dato que acabamos de obtener.
+Si conocemos de antemano el conjunto de solicitudes que deberemos atender $p_1, p_2, \ldots, p_n$ peticiones con el menor número de fallos en caché
+  \subsection{Algoritmo}
+  La técnica que se seguirá es ir escogiendo el elemento que se va a sacar de caché de tal manera que sea el elemento que se usará más tarde(\textbf{Farthest-In-Future}) cada vez que se produzca un fallo en caché:
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{$p$}, array de $n$ peticiones\\
+        	\texttt{k}, tamaño de la caché\\ \
+     	\STATE{$p_{reducido}$ = eliminarDuplicadosConsecutivos($p$)\\
+     	Esto se realiza para agilizar el recorrido del array, ya que si están consecutivos está asegurado que, a partir de la segunda ocurrencia, estarán en caché.}
+     	%No estoy muy seguro de este STATE
+     	\STATE{caché = eliminarDuplicados($p_{reducidos}$)\\
+     	     	Inicializamos la memoria con los primeros k datos no repetidos}
+	  \FORALL{\texttt{petición}$\in$\texttt{$p_{reducido}$}}
+	   \IF{\texttt{petición $\notin$ caché}}
+		\STATE{}
+	   \ENDIF
+	  \ENDFOR
+
+	\end{algorithmic}
+    \caption{Optimización de memoria caché}
+    \label{memory}
+\end{algorithm}
+\subsection{Implementación}
+\subsection{Contraejemplo:}
     
 \section{El problema de asignación cuadrática}
     
