@@ -114,7 +114,8 @@ Algoritmos Greedy} % Subtitle
 
 
 \section{Terminales de venta}
-El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente. Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente.
+Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
 \subsection{Algoritmo}
 La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
 
@@ -145,8 +146,9 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
     \texttt{\input{terminales.tex}}
   \normalsize
 
-\subsection{Contraejemplo: Sellos} % Contraejemplo? SÍ
-El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+\subsection{Contraejemplo}
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
+habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
 \begin{itemize}
 	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
 	\item Solución óptima: 0.17 + 0.17 (2 sellos)
@@ -241,7 +243,31 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
     
     Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
-    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos.
+    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos. Así,
+    generalizamos Kruskal para aplicarlo sólo hasta las $n-k$ primeras aristas, que unirán las $k$ componentes.
+    
+    Ahora no nos interesa obtener el árbol minimal, sino simplemente calcular las componentes conexas. Nótese además
+    que debemos generalizar la dimensión del algoritmo a la que requieran los vectores de características.
+    
+    \begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{grafo}, grafo euclídeo generado por los vectores de características \\\
+        	\texttt{k}, número de componentes conexas en las que se quiere partir el grafo \\\
+		\STATE{\texttt{componentes=}$\emptyset$}
+		\FORALL{\texttt{v} en \texttt{grafo.vértices}:}
+		   \STATE{\texttt{componentes.add(set(v))}}
+		\ENDFOR
+		\FORALL{arista \texttt{(u,v)} en \texttt{grafo.aristas}:}
+		\IF{\texttt{componente(u)} $\neq$ \texttt{componente(v)}}
+		      \STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
+		    \ENDIF
+		\ENDFOR
+		\RETURN{\texttt{componentes}}
+	\end{algorithmic}
+      \caption{Algoritmo de Kruskal generalizado}
+      \label{kruskal-generalizado}
+    \end{algorithm}
 
 \section{Asignación de trabajos}
 
@@ -285,7 +311,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
     \label{aulas}
 \end{algorithm}
 \subsection{Implementación}
-\subsection{Contraejemplo:}
+\subsection{Contraejemplo}
 \section{Memorias caché}
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
 Tenemos una memoria caché con capacidad para $k$ datos.
@@ -320,7 +346,7 @@ Si conocemos de antemano el conjunto de solicitudes que deberemos atender $p_1, 
     \label{memory}
 \end{algorithm}
 \subsection{Implementación}
-\subsection{Contraejemplo:}
+\subsection{Contraejemplo}
     
 \section{El problema de asignación cuadrática}
     
