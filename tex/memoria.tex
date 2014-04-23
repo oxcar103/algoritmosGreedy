@@ -201,7 +201,46 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 \section{Asignación de trabajos}
 
 \section{Asignación de aulas}
+Tenemos los tiempos de comienzo y finalización de una serie de clases
+($s_i$ y $f_i$, $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
+para dar esas $n$ clases.
+Observamos que el problema es equivalente a uno de coloreo de grafos, para
+el grafo no dirigido con función de adyacencia dada por:
+$$\delta_{i,j}=\left\{\begin{array}{ll}
+  true  & [s_i,f_i] \cap [s_j,f_j] \neq \emptyset \\
+  false  & [s_i,f_i]\cap[s_j,f_j] = \emptyset\quad o\quad i=j\\
+  \end{array}\right.$$
 
+Es decir, habrá arista entre la clase $i-$ésima y la $j-$ésima si la
+clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
+  \subsection{Algoritmo}
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{clases}, array de $n$ objetos Clase, que almacena
+				 un tiempo de inicialización y otro de 
+				 finalización\\
+     	\STATE{\texttt{adyadcentes}=$(\delta_{i,j})_{nxn}, i,j\in \{0\ldots \#clases - 1\}$}
+     	\STATE{\texttt{sin\_colorear}= $\{0\ldots\#clases-1\}$}
+     	\STATE{\texttt{color}=$[]$}
+     	\STATE{\texttt{indice}=0}
+	  \WHILE{\texttt{sin\_colorear}$\neq \emptyset$}
+	    \STATE{\texttt{color[indice]=[sin\_colorear.pop\_front]}}
+	    \FORALL{\texttt{v}$\in$\texttt{sin\_colorear}}
+	      \IF{\texttt{adyacentes[color[indice][0]][v]}}
+		\STATE{\texttt{color[indice].push(v)}}
+		\STATE{\texttt{sin\_colorear}.delete(v)}
+	      \ENDIF
+	    \ENDFOR
+	    
+	  \ENDWHILE
+		\RETURN{$\#$\texttt{color}}
+	\end{algorithmic}
+    \caption{Asginación de aulas}
+    \label{monedas}
+\end{algorithm}
+\subsection{Implementación}
+\subsection{Contraejemplo: Sellos}
 \section{Memorias caché}
     
 \section{El problema de asignación cuadrática}
