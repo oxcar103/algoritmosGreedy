@@ -1,18 +1,21 @@
 #!/usr/bin/env ruby
 #encoding utf8
 
-# Búsqueda del elemento mayoritario. Un algoritmo:
-# Escogemos parejas de elementos consecutivos repetidos
-# por ejemplo:
-# [1,1,2,3,3,3] => {(1,1),(2,3),(3,3)} => [1,3]
-# [3,1,1,2,3,3,3,3] => {(3,1),(1,2),(3,3),(3,3)} => [3,3]
-# No necesariamente el mayoritario en el nuevo es mayoritario en
-# el original, pero si existe mayoritario del original entonces
-# equivale al del nuevo.
-# Caso base: En tamaño 2, hay elemento mayoritario si
-# ambos son iguales.
-#
-# Eficiencia: O(n)
+def cache(petitions, size)
+	p_reducido = petitions.chunk{|x| x}.map(&:first)
+	fallos = 0
+
+	cache = p.uniq.slice(0, size - 1)
+
+	p.each_with_index { |peticion, i| 
+		if !cache.member?(peticion)
+			
+			
+			fallos += 1
+		end
+	}
+end
+
 
 def farthest_in_future(p, k)
     p_reducido = []
