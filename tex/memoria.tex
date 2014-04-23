@@ -306,7 +306,8 @@ Si conocemos de antemano el conjunto de solicitudes que deberemos atender $p_1, 
      	     	Inicializamos la memoria con los primeros k datos no repetidos}
 	  \FORALL{\texttt{petición}$\in$\texttt{$p_{reducido}$}}
 	   \IF{\texttt{petición $\notin$ caché}}
-		\STATE{}
+		\STATE{Buscamos el elemento que está en caché que más tardará en volver a ser necesitado}
+		\STATE{Sustituimos este elemento por el que necesitamos tener en caché}
 	   \ENDIF
 	  \ENDFOR
 
