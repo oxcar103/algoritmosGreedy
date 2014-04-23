@@ -55,6 +55,11 @@
 \usepackage{amsthm}
 \input{spanishAlgorithmic.tex}
 
+% Símbolos matemáticos
+\usepackage{amssymb}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
 \usepackage[section]{placeins} % Para gráficas en su sección.
 \usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
@@ -169,6 +174,28 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     Son conocidos los algoritmos de Prim y Kruskal para calcular el árbol recubridor minimal. Ambos alcanzan una
     complejidad temporal de $\mathcal{O}(|E|log|V|)$ usando árboles binarios y listas de adyacencia para
     representar el grafo.
+    
+    \begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{grafo}, grafo inicial del que se calcula el árbol minimal \\\
+		\STATE{\texttt{árbol=}$\emptyset$}
+		\FORALL{\texttt{v} en \texttt{grafo.vértice}:}
+		   \STATE{Crea componente conexa \texttt{set(v)}}
+		\ENDFOR
+		\FORALL{arista \texttt{(u,v)} en \texttt{grafo.aristas}:}
+		\IF{\texttt{componente(u)} $\neq$ \texttt{componente(v)}}
+		      \STATE{\texttt{árbol}.añadir(\texttt{(u,v)})}
+		      \STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
+		    \ENDIF
+		\ENDFOR
+		\RETURN{\texttt{árbol}}
+	\end{algorithmic}
+      \caption{Algoritmo de Kruskal}
+      \label{monedas}
+    \end{algorithm}
+
+  
     
   \subsection{Triangulación de Delaunay}
     Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
