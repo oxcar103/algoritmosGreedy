@@ -356,6 +356,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 			   \caption{Asignación de trabajos}
 			   \label{Asignación Global}
 		\end{algorithm}
+<<<<<<< HEAD
 		
 	\subsection{Contraejemplos}
 	Podemos encontrar contraejemplos muy sencillos para todos los algoritmos. Si consideramos la matriz de costes: \\ \\
@@ -381,7 +382,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 	  
 	Tiene un coste de 4. Vemos de esta forma que estos algoritmos no proporcionan una solución óptima. 
 	
-	
+
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
 ($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
@@ -424,6 +425,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 \subsection{Implementación}
 \subsection{Contraejemplo}
 \section{Memorias caché}
+\label{cache}
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
 El problema de las memorias caché consiste en averiguar qué datos conviene eliminar en una caché, conociendo de antemano los datos que se van a pedir, para evitar lo máximo posible los fallos de caché.
   \subsection{Algoritmo}
@@ -451,10 +453,6 @@ La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya
     \caption{Optimización de memoria caché}
     \label{memory}
 \end{algorithm}
-\subsection{Implementación}
-\subsection{Contraejemplo}
-    
-\section{El problema de asignación cuadrática}
     
 \section{Implementaciones}
    \subsection{Terminales de venta}
@@ -472,10 +470,21 @@ La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya
 	\texttt{\input{euclidean_graph.tex}}
       \normalsize
     
-   \subsection{Segmentación}
+   \subsection{Segmentación de clientes}
       Se incluye a continuación una implementación en Python, utilizando como base la implementación del ejercicio anterior.\\
         \small
 	\texttt{\input{segmentacion.tex}}
-	\normalsize  
+	\normalsize
+	
+	\subsection{Asignación de trabajos}
+	
+	\subsection{Asignación de aulas}
+	
+	\subsection{Memorias caché}
+	A continuación una implementación en Ruby del algoritmo diseñado en la sección \ref{cache}:
+	
+    \small
+	\texttt{\input{cache.tex}}
+	\normalsize
     
 \end{document}
