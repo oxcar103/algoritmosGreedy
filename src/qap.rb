@@ -37,25 +37,25 @@ module QAP
     class QAP
         def initialize(filename)
             # Lectura del archivo del problema QAP.
-            @size = 0
+            @size = -1
             distancedata = []
             weightdata = false
 
             File.foreach(filename) { |l|
-                if @size == 0
+                if @size < 0
                     @size = l.to_i 
-                elsif l =~ /^\s*$/ && distancedata.any? # Línea separando distancias y pesos
-                    weightdata = [] if !weightdata
-                elsif !weightdata # Añadiendo distancias
+                elsif l =~ /^\s*$/ && distancedata.any? && !weightdata  # Línea separando distancias y pesos
+                    weightdata = []
+                elsif !weightdata  # Añadiendo distancias
                     distancedata += l.split(" ").map(&:to_i)
-                else # Añadiendo pesos
+                else  # Añadiendo pesos
                     weightdata += l.split(" ").map(&:to_i)
                 end
             }
 
-            @permutation = (0..(size-1)).to_a
-            @distances = distancedata.each_slice(@size).to_a
-            @weights = weightdata.each_slice(@size).to_a
+            @permutation = (0..(@size-1)).to_a  # Genera un array con valores de 0 a size-1
+            @distances = distancedata.each_slice(@size).to_a  # Matriz de distancias
+            @weights = weightdata.each_slice(@size).to_a  # Matriz de pesos
         end
 
         # Acceso público a la permutación.
