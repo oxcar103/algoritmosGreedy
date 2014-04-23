@@ -1,47 +1,44 @@
 #!/usr/bin/env ruby
-#encoding utf8
+#encoding: utf-8
 
-# Búsqueda del elemento mayoritario. Un algoritmo:
-# Escogemos parejas de elementos consecutivos repetidos
-# por ejemplo:
-# [1,1,2,3,3,3] => {(1,1),(2,3),(3,3)} => [1,3]
-# [3,1,1,2,3,3,3,3] => {(3,1),(1,2),(3,3),(3,3)} => [3,3]
-# No necesariamente el mayoritario en el nuevo es mayoritario en
-# el original, pero si existe mayoritario del original entonces
-# equivale al del nuevo.
-# Caso base: En tamaño 2, hay elemento mayoritario si
-# ambos son iguales.
-#
-# Eficiencia: O(n)
+def cache(p, size)
+    # Eliminamos repetidos consecutivos
+    p_reducido = p.chunk{|x| x}.map(&:first)
 
-def farthest_in_future(p, k)
-    p_reducido = []
+    # La caché se inicia a los 'size' primeros datos (sin repetir)
+    cache = p.uniq.slice(0, size)
     fallos = 0
 
-    p.each_with_index{|element,index| p_reducido << element if element != p[index+1]}
+    # Recorremos las peticiones y reemplazamos el elemento
+    # conveniente cuando se produce un fallo de caché
+    p.each_with_index { |peticion, i| 
+        if !cache.member?(peticion)
+            i_a_eliminar = 0
+            i_cache = nil
 
-    #No funciona, por eso lo comenté
-    #cache = p.uniq.resize(k)
+            cache.each_with_index { |e, j|
+                # Si no se encuentra una próxima petición se escoge este
+                # elemento (find_index devuelve nil)
+                prox_pet = p[i .. p.size-1].find_index(e) || p.size
 
-    p.each{|petición| 
-        if !cache.include?(petición){
-        #Falta traducir:
-        #\STATE{Buscamos el elemento que está en caché que más tardará en volver a ser necesitado}
-        #\STATE{Sustituimos este elemento por el que necesitamos tener en caché}
+                if prox_pet > i_a_eliminar
+                    i_cache = j
+                    i_a_eliminar = prox_pet
+                end
+            }
 
-        fallos+=1
-        }
+            cache[i_cache] = peticion
 
+            fallos += 1
+        end
     }
 
-return fallos
+    fallos
 end
 
-
 if __FILE__ == $0
-puts "Introduce array: "
-line = gets.chomp
-array = line.split.map(&:to_i)
+    # Pruebas
+    pet = [1, 6, 3, 2, 5, 3, 2, 1, 4, 1, 1, 1, 9, 4, 4, 2, 4, 2, 1, 3, 4, 5, 2]
 
-puts "Elemento mayoritario: #{array.mayoritario}."
+    puts "Número de fallos: #{cache(pet, 5)}."
 end
