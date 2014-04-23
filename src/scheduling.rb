@@ -34,18 +34,18 @@ class Scheduling
         end
         
         sin_colorear = (0..@clases.size-1).to_a
-        vertices = []
+        color = []
         index = 0
         
         while !sin_colorear.empty?
-            vertices[index] = [sin_colorear.shift]
+            color[index] = [sin_colorear.shift]
             
             actualizados = []
             
             sin_colorear.each do |v|
                 # Coloreamos la clase si no solapa con ninguna del color actual
-                if !(vertices[index].collect{ |u| adyacentes[v][u] }.member? true)
-                    vertices[index] << v
+                if !(color[index].collect{ |u| adyacentes[v][u] }.member? true)
+                    color[index] << v
                     actualizados << v
                 end
             end
@@ -53,7 +53,7 @@ class Scheduling
             index += 1
         end
         
-        vertices.map{ |i| i.map{ |j| @clases[j] } }       
+        color.map{ |i| i.map{ |j| @clases[j] } }       
     end
 end
 
