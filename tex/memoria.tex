@@ -140,11 +140,7 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
 \end{algorithm}
 
 \subsection{Implementación}
-  Implementamos el algoritmo diseñado en Ruby.
   
-  \small
-    \texttt{\input{terminales.tex}}
-  \normalsize
 
 \subsection{Contraejemplo}
 El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
@@ -269,6 +265,12 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       \label{kruskal-generalizado}
     \end{algorithm}
 
+    \subsection{Implementación}
+      Se incluye a continuación una implementación en Python, utilizando como base la implementación del ejercicio anterior.\\
+        \small
+	\texttt{\input{segmentacion.tex}}
+	\normalsize
+    
 \section{Asignación de trabajos}
 
 \section{Asignación de aulas}
@@ -349,5 +351,13 @@ Si conocemos de antemano el conjunto de solicitudes que deberemos atender $p_1, 
 \subsection{Contraejemplo}
     
 \section{El problema de asignación cuadrática}
+    
+\section{Implementaciones}
+   \subsection{Terminales de venta}
+      Implementamos el algoritmo diseñado en Ruby.
+  
+      \small
+	\texttt{\input{terminales.tex}}
+      \normalsize
     
 \end{document}
