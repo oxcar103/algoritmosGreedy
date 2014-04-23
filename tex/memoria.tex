@@ -299,17 +299,21 @@ Si conocemos de antemano el conjunto de solicitudes que deberemos atender $p_1, 
 		\REQUIRE \ \\
         	\texttt{$p$}, array de $n$ peticiones\\
         	\texttt{k}, tamaño de la caché\\ \
+     	\STATE{fallos = 0}\\
      	\STATE{$p_{reducido}$ = eliminarDuplicadosConsecutivos($p$)\\
      	Esto se realiza para agilizar el recorrido del array, ya que si están consecutivos está asegurado que, a partir de la segunda ocurrencia, estarán en caché.}
      	%No estoy muy seguro de este STATE
      	\STATE{caché = eliminarDuplicados($p_{reducidos}$)\\
      	     	Inicializamos la memoria con los primeros k datos no repetidos}
-	  \FORALL{\texttt{petición}$\in$\texttt{$p_{reducido}$}}
+	  \FORALL{\texttt{petición}$\in$\texttt{$p$}}
 	   \IF{\texttt{petición $\notin$ caché}}
-		\STATE{Buscamos el elemento que está en caché que más tardará en volver a ser necesitado}
+		\STATE{Buscamos(en $p_reducido$) el elemento que está en caché que más tardará en volver a ser necesitado}
 		\STATE{Sustituimos este elemento por el que necesitamos tener en caché}
+		\STATE{fallos++}
 	   \ENDIF
 	  \ENDFOR
+	  
+	  \RETURN{fallos}
 
 	\end{algorithmic}
     \caption{Optimización de memoria caché}
