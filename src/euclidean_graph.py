@@ -65,14 +65,14 @@ def kruskal(graph, limit=0):
     for v in graph['vertices']:
         components[v] = Set([v])
     
-    # Toma el mínimo de la lista de vértices.
+    # Toma el mínimo de la lista de aristas.
     edgesList = list(graph['edges'])
     edgesList.sort(key=lambda edge:edge[2])
 
     # Considera cada arista del vértice.
-    for i in range(len(edgesList)-limit):
-        node1, node2, weight = edgesList[i]
-        if components[node1] != components[node2]:
+    for edge in edgesList:
+        node1, node2, weight = edge
+        if components[node1] != components[node2] and len(minimum_spanning_tree) < len(graph['vertices'])-limit:
             # Realiza la unión de las componentes.
             # Los nodos del segundo componente pasan al primero.
             for node in components[node2]:
