@@ -1,10 +1,4 @@
-#!/usr/bin/env ruby
-#encoding: utf-8
-
 def cache(p, size)
-    # Eliminamos repetidos consecutivos
-    p_reducido = p.chunk{|x| x}.map(&:first)
-
     # La caché se inicia a los 'size' primeros datos (sin repetir)
     cache = p.uniq.slice(0, size)
     fallos = 0
@@ -34,11 +28,4 @@ def cache(p, size)
     }
 
     fallos
-end
-
-if __FILE__ == $0
-    # Pruebas
-    pet = [1, 6, 3, 2, 5, 3, 2, 1, 4, 1, 1, 1, 9, 4, 4, 2, 4, 2, 1, 3, 4, 5, 2]
-
-    puts "Número de fallos: #{cache(pet, 5)}."
 end

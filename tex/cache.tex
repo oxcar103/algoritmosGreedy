@@ -1,9 +1,6 @@
 % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
 \noindent
 \mbox{}\textbf{\textcolor{Blue}{def}}\ cache\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Eliminamos\ repetidos\ consecutivos}} \\
-\mbox{}\ \ \ \ p$\_$reducido\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}chunk\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}x\textcolor{BrickRed}{$|$}\ x\textcolor{Red}{\}}\textcolor{BrickRed}{.}map\textcolor{BrickRed}{(\&:}first\textcolor{BrickRed}{)} \\
-\mbox{} \\
 \mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ La\ caché\ se\ inicia\ a\ los\ 'size'\ primeros\ datos\ (sin\ repetir)}} \\
 \mbox{}\ \ \ \ cache\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}uniq\textcolor{BrickRed}{.}slice\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
 \mbox{}\ \ \ \ fallos\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
@@ -33,5 +30,4 @@
 \mbox{}\ \ \ \ \textcolor{Red}{\}} \\
 \mbox{} \\
 \mbox{}\ \ \ \ fallos \\
-\mbox{}\textbf{\textcolor{Blue}{end}} \\
-\mbox{}
+\mbox{}\textbf{\textcolor{Blue}{end}}
