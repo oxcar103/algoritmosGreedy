@@ -129,7 +129,7 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
      	\STATE{Crear un vector \texttt{vuelta}}
 		\FORALL{\texttt{moneda} en \texttt{monedas}}
 			\STATE{\texttt{cantidad} $\gets$ \texttt{precio} / \texttt{moneda}}
-			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} \* \texttt{moneda}}
+			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} $\times$ \texttt{moneda}}
 			\STATE{Añadir [\texttt{moneda}, \texttt{cantidad}] a \texttt{vuelta}}
 		\ENDFOR
 		\RETURN{vuelta}
@@ -145,7 +145,7 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
     \texttt{\input{terminales.tex}}
   \normalsize
 
-\subsection{Contraejemplo: Sellos} % Contraejemplo?
+\subsection{Contraejemplo: Sellos} % Contraejemplo? SÍ
 El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
 \begin{itemize}
 	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
@@ -158,7 +158,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. 
     Modelizaremos el problema como un grafo completo $G$ del conjunto de ciudades $E$. Con aristas 
-    $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso 
+    $V = \left\{ [a,b] |\ a,b \in E \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso 
     igual a la distancia que los separa:
 
     \begin{equation}
@@ -198,7 +198,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
   
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal.
     El grafo inicial es completo, ya que toda ciudad es suceptible de ser comunicada con cualquiera otra. Pero al 
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
@@ -209,7 +209,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \begin{proof}
       Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
       Sea $(p,q)$ una arista arbitraria del árbol generador. 
-      Consideramos el círculo que tiene como diámetkruro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
+      Consideramos el círculo que tiene como diámetro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
       \begin{equation}
        \overrightarrow{pr} \leq \overrightarrow{pq} \qquad \overrightarrow{rq} \leq \overrightarrow{pq}
       \end{equation}
@@ -247,7 +247,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
-($s_i$ y $f_i$, $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
+($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
 para dar esas $n$ clases.
 Observamos que el problema es equivalente a uno de coloreo de grafos, para
 el grafo no dirigido con función de adyacencia dada por:
@@ -282,10 +282,10 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 		\RETURN{$\#$\texttt{color}}
 	\end{algorithmic}
     \caption{Asginación de aulas}
-    \label{monedas}
+    \label{aulas}
 \end{algorithm}
 \subsection{Implementación}
-\subsection{Contraejemplo: Sellos}
+\subsection{Contraejemplo:}
 \section{Memorias caché}
     
 \section{El problema de asignación cuadrática}
