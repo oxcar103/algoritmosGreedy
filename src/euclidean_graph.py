@@ -3,7 +3,6 @@
 
 # Siguiendo el ejemplo de https://github.com/israelst/Algorithms-Book--Python/blob/master/5-Greedy-algorithms/kruskal.py
 from sets import Set
-from math import sqrt
 
 # Formato de los grafos.
 empty_graph = {
@@ -31,11 +30,14 @@ def euclideanGraph(points):
     return graph
 
 
+from math import sqrt
 def dist(p,q):
     """ Devuelve distancia euclídea entre dos puntos."""
-    x1,y1 = p
-    x2,y2 = q
-    return sqrt((x1-x2)**2 + (y1-y2)**2)
+    p,q = list(p),list(q)
+    sum = 0
+    for i in range(min(len(p),len(q))):
+        sum = sum + (p[i]-q[i])**2
+    return sqrt(sum)
 
 
 # Dibujando grafos euclídeos.
@@ -51,7 +53,7 @@ def plotGraph(graph, clr='k'):
     # Dibuja puntos
     for point in graph['vertices']:
         x,y = point
-        plot(x,y, 'ro',markersize=20)
+        plot(x,y,'ro',markersize=20)
 
 
 def kruskal(graph):
