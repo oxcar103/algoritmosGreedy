@@ -272,7 +272,39 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 	\normalsize
     
 \section{Asignación de trabajos}
+Tenemos un conjunto de $n$ trabajadores y $n$ trabajos, y queremos asignar a cada trabajador un trabajo de forma
+que el coste de realizar todos los trabajos sea mínimo. Dichos costes estarán proporcionados en una matriz cuadrada
+de orden $n$.
 
+Para resolver este problema, hemos implementado tres algoritmos greedy que se explican a continuación. 
+	\subsection{Algoritmos}
+		\subsection{Asignación por trabajador}
+		Recorreremos la matriz desde el primer trabajador al último, buscando el trabajo con coste mínimo, y que no esté ya 
+		asignado a algún trabajador. Almacenaremos los pares trabajador-trabajo en un vector, que será el valor de retorno. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+		        	\texttt{m}, matriz de costes, y $n$ orden de la matriz
+		     	\STATE{\texttt{adyadcentes}=$(\delta_{i,j})_{nxn}, i,j\in \{0\ldots \#clases - 1\}$}
+		     	\STATE{\texttt{sin\_colorear}= $\{0\ldots\#clases-1\}$}
+		     	\STATE{\texttt{color}=$[]$}
+		     	\STATE{\texttt{indice}=0}
+			  \WHILE{\texttt{sin\_colorear}$\neq \emptyset$}
+			    \STATE{\texttt{color[indice]=[sin\_colorear.pop\_front]}}
+			    \FORALL{\texttt{v}$\in$\texttt{sin\_colorear}}
+			      \IF{\textbf{no} \texttt{adyacentes[color[indice][0]][v]}}
+				\STATE{\texttt{color[indice].push(v)}}
+				\STATE{\texttt{sin\_colorear.delete(v)}}
+			      \ENDIF
+			    \ENDFOR
+			    
+			  \ENDWHILE
+				\RETURN{$\#$\texttt{color}}
+			\end{algorithmic}
+		    \caption{Asignación de aulas}
+		    \label{aulas}
+		\end{algorithm}
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
 ($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
