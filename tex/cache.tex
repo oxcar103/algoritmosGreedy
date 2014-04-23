@@ -1,0 +1,37 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textbf{\textcolor{Blue}{def}}\ cache\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Eliminamos\ repetidos\ consecutivos}} \\
+\mbox{}\ \ \ \ p$\_$reducido\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}chunk\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}x\textcolor{BrickRed}{$|$}\ x\textcolor{Red}{\}}\textcolor{BrickRed}{.}map\textcolor{BrickRed}{(\&:}first\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ La\ caché\ se\ inicia\ a\ los\ 'size'\ primeros\ datos\ (sin\ repetir)}} \\
+\mbox{}\ \ \ \ cache\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}uniq\textcolor{BrickRed}{.}slice\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ fallos\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Recorremos\ las\ peticiones\ y\ reemplazamos\ el\ elemento}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ conveniente\ cuando\ se\ produce\ un\ fallo\ de\ caché}} \\
+\mbox{}\ \ \ \ p\textcolor{BrickRed}{.}each$\_$with$\_$index\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}peticion\textcolor{BrickRed}{,}\ i\textcolor{BrickRed}{$|$}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{!}cache\textcolor{BrickRed}{.}member?\textcolor{BrickRed}{(}peticion\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ i$\_$a$\_$eliminar\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ i$\_$cache\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{nil}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ cache\textcolor{BrickRed}{.}each$\_$with$\_$index\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}e\textcolor{BrickRed}{,}\ j\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Si\ no\ se\ encuentra\ una\ próxima\ petición\ se\ escoge\ este}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ elemento\ (find$\_$index\ devuelve\ nil)}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ prox$\_$pet\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{[}i\ \textcolor{BrickRed}{..}\ p\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{].}find$\_$index\textcolor{BrickRed}{(}e\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$|$$|$}\ p\textcolor{BrickRed}{.}size \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ prox$\_$pet\ \textcolor{BrickRed}{\textgreater{}}\ i$\_$a$\_$eliminar \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$cache\ \textcolor{BrickRed}{=}\ j \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$a$\_$eliminar\ \textcolor{BrickRed}{=}\ prox$\_$pet \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ cache\textcolor{BrickRed}{[}i$\_$cache\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ peticion \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ fallos\ \textcolor{BrickRed}{+=}\ \textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ fallos \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{}

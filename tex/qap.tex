@@ -1,0 +1,187 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ encoding:\ utf-8}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{class}}\ Object \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Copia\ profunda\ de\ objetos}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ http://stackoverflow.com/questions/8206523/how-to-create-a-deep-copy-of-an-object-in-ruby}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ deep$\_$clone \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\ \textbf{\textcolor{Blue}{if}}\ \textcolor{ForestGreen}{@deep$\_$cloning} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\ \textcolor{BrickRed}{=}\ clone \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\textcolor{BrickRed}{.}instance$\_$variables\textcolor{BrickRed}{.}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}var\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ val\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\textcolor{BrickRed}{.}instance$\_$variable$\_$get\textcolor{BrickRed}{(}var\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{begin}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ \textcolor{BrickRed}{=}\ val\textcolor{BrickRed}{.}deep$\_$clone \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{rescue}}\ TypeError \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{next}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{ensure}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\textcolor{BrickRed}{.}instance$\_$variable$\_$set\textcolor{BrickRed}{(}var\textcolor{BrickRed}{,}\ val\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ deep$\_$cloning$\_$obj\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@deep$\_$cloning$\_$obj}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{nil}} \\
+\mbox{}\ \ \ \ \ \ \ \ deep$\_$cloning$\_$obj \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{module}}\ QAP \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{class}}\ QAP \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ initialize\textcolor{BrickRed}{(}filename\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Lectura\ del\ archivo\ del\ problema\ QAP.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@size}\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ distancedata\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ weightdata\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ File\textcolor{BrickRed}{.}foreach\textcolor{BrickRed}{(}filename\textcolor{BrickRed}{)}\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}l\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{ForestGreen}{@size}\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@size}\ \textcolor{BrickRed}{=}\ l\textcolor{BrickRed}{.}to$\_$i\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{elsif}}\ l\ \textcolor{BrickRed}{=\textasciitilde{}}\ \texttt{\textcolor{Orange}{/\textasciicircum{}\textbackslash{}s*\$/}}\ \textcolor{BrickRed}{\&\&}\ distancedata\textcolor{BrickRed}{.}any?\ \textcolor{BrickRed}{\&\&}\ \textcolor{BrickRed}{!}weightdata\ \ \textit{\textcolor{Brown}{\#\ Línea\ separando\ distancias\ y\ pesos}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ weightdata\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{elsif}}\ \textcolor{BrickRed}{!}weightdata\ \ \textit{\textcolor{Brown}{\#\ Añadiendo\ distancias}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ distancedata\ \textcolor{BrickRed}{+=}\ l\textcolor{BrickRed}{.}split\textcolor{BrickRed}{(}\texttt{\textcolor{Red}{"{}\ "{}}}\textcolor{BrickRed}{).}map\textcolor{BrickRed}{(\&:}to$\_$i\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{else}}\ \ \textit{\textcolor{Brown}{\#\ Añadiendo\ pesos}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ weightdata\ \textcolor{BrickRed}{+=}\ l\textcolor{BrickRed}{.}split\textcolor{BrickRed}{(}\texttt{\textcolor{Red}{"{}\ "{}}}\textcolor{BrickRed}{).}map\textcolor{BrickRed}{(\&:}to$\_$i\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@permutation}\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..(}\textcolor{ForestGreen}{@size}\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{)).}to$\_$a\ \ \textit{\textcolor{Brown}{\#\ Genera\ un\ array\ con\ valores\ de\ 0\ a\ size-1}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@distances}\ \textcolor{BrickRed}{=}\ distancedata\textcolor{BrickRed}{.}each$\_$slice\textcolor{BrickRed}{(}\textcolor{ForestGreen}{@size}\textcolor{BrickRed}{).}to$\_$a\ \ \textit{\textcolor{Brown}{\#\ Matriz\ de\ distancias}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@weights}\ \textcolor{BrickRed}{=}\ weightdata\textcolor{BrickRed}{.}each$\_$slice\textcolor{BrickRed}{(}\textcolor{ForestGreen}{@size}\textcolor{BrickRed}{).}to$\_$a\ \ \textit{\textcolor{Brown}{\#\ Matriz\ de\ pesos}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Acceso\ público\ a\ la\ permutación.}} \\
+\mbox{}\ \ \ \ \ \ \ \ attr$\_$accessor\ \textcolor{BrickRed}{:}permutation\  \\
+\mbox{}\ \ \ \ \ \ \ \ attr$\_$reader\ \ \ \textcolor{BrickRed}{:}size \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Lectura\ de\ distancias\ y\ pesos.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ distance\textcolor{BrickRed}{(}i\textcolor{BrickRed}{,}j\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@distances}\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ weight\textcolor{BrickRed}{(}i\textcolor{BrickRed}{,}j\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@weights}\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Coste\ actual.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ cost \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ total$\_$cost\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@distances}\textcolor{BrickRed}{.}each$\_$index\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@distances}\textcolor{BrickRed}{[}i\textcolor{BrickRed}{].}each$\_$index\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ total$\_$cost\ \textcolor{BrickRed}{+=}\ weight\textcolor{BrickRed}{(}i\textcolor{BrickRed}{,}j\textcolor{BrickRed}{)*}distance\textcolor{BrickRed}{(}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{],}\ permutation\textcolor{BrickRed}{[}j\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ total$\_$cost \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\#}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Heurísticas}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\#}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Heurística\ 2-opt.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}opt2\textcolor{BrickRed}{(}qap\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ continue\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{while}}\ continue \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ continue\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Realiza\ una\ permutación\ simple\ y\ comprueba\ si\ mejora\ el\ coste\ total.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Termina\ el\ proceso\ cuando\ no\ encuentra\ mejoras\ en\ una\ iteración.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..(}qap\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{)).}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{((}i\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)..(}qap\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{)).}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ old$\_$cost\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}cost \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{],}\ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}j\textcolor{BrickRed}{],}qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ old$\_$cost\ \textcolor{BrickRed}{\textless{}=}\ qap\textcolor{BrickRed}{.}cost \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{],}\ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}j\textcolor{BrickRed}{],}qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{else}}\ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ continue\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Heurística\ Greedy.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}greedy$\_$v1\textcolor{BrickRed}{(}qap\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ min\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}cost \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ result\ \textcolor{BrickRed}{=}\ qap \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ s\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}k\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fab$\_$asignada\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textbf{\textcolor{Blue}{false}}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loc$\_$asignada\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textbf{\textcolor{Blue}{false}}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}deep$\_$clone \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ actual.permutation=qap.permutation.clone}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{Purple}{1}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}inject\textcolor{BrickRed}{(}k\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fab$\_$asignada\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loc$\_$asignada\textcolor{BrickRed}{[}actual\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Busca\ el\ índice\ de\ la\ fábrica\ no\ asignada\ con\ más\ flujo\ a\ la\ k-ésima}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max$\_$w$\_$index\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each$\_$with$\_$index\textcolor{BrickRed}{.}select\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{!}fab$\_$asignada\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{[}actual\textcolor{BrickRed}{.}weight\textcolor{BrickRed}{(}k\textcolor{BrickRed}{,}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]),}j\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}max\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Busca\ la\ posición\ más\ cercana\ a\ la\ fábrica\ k-ésima\ aún\ no\ asignada}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ min$\_$d$\_$index\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each$\_$with$\_$index\textcolor{BrickRed}{.}select\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{!}loc$\_$asignada\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{[}actual\textcolor{BrickRed}{.}distance\textcolor{BrickRed}{(}actual\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}k\textcolor{BrickRed}{],}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]),}j\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}min\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]} \\
+\mbox{}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Coloca\ la\ fábrica\ en\ dicha\ posición}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}max$\_$w$\_$index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ min$\_$d$\_$index \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ En\ la\ próxima\ iteración,\ fábrica\ y\ localización\ se\ marcarán\ como\ asignadas}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max$\_$w$\_$index \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ actual\textcolor{BrickRed}{.}cost\ \textcolor{BrickRed}{\textless{}}\ min \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ min\ \textcolor{BrickRed}{=}\ actual\textcolor{BrickRed}{.}cost \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result\ \textcolor{BrickRed}{=}\ actual \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ qap\textcolor{BrickRed}{.}permutation\ \textcolor{BrickRed}{=}\ result\textcolor{BrickRed}{.}permutation \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{.}greedy$\_$v2\textcolor{BrickRed}{(}qap\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ s\ \textcolor{BrickRed}{=}\ qap\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ fab$\_$asignada\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textbf{\textcolor{Blue}{false}}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ loc$\_$asignada\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textbf{\textcolor{Blue}{false}}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ w\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ d\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Calculamos\ vectores\ sumas\ de\ pesos\ y\ sumas\ de\ distancias}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]=(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ qap\textcolor{BrickRed}{.}weight\textcolor{BrickRed}{(}i\textcolor{BrickRed}{,}j\textcolor{BrickRed}{)}\textcolor{Red}{\}}\textcolor{BrickRed}{.}inject\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}sum\textcolor{BrickRed}{,}x\textcolor{BrickRed}{$|$}\ sum\ \textcolor{BrickRed}{+}\ x\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]=(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ qap\textcolor{BrickRed}{.}distance\textcolor{BrickRed}{(}i\textcolor{BrickRed}{,}j\textcolor{BrickRed}{)}\textcolor{Red}{\}}\textcolor{BrickRed}{.}inject\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}sum\textcolor{BrickRed}{,}x\textcolor{BrickRed}{$|$}\ sum\ \textcolor{BrickRed}{+}\ x\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}s\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{).}times\ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max$\_$w$\_$index\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each$\_$with$\_$index\textcolor{BrickRed}{.}select\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{!}fab$\_$asignada\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{[}w\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]],}j\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}max\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ min$\_$d$\_$index\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}s\textcolor{BrickRed}{).}each$\_$with$\_$index\textcolor{BrickRed}{.}select\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{!}loc$\_$asignada\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}collect\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{BrickRed}{[}d\textcolor{BrickRed}{[}j\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]],}j\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]]}\textcolor{Red}{\}}\textcolor{BrickRed}{.}min\textcolor{BrickRed}{[-}\textcolor{Purple}{1}\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ qap\textcolor{BrickRed}{.}permutation\textcolor{BrickRed}{[}max$\_$w$\_$index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ min$\_$d$\_$index \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fab$\_$asignada\textcolor{BrickRed}{[}max$\_$w$\_$index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loc$\_$asignada\textcolor{BrickRed}{[}min$\_$d$\_$index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{def}}\ to$\_$s \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}Permutación:\ "{}}}\ \textcolor{BrickRed}{+}\ permutation\textcolor{BrickRed}{.}to$\_$s\ \textcolor{BrickRed}{+}\ \texttt{\textcolor{Red}{"{}\textbackslash{}nCoste:\ \#\{cost\}\textbackslash{}n"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textbf{\textcolor{Blue}{$\_$$\_$FILE$\_$$\_$}}\ \textcolor{BrickRed}{==}\ \textcolor{ForestGreen}{\$0} \\
+\mbox{}\ \ \ \ \ \ \ \ puts\ \texttt{\textcolor{Red}{"{}Introduce\ nombre\ de\ archivo:\ "{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ file\ \textcolor{BrickRed}{=}\ gets\textcolor{BrickRed}{.}chomp \\
+\mbox{}\ \ \ \ \ \ \ \ instancia\ \textcolor{BrickRed}{=}\ QAP\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}file\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#instancia\ =\ QAP.new("{}../datos.qap/bur26a.dat"{})}} \\
+\mbox{}\ \ \ \ \ \ \ \ puts\ \texttt{\textcolor{Red}{"{}\textbackslash{}nPermutación\ inicial:\ \textbackslash{}n\#\{instancia\}\textbackslash{}n"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ QAP\textcolor{BrickRed}{.}greedy$\_$v1\ instancia \\
+\mbox{}\ \ \ \ \ \ \ \ puts\ \texttt{\textcolor{Red}{"{}Instancia\ tras\ greedy:\ \textbackslash{}n\#\{instancia\}\textbackslash{}n"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ QAP\textcolor{BrickRed}{.}greedy$\_$v2\ instancia \\
+\mbox{}\ \ \ \ \ \ \ \ puts\ \texttt{\textcolor{Red}{"{}Instancia\ tras\ greedy\ 2:\ \textbackslash{}n\#\{instancia\}\textbackslash{}n"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ QAP\textcolor{BrickRed}{.}opt2\ instancia \\
+\mbox{}\ \ \ \ \ \ \ \ puts\ \texttt{\textcolor{Red}{"{}Instancia\ tras\ 2-opt:\ \textbackslash{}n\#\{instancia\}\textbackslash{}n"{}}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{}

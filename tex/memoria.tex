@@ -119,7 +119,8 @@ Algoritmos Greedy} % Subtitle
 
 
 \section{Terminales de venta}
-El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente. Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente.
+Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
 \subsection{Algoritmo}
 La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
 
@@ -134,7 +135,7 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
      	\STATE{Crear un vector \texttt{vuelta}}
 		\FORALL{\texttt{moneda} en \texttt{monedas}}
 			\STATE{\texttt{cantidad} $\gets$ \texttt{precio} / \texttt{moneda}}
-			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} \* \texttt{moneda}}
+			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} $\times$ \texttt{moneda}}
 			\STATE{Añadir [\texttt{moneda}, \texttt{cantidad}] a \texttt{vuelta}}
 		\ENDFOR
 		\RETURN{vuelta}
@@ -144,14 +145,11 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
 \end{algorithm}
 
 \subsection{Implementación}
-  Implementamos el algoritmo diseñado en Ruby.
   
-  \small
-    \texttt{\input{terminales.tex}}
-  \normalsize
 
-\subsection{Contraejemplo: Sellos} % Contraejemplo?
-El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+\subsection{Contraejemplo}
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
+habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
 \begin{itemize}
 	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
 	\item Solución óptima: 0.17 + 0.17 (2 sellos)
@@ -163,7 +161,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. 
     Modelizaremos el problema como un grafo completo $G$ del conjunto de ciudades $E$. Con aristas 
-    $V = \left\{ [a,b] |\ a,b \in C \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso 
+    $V = \left\{ [a,b] |\ a,b \in E \right\}$, donde la arista conectando los nodos $a$ y $b$ tiene peso 
     igual a la distancia que los separa:
 
     \begin{equation}
@@ -203,7 +201,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
   
     
   \subsection{Triangulación de Delaunay}
-    Para reducir la carga del algoritmo, podemos reducir el grafo sobre que que buscamos el árbol generador minimal.
+    Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal.
     El grafo inicial es completo, ya que toda ciudad es suceptible de ser comunicada con cualquiera otra. Pero al 
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
@@ -214,7 +212,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \begin{proof}
       Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
       Sea $(p,q)$ una arista arbitraria del árbol generador. 
-      Consideramos el círculo que tiene como diámetkruro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
+      Consideramos el círculo que tiene como diámetro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
       \begin{equation}
        \overrightarrow{pr} \leq \overrightarrow{pq} \qquad \overrightarrow{rq} \leq \overrightarrow{pq}
       \end{equation}
@@ -241,12 +239,47 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \end{algorithm}
     
 \section{Segmentación de clientes}
+  \subsection{Enunciado}
+    Dado un conjunto de puntos en $\mathbb{R}^n$ dotado de la distancia euclídea, buscamos la partición de puntos que
+    maximice la suma de distancias entre subconjuntos de la particición. Esto es, dado $C$ y una partición $P \subset \mathcal{P}(C)$,
+    queremos maximizar:
+    \begin{equation}
+     \sum_{A,B \in P} dist(A,B) = \sum_{A,B \in P} min_{a\in A, b\in B}(dist(a,b))
+    \end{equation}
+
+    
   \subsection{Algoritmo}
     Agruparemos clientes según similitud por su vector de características. Dado un conjunto de vectores en $\mathbb{R}^n$
     queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
     
     Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
     aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos.
+    
+    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos. Así,
+    generalizamos Kruskal para aplicarlo sólo hasta las $n-k$ primeras aristas, que unirán las $k$ componentes.
+    
+    Ahora no nos interesa obtener el árbol minimal, sino simplemente calcular las componentes conexas. Nótese además
+    que debemos generalizar la dimensión del algoritmo a la que requieran los vectores de características.
+    
+    \begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{grafo}, grafo euclídeo generado por los vectores de características \\\
+        	\texttt{k}, número de componentes conexas en las que se quiere partir el grafo \\\
+		\STATE{\texttt{componentes=}$\emptyset$}
+		\FORALL{\texttt{v} en \texttt{grafo.vértices}:}
+		   \STATE{\texttt{componentes.add(set(v))}}
+		\ENDFOR
+		\FORALL{arista \texttt{(u,v)} en \texttt{grafo.aristas}:}
+		\IF{\texttt{componente(u)} $\neq$ \texttt{componente(v)}}
+		      \STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
+		    \ENDIF
+		\ENDFOR
+		\RETURN{\texttt{componentes}}
+	\end{algorithmic}
+      \caption{Algoritmo de Kruskal generalizado}
+      \label{kruskal-generalizado}
+    \end{algorithm}
     
   \subsection{Contraejemplo}
   La heurística mencionada no es óptima. Veamos un contraejemplo:
@@ -265,11 +298,89 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     
     Pero por ejemplo $\{\{a\},\{b,c,d\},\{e\}\}$, tiene mayor suma de distancias: $2,5+5+2,5=10$
 
+    
 \section{Asignación de trabajos}
+Tenemos un conjunto de $n$ trabajadores y $n$ trabajos, y queremos asignar a cada trabajador un trabajo de forma
+que el coste de realizar todos los trabajos sea mínimo. Dichos costes estarán proporcionados en una matriz cuadrada
+de orden $n$.
 
+Para resolver este problema, hemos implementado tres algoritmos greedy que se explican a continuación. 
+	\subsection{Algoritmos}
+		\subsection{Asignación por trabajador}
+		Recorreremos la matriz desde el primer trabajador al último, buscando el trabajo con coste mínimo, y que no esté ya 
+		asignado a algún trabajador. Almacenaremos los pares trabajador-trabajo en un vector, que será el valor de retorno. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea un vector trabajosUsados de tamaño $n$ y lo rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0}}
+		        \FORALL{Trabajador (i)}
+		          \FORALL{Trabajo (j)}
+		            \IF{!trabajosUsados[j]}
+		            	\IF{Minimo < 0 || m[i][j] < Minimo}
+		            		\STATE{\texttt{posTrabajo = j}}
+		            	\ENDIF
+		            \ENDIF
+		          \ENDFOR
+		          \STATE{\texttt{ Asignacion.push(pair(i,posTrabajo))} }
+		          \STATE{\texttt{trabajosUsados[posTrabajo = true]} }
+		        \ENDFOR  	
+		        
+				\RETURN{\texttt{Asignacion}}
+			\end{algorithmic}
+		    \caption{Asignación de trabajos}
+		    \label{Asignación Trabajos}
+		\end{algorithm}
+		
+	
+		\subsection{Asignación por trabajo}
+		En este caso, recorreremos la matriz por trabajos, buscando el trabajador que haga mínimo el coste y que no esté
+		asignado a ningún trabajo. Devolveremos las asignaciones trabajador-trabajo en un vector. 
+		
+		Esta solución es simétrica a la anterior, con la única diferencia que recorre la matriz  primero por columnas 
+		y después por filas, mientras que antes era al contrario. El código difiere únicamente en ese matiz. 
+		
+		\subsection{Búsqueda de mínimos globales}
+		En este algoritmo, buscaremos el par trabajador-trabajo con coste mínimo en toda la matriz, siempre que los dos estén 
+		libres. De esta forma obtendremos un mínimo global. Nuevamente, el valor de retorno será un vector con las asociaciones
+		trabajador-trabajo. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea dos vectores: trabajosUsados y trabajadoresUsados, de tamaño $n$ y los rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0\\ posTrabajador = 0}}
+			       \FORALL{Fila}
+			         \FORALL{Trabajador (j)}
+			           \IF{!trabajadoresUsados[j]}
+			           	 \FORALL{Trabajo (k)}
+			               \IF{!trabajosUsados[j]}
+			           	  	 \IF{Minimo < 0 || m[j][k] < Minimo}
+			           			\STATE{\texttt{posTrabajo = k \\ posTrabajador = j}}
+			           	     \ENDIF
+			           	   \ENDIF
+			             \ENDFOR
+			           \ENDIF
+			         \ENDFOR
+			       \STATE{\texttt{Asignacion.push(pair(posTrabajador,posTrabajo))}}
+			       \STATE{\texttt{trabajosUsados[posTrabajo] = true \\ trabajadoresUsados[posTrabajador] = true}}
+			       \ENDFOR  	
+				        
+				\RETURN{\texttt{Asignacion}}
+			\end{algorithmic}
+			   \caption{Asignación de trabajos}
+			   \label{Asignación Global}
+		\end{algorithm}
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
-($s_i$ y $f_i$, $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
+($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
 para dar esas $n$ clases.
 Observamos que el problema es equivalente a uno de coloreo de grafos, para
 el grafo no dirigido con función de adyacencia dada por:
@@ -294,25 +405,83 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 	  \WHILE{\texttt{sin\_colorear}$\neq \emptyset$}
 	    \STATE{\texttt{color[indice]=[sin\_colorear.pop\_front]}}
 	    \FORALL{\texttt{v}$\in$\texttt{sin\_colorear}}
-	      \IF{\texttt{adyacentes[color[indice][0]][v]}}
+	      \IF{\textbf{no} \texttt{adyacentes[color[indice][0]][v]}}
 		\STATE{\texttt{color[indice].push(v)}}
-		\STATE{\texttt{sin\_colorear}.delete(v)}
+		\STATE{\texttt{sin\_colorear.delete(v)}}
 	      \ENDIF
 	    \ENDFOR
 	    
 	  \ENDWHILE
 		\RETURN{$\#$\texttt{color}}
 	\end{algorithmic}
-    \caption{Asginación de aulas}
-    \label{monedas}
+    \caption{Asignación de aulas}
+    \label{aulas}
 \end{algorithm}
 
 \subsection{Implementación}
 \subsection{Contraejemplo}
 
-
 \section{Memorias caché}
+\label{cache}
+%Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
+El problema de las memorias caché consiste en averiguar qué datos conviene eliminar en una caché, conociendo de antemano los datos que se van a pedir, para evitar lo máximo posible los fallos de caché.
+  \subsection{Algoritmo}
+La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Además, podemos simplificar el problema si consideramos solo una vez los datos que se piden varias veces de forma consecutiva, ya que sabemos que no se eliminarán de una petición a la siguiente.
+
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{p}, array de $n$ peticiones\\
+        	\texttt{k}, tamaño de la caché\\ \
+     	\STATE{\texttt{fallos} = 0}\\
+     	\STATE{\texttt{p\_reducido} = eliminarDuplicadosConsecutivos(p)}
+     	\STATE{\texttt{cache} = eliminarDuplicados(\texttt{p\_reducido}).\texttt{slice}(0, k-1)}
+	  \FORALL{\texttt{petición} $\in$ \texttt{p}}
+	   \IF{\texttt{petición $\notin$ cache}}
+		\STATE{\texttt{a\_eliminar} = Elemento de \texttt{p\_reducido} en \texttt{cache} que más tardará en volver a ser necesitado}
+		\STATE{\texttt{cache[cache.find(a\_eliminar)]} = \texttt{peticion}}
+		\STATE{\texttt{fallos++}}
+	   \ENDIF
+	  \ENDFOR
+	  
+	  \RETURN{fallos}
+
+	\end{algorithmic}
+    \caption{Optimización de memoria caché}
+    \label{memory}
+\end{algorithm}
     
-\section{El problema de asignación cuadrática}
+\section{Implementaciones}
+   \subsection{Terminales de venta}
+      Implementamos el algoritmo diseñado en Ruby.
+  
+      \small
+	\texttt{\input{terminales.tex}}
+      \normalsize
+   
+   \subsection{Red de comunicaciones}
+      Implementamos la construcción de grafos euclídeos a partir del conjunto de puntos, así como el algoritmo de Kruskal y
+      el dibujado del grafo euclídeo.
+      
+      \small
+	\texttt{\input{euclidean_graph.tex}}
+      \normalsize
+    
+   \subsection{Segmentación de clientes}
+      Se incluye a continuación una implementación en Python, utilizando como base la implementación del ejercicio anterior.\\
+        \small
+	\texttt{\input{segmentacion.tex}}
+	\normalsize
+	
+	\subsection{Asignación de trabajos}
+	
+	\subsection{Asignación de aulas}
+	
+	\subsection{Memorias caché}
+	A continuación una implementación en Ruby del algoritmo diseñado en la sección \ref{cache}:
+	
+    \small
+	\texttt{\input{cache.tex}}
+	\normalsize
     
 \end{document}
