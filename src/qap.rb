@@ -1,15 +1,8 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-class File
-    def eat_empty_lines
-        while (c=getc) == "\n"
-        end
-        ungetc(c)
-    end
-end
-
 class Object
+    # Copia profunda de objetos
     # http://stackoverflow.com/questions/8206523/how-to-create-a-deep-copy-of-an-object-in-ruby
     def deep_clone
         return @deep_cloning_obj if @deep_cloning
