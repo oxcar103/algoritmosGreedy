@@ -107,7 +107,7 @@ module QAP
             end
         end
         
-        # Heurística Greedy.
+        # Heurística Greedy basada en Vecino más cercano
         def self.greedy_v1(qap)
             min = qap.cost
             result = qap
@@ -117,16 +117,24 @@ module QAP
                 fab_asignada = Array.new(s+1){false}
                 loc_asignada = Array.new(s+1){false}
                 actual = qap.deep_clone
-                # actual.permutation=qap.permutation.clone
                 
                 (1..s).inject(k) do |i|
                     fab_asignada[i] = true
                     loc_asignada[actual.permutation[i]] = true
                     
                     # Busca el índice de la fábrica no asignada con más flujo a la k-ésima
-                    max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [actual.weight(k,j[0]),j[-1]]}.max[-1]
+                    max_w_index = (0..s).each_with_index.select { |j| 
+                        !fab_asignada[j[0]]
+                    }.collect { |j|
+                        [actual.weight(k,j[0]),j[-1]]
+                    }.max[-1]
+                    
                     # Busca la posición más cercana a la fábrica k-ésima aún no asignada
-                    min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j|                                    [actual.distance(actual.permutation[k],j[0]),j[-1]]}.min[-1]
+                    min_d_index = (0..s).each_with_index.select { |j| 
+                        !loc_asignada[j[0]]
+                    }.collect { |j| 
+                        [actual.distance(actual.permutation[k],j[0]),j[-1]]
+                    }.min[-1]
  
                     # Coloca la fábrica en dicha posición
                     actual.permutation[max_w_index] = min_d_index
@@ -151,13 +159,31 @@ module QAP
             
             # Calculamos vectores sumas de pesos y sumas de distancias
             (0..s).each{|i| 
-                w[i]=(0..s).collect{|j| qap.weight(i,j)}.inject(0){|sum,x| sum + x}
-                d[i]=(0..s).collect{|j| qap.distance(i,j)}.inject(0){|sum,x| sum + x}
+                w[i] = (0..s).collect { |j|
+                    qap.weight(i,j)
+                }.inject(0) { 
+                    |sum,x| sum + x
+                }
+                
+                d[i] = (0..s).collect { |j|
+                    qap.distance(i,j)
+                }.inject(0) { |sum,x| 
+                    sum + x
+                }
             }
             
             (s+1).times do
-                max_w_index = (0..s).each_with_index.select{|j| !fab_asignada[j[0]]}.collect{|j| [w[j[0]],j[-1]]}.max[-1]
-                min_d_index = (0..s).each_with_index.select{|j| !loc_asignada[j[0]]}.collect{|j| [d[j[0]],j[-1]]}.min[-1]
+                max_w_index = (0..s).each_with_index.select { |j|
+                    !fab_asignada[j[0]]
+                }.collect { |j| 
+                    [w[j[0]],j[-1]]
+                }.max[-1]
+                
+                min_d_index = (0..s).each_with_index.select { |j|
+                    !loc_asignada[j[0]]
+                }.collect { |j| 
+                    [d[j[0]],j[-1]]
+                }.min[-1]
                 
                 qap.permutation[max_w_index] = min_d_index
                 fab_asignada[max_w_index] = true
