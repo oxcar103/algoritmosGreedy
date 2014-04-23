@@ -1,4 +1,4 @@
-//  Problema 4: Asignación de trabajos. Utilizando heurística greedy. Se implementan 3 heurísticas greedy. 
+//  Problema 4: Asignación de trabajos. Utilizando 3 heurísticas greedy. 
 
 #include <iostream>
 #include <vector>
@@ -7,11 +7,8 @@ using namespace std;
 
 typedef vector<pair<int, int> > Asignacion;
 
-/* 
-    Heurística greedyTrabajador. Recorre la matriz por trabajador (filas) y busca el trabajo que aun no esté asignado 
-    a ningún trabajado con coste mínimo, y lo asigna al trabajador actual. 
-    Tiene una eficiencia cuadrática, pues consta de dos bucles for anidados.
-*/
+//  Heurística greedyTrabajador, recorre la matriz por trabajadores. 
+
 Asignacion greedyTrabajador(double **m, int size){
     
     Asignacion asignacion_final; 
@@ -41,11 +38,8 @@ Asignacion greedyTrabajador(double **m, int size){
     return asignacion_final; 
 }
 
-/* 
-    Heurística greedyTrabajo. Recorre la matriz por trabajos (columnas) y busca el trabajador que aun no tenga asignado
-    a ningún trabajo, y que haga mínimo el coste para ese trabajo, asignándolo al trabajo actual. 
-    Es análogo al anterior, por lo que también tiene eficiencia cuadrática.  
-*/
+//  Heurística greedyTrabajo, recorre la matriz por trabajos. 
+
 Asignacion greedyTrabajo(double **m, int size){
     
     Asignacion asignacion_final; 
@@ -75,12 +69,8 @@ Asignacion greedyTrabajo(double **m, int size){
     return asignacion_final; 
 }
 
-/*
-    Heurística greedyGlobal. Busca costes trabajador-trabajo mínimos en la matriz, siempre que ambos estén libres. 
-    Una vez encontrados los asocia como pareja y los marca como utilizados. 
-    Esta heurística tiene la desventaja de que recorre la matriz entera en cada búsqueda, por lo que es más costosa computacionalmente, 
-    siendo de un orden cúbico. 
-*/ 
+//  Heurística greedyGlobal. Busca mínimos globales. 
+
 Asignacion greedyGlobal(double **m, int size){
     vector<bool> trabajadores_usados(size, false);
     vector<bool> trabajos_usados(size, false);
@@ -123,17 +113,13 @@ int main(){
     int coste1 = 0, coste2 = 0, coste3 = 0;  
 
     int n_trabajos = 5; 
-    // Creamos la matriz. 
+
+    // Creación de la matriz. 
     double **m; 
     m = new double*[n_trabajos]; 
     for (int i = 0; i < n_trabajos; i++)
         m[i] = new double[n_trabajos]; 
 
-    // Inicializamos la matriz. 
-    /*for (int i = 0; i < n_trabajos; i++)
-       for (int j = 0; j < n_trabajos; j++)
-            m[i][j] = i+j; 
-*/
     //---------------------- Prueba para una matriz 5x5 ------------------------------------
 
     m[0][0] = 9;        m[0][1] = 4;        m[0][2] = 23;       m[0][3] = 12;       m[0][4] = 9; 
