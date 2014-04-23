@@ -197,6 +197,12 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     Para encontrar la triangulación de Delaunay usar 
     
 \section{Segmentación de clientes}
+  \subsection{Algoritmo}
+    Agruparemos clientes según similitud por su vector de características. Dado un conjunto de vectores en $\mathbb{R}^n$
+    queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
+    
+    Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
+    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos.
 
 \section{Asignación de trabajos}
 
