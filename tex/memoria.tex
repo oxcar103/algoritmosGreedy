@@ -277,8 +277,84 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 
     
 \section{Asignación de trabajos}
-Este problema consiste en hallar, para unas listas de trabajos y trabajadores dadas, la asignación que reduce el costo total correspondiente a que cada trabajador realice cierto trabajo. Se pueden diseñar varias heurísticas de tipo Greedy para hallar soluciones al problema
+Tenemos un conjunto de $n$ trabajadores y $n$ trabajos, y queremos asignar a cada trabajador un trabajo de forma
+que el coste de realizar todos los trabajos sea mínimo. Dichos costes estarán proporcionados en una matriz cuadrada
+de orden $n$.
 
+Para resolver este problema, hemos implementado tres algoritmos greedy que se explican a continuación. 
+	\subsection{Algoritmos}
+		\subsection{Asignación por trabajador}
+		Recorreremos la matriz desde el primer trabajador al último, buscando el trabajo con coste mínimo, y que no esté ya 
+		asignado a algún trabajador. Almacenaremos los pares trabajador-trabajo en un vector, que será el valor de retorno. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea un vector trabajosUsados de tamaño $n$ y lo rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0}}
+		        \FORALL{Trabajador (i)}
+		          \FORALL{Trabajo (j)}
+		            \IF{!trabajosUsados[j]}
+		            	\IF{Minimo < 0 || m[i][j] < Minimo}
+		            		\STATE{\texttt{posTrabajo = j}}
+		            	\ENDIF
+		            \ENDIF
+		          \ENDFOR
+		          \STATE{\texttt{ Asignacion.push(pair(i,posTrabajo))} }
+		          \STATE{\texttt{trabajosUsados[posTrabajo = true]} }
+		        \ENDFOR  	
+		        
+				\RETURN{\texttt{Asignacion}}
+			\end{algorithmic}
+		    \caption{Asignación de trabajos}
+		    \label{Asignación Trabajos}
+		\end{algorithm}
+		
+	
+		\subsection{Asignación por trabajo}
+		En este caso, recorreremos la matriz por trabajos, buscando el trabajador que haga mínimo el coste y que no esté
+		asignado a ningún trabajo. Devolveremos las asignaciones trabajador-trabajo en un vector. 
+		
+		Esta solución es simétrica a la anterior, con la única diferencia que recorre la matriz  primero por columnas 
+		y después por filas, mientras que antes era al contrario. El código difiere únicamente en ese matiz. 
+		
+		\subsection{Búsqueda de mínimos globales}
+		En este algoritmo, buscaremos el par trabajador-trabajo con coste mínimo en toda la matriz, siempre que los dos estén 
+		libres. De esta forma obtendremos un mínimo global. Nuevamente, el valor de retorno será un vector con las asociaciones
+		trabajador-trabajo. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea dos vectores: trabajosUsados y trabajadoresUsados, de tamaño $n$ y los rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0\\ posTrabajador = 0}}
+			       \FORALL{Fila}
+			         \FORALL{Trabajador (j)}
+			           \IF{!trabajadoresUsados[j]}
+			           	 \FORALL{Trabajo (k)}
+			               \IF{!trabajosUsados[j]}
+			           	  	 \IF{Minimo < 0 || m[j][k] < Minimo}
+			           			\STATE{\texttt{posTrabajo = k \\ posTrabajador = j}}
+			           	     \ENDIF
+			           	   \ENDIF
+			             \ENDFOR
+			           \ENDIF
+			         \ENDFOR
+			       \STATE{\texttt{Asignacion.push(pair(posTrabajador,posTrabajo))}}
+			       \STATE{\texttt{trabajosUsados[posTrabajo] = true \\ trabajadoresUsados[posTrabajador] = true}}
+			       \ENDFOR  	
+				        
+				\RETURN{\texttt{Asignacion}}
+			\end{algorithmic}
+			   \caption{Asignación de trabajos}
+			   \label{Asignación Global}
+		\end{algorithm}
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
 ($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
