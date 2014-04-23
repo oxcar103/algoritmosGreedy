@@ -281,26 +281,72 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 		\begin{algorithm}[H]
 			\begin{algorithmic}[1]
 				\REQUIRE \ \\
-		        	\texttt{m}, matriz de costes, y $n$ orden de la matriz
-		     	\STATE{\texttt{adyadcentes}=$(\delta_{i,j})_{nxn}, i,j\in \{0\ldots \#clases - 1\}$}
-		     	\STATE{\texttt{sin\_colorear}= $\{0\ldots\#clases-1\}$}
-		     	\STATE{\texttt{color}=$[]$}
-		     	\STATE{\texttt{indice}=0}
-			  \WHILE{\texttt{sin\_colorear}$\neq \emptyset$}
-			    \STATE{\texttt{color[indice]=[sin\_colorear.pop\_front]}}
-			    \FORALL{\texttt{v}$\in$\texttt{sin\_colorear}}
-			      \IF{\textbf{no} \texttt{adyacentes[color[indice][0]][v]}}
-				\STATE{\texttt{color[indice].push(v)}}
-				\STATE{\texttt{sin\_colorear.delete(v)}}
-			      \ENDIF
-			    \ENDFOR
-			    
-			  \ENDWHILE
-				\RETURN{$\#$\texttt{color}}
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea un vector trabajosUsados de tamaño $n$ y lo rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0}}
+		        \FORALL{Trabajador (i)}
+		          \FORALL{Trabajo (j)}
+		            \IF{!trabajosUsados[j]}
+		            	\IF{Minimo < 0 || m[i][j] < Minimo}
+		            		\STATE{\texttt{posTrabajo = j}}
+		            	\ENDIF
+		            \ENDIF
+		          \ENDFOR
+		          \STATE{\texttt{ Asignacion.push(pair(i,posTrabajo))} }
+		          \STATE{\texttt{trabajosUsados[posTrabajo = true]} }
+		        \ENDFOR  	
+		        
+				\RETURN{\texttt{Asignacion}}
 			\end{algorithmic}
-		    \caption{Asignación de aulas}
-		    \label{aulas}
+		    \caption{Asignación de trabajos}
+		    \label{Asignación Trabajos}
 		\end{algorithm}
+		
+	
+		\subsection{Asignación por trabajo}
+		En este caso, recorreremos la matriz por trabajos, buscando el trabajador que haga mínimo el coste y que no esté
+		asignado a ningún trabajo. Devolveremos las asignaciones trabajador-trabajo en un vector. 
+		
+		Esta solución es simétrica a la anterior, con la única diferencia que recorre la matriz  primero por columnas 
+		y después por filas, mientras que antes era al contrario. El código difiere únicamente en ese matiz. 
+		
+		\subsection{Búsqueda de mínimos globales}
+		En este algoritmo, buscaremos el par trabajador-trabajo con coste mínimo en toda la matriz, siempre que los dos estén 
+		libres. De esta forma obtendremos un mínimo global. Nuevamente, el valor de retorno será un vector con las asociaciones
+		trabajador-trabajo. 
+		
+		\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\REQUIRE \ \\
+					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
+				\STATE{\texttt{Crea una Asignacion vacía}}
+				\STATE{\texttt{Crea dos vectores: trabajosUsados y trabajadoresUsados, de tamaño $n$ y los rellena a false}}
+				\STATE{\texttt{Minimo = -1}}
+				\STATE{\texttt{posTrabajo = 0\\ posTrabajador = 0}}
+			       \FORALL{Fila}
+			         \FORALL{Trabajador (j)}
+			           \IF{!trabajadoresUsados[j]}
+			           	 \FORALL{Trabajo (k)}
+			               \IF{!trabajosUsados[j]}
+			           	  	 \IF{Minimo < 0 || m[j][k] < Minimo}
+			           			\STATE{\texttt{posTrabajo = k \\ posTrabajador = j}}
+			           	     \ENDIF
+			           	   \ENDIF
+			             \ENDFOR
+			           \ENDIF
+			         \ENDFOR
+			       \STATE{\texttt{Asignacion.push(pair(posTrabajador,posTrabajo))}}
+			       \STATE{\texttt{trabajosUsados[posTrabajo] = true \\ trabajadoresUsados[posTrabajador] = true}}
+			       \ENDFOR  	
+				        
+				\RETURN{\texttt{Asignacion}}
+			\end{algorithmic}
+			   \caption{Asignación de trabajos}
+			   \label{Asignación Global}
+		\end{algorithm}
+		
 \section{Asignación de aulas}
 Tenemos los tiempos de comienzo y finalización de una serie de clases
 ($s_i$ y $f_i$, con $i\in\{1\ldots n\}$) y queremos encontrar el mínimo número de aulas necesarias
