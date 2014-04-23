@@ -31,6 +31,11 @@
 \usepackage{wrapfig} % Allows in-line images
 \usepackage[utf8]{inputenc}
 
+
+\usepackage{amsmath}
+% para importar svg
+%\usepackage[generate=all]{svgfig}
+
 % sudo apt-get install texlive-lang-spanish
 \usepackage[spanish]{babel} % English language/hyphenation
 \selectlanguage{spanish}
@@ -251,6 +256,8 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
     
     Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
+    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos.
+    
     aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos. Así,
     generalizamos Kruskal para aplicarlo sólo hasta las $n-k$ primeras aristas, que unirán las $k$ componentes.
     
@@ -276,7 +283,23 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       \caption{Algoritmo de Kruskal generalizado}
       \label{kruskal-generalizado}
     \end{algorithm}
+    
+  \subsection{Contraejemplo}
+  La heurística mencionada no es óptima. Veamos un contraejemplo:
+  
+  Sea el grafo $G=(\{a,b,c,d,e\},E)$ generado por la matriz de costos:
+  
+  $$\begin{pmatrix}
+     0 & 3 & 3 & 2,5 & 2,5\\
+     3 & 0 & 3 & 3 & 5\\
+     3 & 3 & 0 & 3 & 5\\
+     2,5 & 3 & 3 & 0 & 5\\
+     2,5 & 5 & 5 & 5 & 0\\
+    \end{pmatrix}$$
 
+    Para 3 grupos, la heurística obtendría: $\{\{a,d,e\},\{b\},\{c\}\}$ con suma de distancias $3+3+3=9$\\
+    
+    Pero por ejemplo $\{\{a\},\{b,c,d\},\{e\}\}$, tiene mayor suma de distancias: $2,5+5+2,5=10$
 
     
 \section{Asignación de trabajos}
@@ -421,14 +444,18 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
     \caption{Asignación de aulas}
     \label{aulas}
 \end{algorithm}
+
 \subsection{Implementación}
 \subsection{Contraejemplo}
+
 \section{Memorias caché}
 \label{cache}
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
 El problema de las memorias caché consiste en averiguar qué datos conviene eliminar en una caché, conociendo de antemano los datos que se van a pedir, para evitar lo máximo posible los fallos de caché.
   \subsection{Algoritmo}
-La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Además, podemos simplificar el problema si consideramos solo una vez los datos que se piden varias veces de forma consecutiva, ya que sabemos que no se eliminarán de una petición a la siguiente.
+La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Los primeros datos que se incluyen en caché son los primeros $k$ datos (sin considerar repeticiones) de la lista de peticiones.
+
+Asumiremos en el algoritmo que tenemos implementadas una función \texttt{eliminaRepetidos}, que devuelve un array con una única ocurrencia de cada elemento del array pasado como argumento.
 
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
@@ -436,11 +463,10 @@ La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya
         	\texttt{p}, array de $n$ peticiones\\
         	\texttt{k}, tamaño de la caché\\ \
      	\STATE{\texttt{fallos} = 0}\\
-     	\STATE{\texttt{p\_reducido} = eliminarDuplicadosConsecutivos(p)}
-     	\STATE{\texttt{cache} = eliminarDuplicados(\texttt{p\_reducido}).\texttt{slice}(0, k-1)}
+     	\STATE{\texttt{cache} = eliminaRepetidos(\texttt{p}).\texttt{slice}(0, k-1)}
 	  \FORALL{\texttt{petición} $\in$ \texttt{p}}
 	   \IF{\texttt{petición $\notin$ cache}}
-		\STATE{\texttt{a\_eliminar} = Elemento de \texttt{p\_reducido} en \texttt{cache} que más tardará en volver a ser necesitado}
+		\STATE{\texttt{a\_eliminar} = Elemento de \texttt{p} en \texttt{cache} que más tardará en volver a ser necesitado}
 		\STATE{\texttt{cache[cache.find(a\_eliminar)]} = \texttt{peticion}}
 		\STATE{\texttt{fallos++}}
 	   \ENDIF
