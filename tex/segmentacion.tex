@@ -1,0 +1,40 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ python}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ encoding:\ utf-8}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{import}}\ euclidean$\_$graph\ as\ eg \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{import}}\ sys \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{readKPoints}}\textcolor{BrickRed}{():} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ "{}"{}"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Lee\ puntos\ con\ el\ formato\ de\ entrada\ siguiente:}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ n}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ x1\ x2\ x3\ ..\ xk}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ y1\ y2\ y3\ ..\ yk}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ z1\ z2\ z3\ ..\ zk}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ (...)}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ donde\ n\ es\ el\ número\ de\ puntos,\ d\ es\ la\ dimensión\ y\ [x1,x2,x3...xk]\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ son\ las\ coordenadas\ de\ un\ punto.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ "{}"{}"{}}} \\
+\mbox{}\ \ \ \ points\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ n\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{input}}\textcolor{BrickRed}{())} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ \textbf{\textcolor{Black}{range}}\textcolor{BrickRed}{(}n\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ \ \ \ \ p\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{raw$\_$input}}\textcolor{BrickRed}{().}\textbf{\textcolor{Black}{strip}}\textcolor{BrickRed}{().}\textbf{\textcolor{Black}{split}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ \ \ \ \ p\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[}\textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}x\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{for}}\ x\ \textbf{\textcolor{Blue}{in}}\ p\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ points\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{append}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{tuple}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{))} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ points \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{if}}\ $\_$$\_$name$\_$$\_$\ \textcolor{BrickRed}{==}\ \texttt{\textcolor{Red}{"{}$\_$$\_$main$\_$$\_$"{}}}\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ points\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{readKPoints}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ graph\ \textcolor{BrickRed}{=}\ eg\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{euclideanGraph}}\textcolor{BrickRed}{(}points\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ k\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}sys\textcolor{BrickRed}{.}argv\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \ solution\ \textcolor{BrickRed}{=}\ eg\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{kruskal}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{,}k\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{}\ \ \ \ eg\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{plotGraph}}\textcolor{BrickRed}{(}solution\textcolor{BrickRed}{,}\texttt{\textcolor{Red}{'k'}}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ eg\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{show}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \  \\
+\mbox{}

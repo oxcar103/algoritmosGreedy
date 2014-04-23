@@ -1,0 +1,124 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ python}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ encoding:\ utf-8}} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Siguiendo\ el\ ejemplo\ de\ https://github.com/israelst/Algorithms-Book-\/-Python/blob/master/5-Greedy-algorithms/kruskal.py}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{from}}\ sets\ \textbf{\textcolor{RoyalBlue}{import}}\ Set \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Formato\ de\ los\ grafos.}} \\
+\mbox{}empty$\_$graph\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{\{} \\
+\mbox{}\ \ \ \ \texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{:}\ \textcolor{BrickRed}{[],} \\
+\mbox{}\ \ \ \ \texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{:}\ \textbf{\textcolor{Black}{set}}\textcolor{BrickRed}{()} \\
+\mbox{}\textcolor{BrickRed}{\}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{euclideanGraph}}\textcolor{BrickRed}{(}points\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ graph\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{:}\ \textcolor{BrickRed}{[],} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{:}\ \textbf{\textcolor{Black}{set}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ \textcolor{BrickRed}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Añade\ los\ nodos.}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ p\ \textbf{\textcolor{Blue}{in}}\ points\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ \ \ \ \ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{].}\textbf{\textcolor{Black}{append}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Añade\ una\ arista\ de\ peso\ distancia\ entre\ cada\ dos\ puntos.}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ \textbf{\textcolor{Black}{range}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}points\textcolor{BrickRed}{)):}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ j\ \textbf{\textcolor{Blue}{in}}\ \textbf{\textcolor{Black}{range}}\textcolor{BrickRed}{(}i\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}points\textcolor{BrickRed}{)):} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ p\textcolor{BrickRed}{,}q\ \textcolor{BrickRed}{=}\ points\textcolor{BrickRed}{[}i\textcolor{BrickRed}{],}points\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ edge\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}q\textcolor{BrickRed}{,}\textbf{\textcolor{Black}{dist}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}q\textcolor{BrickRed}{))} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{].}\textbf{\textcolor{Black}{add}}\textcolor{BrickRed}{(}edge\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ graph \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{from}}\ math\ \textbf{\textcolor{RoyalBlue}{import}}\ sqrt \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{dist}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}q\textcolor{BrickRed}{):} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ "{}"{}"{}\ Devuelve\ distancia\ euclídea\ entre\ dos\ puntos."{}"{}"{}}} \\
+\mbox{}\ \ \ \ p\textcolor{BrickRed}{,}q\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{list}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{),}\textbf{\textcolor{Black}{list}}\textcolor{BrickRed}{(}q\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ sum\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ \textbf{\textcolor{Black}{range}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{min}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}p\textcolor{BrickRed}{),}\textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}q\textcolor{BrickRed}{))):} \\
+\mbox{}\ \ \ \ \ \ \ \ sum\ \textcolor{BrickRed}{=}\ sum\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}p\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]-}q\textcolor{BrickRed}{[}i\textcolor{BrickRed}{])**}\textcolor{Purple}{2} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textbf{\textcolor{Black}{sqrt}}\textcolor{BrickRed}{(}sum\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Dibujando\ grafos\ euclídeos.}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{from}}\ pylab\ \textbf{\textcolor{RoyalBlue}{import}}\ plot\textcolor{BrickRed}{,}\ show \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{plotGraph}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{,}\ clr\textcolor{BrickRed}{=}\texttt{\textcolor{Red}{'k'}}\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Dibuja\ líneas}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ edge\ \textbf{\textcolor{Blue}{in}}\ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{]:} \\
+\mbox{}\ \ \ \ \ \ \ \ p\textcolor{BrickRed}{,}q\textcolor{BrickRed}{,}weight\ \textcolor{BrickRed}{=}\ edge \\
+\mbox{}\ \ \ \ \ \ \ \ x1\textcolor{BrickRed}{,}y1\ \textcolor{BrickRed}{=}\ p \\
+\mbox{}\ \ \ \ \ \ \ \ x2\textcolor{BrickRed}{,}y2\ \textcolor{BrickRed}{=}\ q \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{plot}}\textcolor{BrickRed}{([}x1\textcolor{BrickRed}{,}x2\textcolor{BrickRed}{],[}y1\textcolor{BrickRed}{,}y2\textcolor{BrickRed}{],}linestyle\textcolor{BrickRed}{=}\texttt{\textcolor{Red}{'-'}}\textcolor{BrickRed}{,}linewidth\textcolor{BrickRed}{=}\textcolor{Purple}{3}\textcolor{BrickRed}{,}\ color\textcolor{BrickRed}{=}clr\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Dibuja\ puntos}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ point\ \textbf{\textcolor{Blue}{in}}\ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{]:} \\
+\mbox{}\ \ \ \ \ \ \ \ x\textcolor{BrickRed}{,}y\ \textcolor{BrickRed}{=}\ point \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{plot}}\textcolor{BrickRed}{(}x\textcolor{BrickRed}{,}y\textcolor{BrickRed}{,}\texttt{\textcolor{Red}{'ro'}}\textcolor{BrickRed}{,}markersize\textcolor{BrickRed}{=}\textcolor{Purple}{15}\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{kruskal}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{,}\ limit\textcolor{BrickRed}{=}\textcolor{Purple}{0}\textcolor{BrickRed}{):} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Árbol\ generador\ minimal.}} \\
+\mbox{}\ \ \ \ minimum$\_$spanning$\_$tree\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{set}}\textcolor{BrickRed}{()} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Define\ una\ componente\ conexa\ para\ cada\ vértice.}} \\
+\mbox{}\ \ \ \ components\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{dict}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ v\ \textbf{\textcolor{Blue}{in}}\ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{]:} \\
+\mbox{}\ \ \ \ \ \ \ \ components\textcolor{BrickRed}{[}v\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{Set}}\textcolor{BrickRed}{([}v\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Toma\ el\ mínimo\ de\ la\ lista\ de\ aristas.}} \\
+\mbox{}\ \ \ \ edgesList\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{list}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \ edgesList\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{sort}}\textcolor{BrickRed}{(}key\textcolor{BrickRed}{=}\textbf{\textcolor{Blue}{lambda}}\ edge\textcolor{BrickRed}{:}edge\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{])} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Considera\ cada\ arista\ del\ vértice.}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ edge\ \textbf{\textcolor{Blue}{in}}\ edgesList\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ \ \ \ \ node1\textcolor{BrickRed}{,}\ node2\textcolor{BrickRed}{,}\ weight\ \textcolor{BrickRed}{=}\ edge \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ components\textcolor{BrickRed}{[}node1\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{!=}\ components\textcolor{BrickRed}{[}node2\textcolor{BrickRed}{]}\ \textbf{\textcolor{Blue}{and}}\ \textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}minimum$\_$spanning$\_$tree\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{\textless{}}\ \textbf{\textcolor{Black}{len}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{])-}limit\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Realiza\ la\ unión\ de\ las\ componentes.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Los\ nodos\ del\ segundo\ componente\ pasan\ al\ primero.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ node\ \textbf{\textcolor{Blue}{in}}\ components\textcolor{BrickRed}{[}node2\textcolor{BrickRed}{]:} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ components\textcolor{BrickRed}{[}node\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ components\textcolor{BrickRed}{[}node1\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ components\textcolor{BrickRed}{[}node1\textcolor{BrickRed}{].}\textbf{\textcolor{Black}{add}}\textcolor{BrickRed}{(}node\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Añade\ la\ arista\ al\ árbol\ generador.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ minimum$\_$spanning$\_$tree\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{add}}\textcolor{BrickRed}{((}node1\textcolor{BrickRed}{,}\ node2\textcolor{BrickRed}{,}\ weight\textcolor{BrickRed}{))} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Genera\ el\ grafo\ pedido}} \\
+\mbox{}\ \ \ \ mstree\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{:}\ graph\textcolor{BrickRed}{[}\texttt{\textcolor{Red}{'vertices'}}\textcolor{BrickRed}{],} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{'edges'}}\textcolor{BrickRed}{:}\ minimum$\_$spanning$\_$tree \\
+\mbox{}\ \ \ \ \textcolor{BrickRed}{\}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ mstree \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ \textbf{\textcolor{Black}{readPoints}}\textcolor{BrickRed}{():} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ "{}"{}"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Lee\ puntos\ con\ el\ formato\ de\ entrada\ siguiente:}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ n}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ x\ y}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ x\ y}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ x\ y}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ (...)}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ donde\ n\ es\ el\ número\ de\ puntos\ y\ [x,y]\ son\ las\ coordenadas\ de\ un\ punto.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ \ \ \ "{}"{}"{}}} \\
+\mbox{}\ \ \ \ points\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ \textbf{\textcolor{Black}{range}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{input}}\textcolor{BrickRed}{())):} \\
+\mbox{}\ \ \ \ \ \ \ \ x\textcolor{BrickRed}{,}y\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{raw$\_$input}}\textcolor{BrickRed}{().}\textbf{\textcolor{Black}{strip}}\textcolor{BrickRed}{().}\textbf{\textcolor{Black}{split}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ \ \ \ \ x\textcolor{BrickRed}{,}y\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}x\textcolor{BrickRed}{),}\ \textbf{\textcolor{Black}{int}}\textcolor{BrickRed}{(}y\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ points\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{append}}\textcolor{BrickRed}{((}x\textcolor{BrickRed}{,}y\textcolor{BrickRed}{))} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ points \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{if}}\ $\_$$\_$name$\_$$\_$\ \textcolor{BrickRed}{==}\ \texttt{\textcolor{Red}{"{}$\_$$\_$main$\_$$\_$"{}}}\textcolor{BrickRed}{:} \\
+\mbox{}\ \ \ \ points\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{readPoints}}\textcolor{BrickRed}{()} \\
+\mbox{}\ \ \ \ graph\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{euclideanGraph}}\textcolor{BrickRed}{(}points\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ solution\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{kruskal}}\textcolor{BrickRed}{(}graph\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#plotGraph(graph,'k')}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{plotGraph}}\textcolor{BrickRed}{(}solution\textcolor{BrickRed}{,}\texttt{\textcolor{Red}{'k'}}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{show}}\textcolor{BrickRed}{()} \\
+\mbox{}

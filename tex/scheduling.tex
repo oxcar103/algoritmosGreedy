@@ -1,0 +1,80 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ encoding:\ utf-8}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{class}}\ Lesson\ \textcolor{BrickRed}{\textless{}}\ Array \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ initialize\textcolor{BrickRed}{(}s$\_$hour\textcolor{BrickRed}{,}s$\_$min\textcolor{BrickRed}{,}f$\_$hour\textcolor{BrickRed}{,}f$\_$min\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Representación\ de\ la\ hora\ de\ inicio\ y\ finalización}} \\
+\mbox{}\ \ \ \ \ \ \ \ push\ Time\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}\textcolor{Purple}{1970}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}s$\_$hour\textcolor{BrickRed}{,}s$\_$min\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ push\ Time\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}\textcolor{Purple}{1970}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}f$\_$hour\textcolor{BrickRed}{,}f$\_$min\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Detecta\ si\ la\ clase\ actual\ y\ otra\ se\ solapan}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ solapa?\textcolor{BrickRed}{(}otra\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}=}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\&\&}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{$|$$|$}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}=}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\&\&}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{$|$$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}=}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\&\&}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{$|$$|$}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}=}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\&\&}\ otra\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}=}\ \textbf{\textcolor{Blue}{self}}\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{class}}\ Scheduling \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ initialize\textcolor{BrickRed}{(}clases\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{=}clases \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{def}}\ planifica \\
+\mbox{}\ \ \ \ \ \ \ \ adyacentes\ \textcolor{BrickRed}{=}\ Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}\textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{.}size\textcolor{BrickRed}{)}\textcolor{Red}{\{}Array\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}\textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{.}size\textcolor{BrickRed}{)}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{.}each$\_$index\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Hacemos\ 0\ en\ la\ diagonal\ de\ la\ matriz\ de\ adyacencia}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ adyacentes\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ En\ el\ grafo,\ dos\ clases\ son\ adyacentes\ si\ se\ solapan}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}i\textcolor{BrickRed}{+}\textcolor{Purple}{1}\ \textcolor{BrickRed}{..}\ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{).}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ adyacentes\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ adyacentes\textcolor{BrickRed}{[}j\textcolor{BrickRed}{][}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{[}i\textcolor{BrickRed}{].}solapa?\ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ sin$\_$colorear\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{..}\textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{).}to$\_$a \\
+\mbox{}\ \ \ \ \ \ \ \ color\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ \ \ \ \ index\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{while}}\ \textcolor{BrickRed}{!}sin$\_$colorear\textcolor{BrickRed}{.}empty? \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ color\textcolor{BrickRed}{[}index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[}sin$\_$colorear\textcolor{BrickRed}{.}shift\textcolor{BrickRed}{]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ actualizados\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ sin$\_$colorear\textcolor{BrickRed}{.}each\ \textbf{\textcolor{Blue}{do}}\ \textcolor{BrickRed}{$|$}v\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Coloreamos\ la\ clase\ si\ no\ solapa\ con\ ninguna\ del\ color\ actual}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{!(}color\textcolor{BrickRed}{[}index\textcolor{BrickRed}{].}collect\textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}u\textcolor{BrickRed}{$|$}\ adyacentes\textcolor{BrickRed}{[}v\textcolor{BrickRed}{][}u\textcolor{BrickRed}{]}\ \textcolor{Red}{\}}\textcolor{BrickRed}{.}member?\ \textbf{\textcolor{Blue}{true}}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color\textcolor{BrickRed}{[}index\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}\textless{}}\ v \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actualizados\ \textcolor{BrickRed}{\textless{}\textless{}}\ v \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ sin$\_$colorear\ \textcolor{BrickRed}{=}\ sin$\_$colorear\ \textcolor{BrickRed}{-}\ actualizados \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ index\ \textcolor{BrickRed}{+=}\ \textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ color\textcolor{BrickRed}{.}map\textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}i\textcolor{BrickRed}{$|$}\ i\textcolor{BrickRed}{.}map\textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}j\textcolor{BrickRed}{$|$}\ \textcolor{ForestGreen}{@clases}\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]}\ \textcolor{Red}{\}}\ \textcolor{Red}{\}}\ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{if}}\ \textbf{\textcolor{Blue}{$\_$$\_$FILE$\_$$\_$}}\textcolor{BrickRed}{==}\textcolor{ForestGreen}{\$0} \\
+\mbox{}\ \ \ \ clases\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Forma\ de\ entrada\ de\ datos:\ }} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ \ \ \ \ \ \ \ \ \ \ 8:30\ 9:30}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ \ \ \ \ \ \ \ \ \ \ 10:50\ 11:50\ \ \ \ \ \ \ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#=begin}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{while}}\ c\textcolor{BrickRed}{=}gets \\
+\mbox{}\ \ \ \ \ \ \ \ c\ \textcolor{BrickRed}{=}\ c\textcolor{BrickRed}{.}chomp\textcolor{BrickRed}{.}split\textcolor{BrickRed}{(}\texttt{\textcolor{Orange}{/[:,"{}\ "{}]/}}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ clases\ \textcolor{BrickRed}{\textless{}\textless{}}\ Lesson\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}c\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{],}c\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{],}c\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{],}c\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{])} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\textit{\textcolor{Brown}{\#=end}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Línea\ de\ prueba\ para\ depuración:}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ clases=\ [Lesson.new(7,30,10,30),\ Lesson.new(7,45,8,50),\ Lesson.new(11,30,12,45),Lesson.new(12,30,13,40)]}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ centro$\_$educativo\ \textcolor{BrickRed}{=}\ Scheduling\textcolor{BrickRed}{.}new\textcolor{BrickRed}{(}clases\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ p\ \texttt{\textcolor{Red}{"{}Se\ necesitan\ \ \#\{centro$\_$educativo.planifica.size\}\ aulas\ para\ albergar\ las\ clases"{}}} \\
+\mbox{}\textbf{\textcolor{Blue}{end}}
