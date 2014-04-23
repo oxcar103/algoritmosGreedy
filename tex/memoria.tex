@@ -454,7 +454,9 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
 El problema de las memorias caché consiste en averiguar qué datos conviene eliminar en una caché, conociendo de antemano los datos que se van a pedir, para evitar lo máximo posible los fallos de caché.
   \subsection{Algoritmo}
-La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Además, podemos simplificar el problema si consideramos solo una vez los datos que se piden varias veces de forma consecutiva, ya que sabemos que no se eliminarán de una petición a la siguiente.
+La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Los primeros datos que se incluyen en caché son los primeros $k$ datos (sin considerar repeticiones) de la lista de peticiones.
+
+Asumiremos en el algoritmo que tenemos implementadas una función \texttt{eliminaRepetidos}, que devuelve un array con una única ocurrencia de cada elemento del array pasado como argumento.
 
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
@@ -462,11 +464,10 @@ La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya
         	\texttt{p}, array de $n$ peticiones\\
         	\texttt{k}, tamaño de la caché\\ \
      	\STATE{\texttt{fallos} = 0}\\
-     	\STATE{\texttt{p\_reducido} = eliminarDuplicadosConsecutivos(p)}
-     	\STATE{\texttt{cache} = eliminarDuplicados(\texttt{p\_reducido}).\texttt{slice}(0, k-1)}
+     	\STATE{\texttt{cache} = eliminaRepetidos(\texttt{p}).\texttt{slice}(0, k-1)}
 	  \FORALL{\texttt{petición} $\in$ \texttt{p}}
 	   \IF{\texttt{petición $\notin$ cache}}
-		\STATE{\texttt{a\_eliminar} = Elemento de \texttt{p\_reducido} en \texttt{cache} que más tardará en volver a ser necesitado}
+		\STATE{\texttt{a\_eliminar} = Elemento de \texttt{p} en \texttt{cache} que más tardará en volver a ser necesitado}
 		\STATE{\texttt{cache[cache.find(a\_eliminar)]} = \texttt{peticion}}
 		\STATE{\texttt{fallos++}}
 	   \ENDIF
