@@ -31,6 +31,11 @@
 \usepackage{wrapfig} % Allows in-line images
 \usepackage[utf8]{inputenc}
 
+
+\usepackage{amsmath}
+% para importar svg
+%\usepackage[generate=all]{svgfig}
+
 % sudo apt-get install texlive-lang-spanish
 \usepackage[spanish]{babel} % English language/hyphenation
 \selectlanguage{spanish}
@@ -242,6 +247,23 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     
     Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
     aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos.
+    
+  \subsection{Contraejemplo}
+  La heurística mencionada no es óptima. Veamos un contraejemplo:
+  
+  Sea el grafo $G=(\{a,b,c,d,e\},E)$ generado por la matriz de costos:
+  
+  $$\begin{pmatrix}
+     0 & 3 & 3 & 2,5 & 2,5\\
+     3 & 0 & 3 & 3 & 5\\
+     3 & 3 & 0 & 3 & 5\\
+     2,5 & 3 & 3 & 0 & 5\\
+     2,5 & 5 & 5 & 5 & 0\\
+    \end{pmatrix}$$
+
+    Para 3 grupos, la heurística obtendría: $\{\{a,d,e\},\{b\},\{c\}\}$ con suma de distancias $3+3+3=9$\\
+    
+    Pero por ejemplo $\{\{a\},\{b,c,d\},\{e\}\}$, tiene mayor suma de distancias: $2,5+5+2,5=10$
 
 \section{Asignación de trabajos}
 
@@ -284,8 +306,11 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
     \caption{Asginación de aulas}
     \label{monedas}
 \end{algorithm}
+
 \subsection{Implementación}
-\subsection{Contraejemplo: Sellos}
+\subsection{Contraejemplo}
+
+
 \section{Memorias caché}
     
 \section{El problema de asignación cuadrática}

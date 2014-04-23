@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="12cm" height="7cm" viewBox="290 80 226 132" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="322.49" y1="105.523" x2="499" y2="200"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="322.173" y1="186.698" x2="483.909" y2="104.698"/>
+  <g>
+    <ellipse style="fill: #ff0000" cx="307.5" cy="97.5" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="307.5" cy="97.5" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="307.5" cy="97.5" rx="16.5" ry="16.5"/>
+  </g>
+  <g>
+    <ellipse style="fill: #ff0000" cx="498.996" cy="97.0487" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="498.996" cy="97.0487" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="498.996" cy="97.0487" rx="16.5" ry="16.5"/>
+  </g>
+  <g>
+    <ellipse style="fill: #0000ff" cx="498.854" cy="193.781" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="498.854" cy="193.781" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="498.854" cy="193.781" rx="16.5" ry="16.5"/>
+  </g>
+  <g>
+    <ellipse style="fill: #0000ff" cx="307.087" cy="194.347" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="307.087" cy="194.347" rx="16.5" ry="16.5"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="307.087" cy="194.347" rx="16.5" ry="16.5"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="307.5" y="97.5">
+    <tspan x="307.5" y="97.5"></tspan>
+  </text>
+  <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="498.996" y1="113.549" x2="498.854" y2="177.281"/>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="304.672" y="99.6213">
+    <tspan x="304.672" y="99.6213">1</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="496.167" y="99.8772">
+    <tspan x="496.167" y="99.8772">2</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="496.591" y="197.882">
+    <tspan x="496.591" y="197.882">3</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="303.587" y="199.212">
+    <tspan x="303.587" y="199.212">4</tspan>
+  </text>
+</svg>
