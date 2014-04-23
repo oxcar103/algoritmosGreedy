@@ -2,28 +2,32 @@
 #encoding: utf-8
 
 def cache(p, size)
+    # Eliminamos repetidos consecutivos
     p_reducido = p.chunk{|x| x}.map(&:first)
+
+    # La caché se inicia a los 'size' primeros datos (sin repetir)
+    cache = p.uniq.slice(0, size)
     fallos = 0
 
-    cache = p.uniq.slice(0, size)
-
+    # Recorremos las peticiones y reemplazamos el elemento
+    # conveniente cuando se produce un fallo de caché
     p.each_with_index { |peticion, i| 
-        puts "Caché en #{i}: #{cache}; petición #{peticion}"
-        if !cache.member? peticion
+        if !cache.member?(peticion)
             i_a_eliminar = 0
-            a_eliminar = nil
+            i_cache = nil
 
-            cache.each { |e|
-                index = p[i .. p.size-1].find_index(e)
+            cache.each_with_index { |e, j|
+                # Si no se encuentra una próxima petición se escoge este
+                # elemento (find_index devuelve nil)
+                prox_pet = p[i .. p.size-1].find_index(e) || p.size
 
-                if index.nil? || index > i_a_eliminar
-                    a_eliminar = e
-                    i_a_eliminar = index.nil? ? p.size : index
+                if prox_pet > i_a_eliminar
+                    i_cache = j
+                    i_a_eliminar = prox_pet
                 end
             }
 
-            puts "Fallo en #{i}. Reemplazando #{a_eliminar} por #{peticion}"
-            cache[cache.find_index a_eliminar] = peticion
+            cache[i_cache] = peticion
 
             fallos += 1
         end
@@ -33,13 +37,8 @@ def cache(p, size)
 end
 
 if __FILE__ == $0
-puts "Introduce tamaño:"
-size = gets.to_i
-puts "Introduce peticiones: "
-pet = gets.chomp.split.map(&:to_i)
+    # Pruebas
+    pet = [1, 6, 3, 2, 5, 3, 2, 1, 4, 1, 1, 1, 9, 4, 4, 2, 4, 2, 1, 3, 4, 5, 2]
 
-# Pruebas
-pet = [1, 6, 3, 2, 5, 3, 2, 1, 4, 1, 1, 9, 4, 4, 2, 4, 2, 1, 3, 4, 5, 2]
-
-puts "Número de fallos: #{cache(pet, 5)}."
+    puts "Número de fallos: #{cache(pet, 5)}."
 end
