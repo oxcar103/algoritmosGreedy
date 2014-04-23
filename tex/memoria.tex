@@ -145,10 +145,7 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
 	\end{algorithmic}
     \caption{Devolución en mínimo número de monedas}
     \label{monedas}
-\end{algorithm}
-
-\subsection{Implementación}
-  
+\end{algorithm}  
 
 \subsection{Contraejemplo}
 El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
@@ -446,7 +443,6 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
     \label{aulas}
 \end{algorithm}
 
-\subsection{Implementación}
 \subsection{Contraejemplo}
 
 \section{Memorias caché}
@@ -479,7 +475,11 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
     \caption{Optimización de memoria caché}
     \label{memory}
 \end{algorithm}
-    
+
+ El mayor inconveniente de esta heurística frente a las clásicas heurísticas FIFO(First In, First Out), LIFO(Last In, First Out), LRU(Least Recently Used) y LFU(Least Frequently Used) para asignación de memoria caché es que, dado que necesita conocer con anterioridad las peticiones que se le harán, no se puede implementar en un sistema de tiempo real.
+ 
+  \subsection{Contraejemplo}
+  
 \section{Implementaciones}
    \subsection{Terminales de venta}
       Implementamos el algoritmo diseñado en Ruby.
