@@ -234,6 +234,15 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \end{algorithm}
     
 \section{Segmentación de clientes}
+  \subsection{Enunciado}
+    Dado un conjunto de puntos en $\mathbb{R}^n$ dotado de la distancia euclídea, buscamos la partición de puntos que
+    maximice la suma de distancias entre subconjuntos de la particición. Esto es, dado $C$ y una partición $P \subset \mathcal{P}(C)$,
+    queremos maximizar:
+    \begin{equation}
+     \sum_{A,B \in P} dist(A,B) = \sum_{A,B \in P} min_{a\in A, b\in B}(dist(a,b))
+    \end{equation}
+
+    
   \subsection{Algoritmo}
     Agruparemos clientes según similitud por su vector de características. Dado un conjunto de vectores en $\mathbb{R}^n$
     queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
