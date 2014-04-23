@@ -50,11 +50,45 @@ module QAP
                 end
       
                 file.eat_empty_lines
-                
+              
                 (0..(size-1)).each do |i|
                     @weights[i]=file.readline.chomp.split(" ").map &:to_i
                 end
             end
+
+=begin
+            @size = 0
+            distancedata = []
+            weightdata = []
+
+            enumlin = File.foreach(filename)
+            @size = enumlin.next.to_i
+            while enumlin.next =~ /^\s*$/; end
+            while !(enumlin.peek =~ /^\s*$/)
+                distancedata += enumlin.next.split(/\s/).map(&:to_i)
+            end
+            while enumlin.next =~ /^\s*$/; end
+            while !(enumlin.peek =~ /^\s*$/)
+                weightdata += enumlin.next.split(/\s/).map(&:to_i)
+            end
+
+            File.foreach(filename) { |x|
+                if @size == 0
+                    @size = x.to_i 
+                elsif x =~ /^\s*$/ && distancedata.any? # Línea separando distancias y pesos
+                    weightdata = [] if !weightdata
+                elsif !weightdata # Añadiendo distancias
+                    distancedata += x.split(/\s/).map(&:to_i)
+                else # Añadiendo pesos
+                    weightdata += x.split(/\s/).map(&:to_i)
+                end
+            }
+
+            @permutation = (0..(size-1)).to_a
+            @distances = distancedata.each_slice(@size).to_a
+            @weights = weightdata.each_slice(@size).to_a
+            puts "#{@distances.inspect}"
+=end
         end
 
         # Acceso público a la permutación.
