@@ -53,7 +53,7 @@ def plotGraph(graph, clr='k'):
     # Dibuja puntos
     for point in graph['vertices']:
         x,y = point
-        plot(x,y,'ro',markersize=20)
+        plot(x,y,'ro',markersize=15)
 
 
 def kruskal(graph):
@@ -116,6 +116,6 @@ if __name__ == "__main__":
     graph = euclideanGraph(points)
     solution = kruskal(graph)
     
-    plotGraph(graph,'k')
-    plotGraph(solution,'g')
+    #plotGraph(graph,'k')
+    plotGraph(solution,'k')
     show()
