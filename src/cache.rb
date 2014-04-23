@@ -1,50 +1,45 @@
 #!/usr/bin/env ruby
-#encoding utf8
+#encoding: utf-8
 
-def cache(petitions, size)
-	p_reducido = petitions.chunk{|x| x}.map(&:first)
-	fallos = 0
-
-	cache = p.uniq.slice(0, size - 1)
-
-	p.each_with_index { |peticion, i| 
-		if !cache.member?(peticion)
-			
-			
-			fallos += 1
-		end
-	}
-end
-
-
-def farthest_in_future(p, k)
-    p_reducido = []
+def cache(p, size)
+    p_reducido = p.chunk{|x| x}.map(&:first)
     fallos = 0
 
-    p.each_with_index{|element,index| p_reducido << element if element != p[index+1]}
+    cache = p.uniq.slice(0, size)
 
-    #No funciona, por eso lo comenté
-    #cache = p.uniq.resize(k)
+    p.each_with_index { |peticion, i| 
+        puts "Caché en #{i}: #{cache}; petición #{peticion}"
+        if !cache.member? peticion
+            i_a_eliminar = 0
+            a_eliminar = nil
 
-    p.each{|petición| 
-        if !cache.include?(petición){
-        #Falta traducir:
-        #\STATE{Buscamos el elemento que está en caché que más tardará en volver a ser necesitado}
-        #\STATE{Sustituimos este elemento por el que necesitamos tener en caché}
+            cache.each { |e|
+                index = p[i .. p.size-1].find_index(e)
 
-        fallos+=1
-        }
+                if index.nil? || index > i_a_eliminar
+                    a_eliminar = e
+                    i_a_eliminar = index.nil? ? p.size : index
+                end
+            }
 
+            puts "Fallo en #{i}. Reemplazando #{a_eliminar} por #{peticion}"
+            cache[cache.find_index a_eliminar] = peticion
+
+            fallos += 1
+        end
     }
 
-return fallos
+    fallos
 end
 
-
 if __FILE__ == $0
-puts "Introduce array: "
-line = gets.chomp
-array = line.split.map(&:to_i)
+puts "Introduce tamaño:"
+size = gets.to_i
+puts "Introduce peticiones: "
+pet = gets.chomp.split.map(&:to_i)
 
-puts "Elemento mayoritario: #{array.mayoritario}."
+# Pruebas
+pet = [1, 6, 3, 2, 5, 3, 2, 1, 4, 1, 1, 9, 4, 4, 2, 4, 2, 1, 3, 4, 5, 2]
+
+puts "Número de fallos: #{cache(pet, 5)}."
 end
