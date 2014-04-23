@@ -27,7 +27,7 @@ end
 
 
 module QAP
-    class QAP
+    class Instancia
         def initialize(filename)
             # Lectura del archivo del problema QAP.
             @size = -1
@@ -73,11 +73,16 @@ module QAP
             end
             return total_cost
         end
+        
+        def to_s
+            "Permutación: " + permutation.to_s + "\nCoste: #{cost}\n"
+        end
+    end
 
-        ##
-        # Heurísticas
-        ##
-
+    ##
+    # Heurísticas
+    ##
+    class Heuristicas
         # Heurística 2-opt.
         def self.opt2(qap)
             continue = true
@@ -159,26 +164,25 @@ module QAP
                 loc_asignada[min_d_index] = true
             end
         end
-        
-        def to_s
-            "Permutación: " + permutation.to_s + "\nCoste: #{cost}\n"
-        end
     end
 
     if __FILE__ == $0
         puts "Introduce nombre de archivo: "
-        file = gets.chomp
-        instancia = QAP.new(file)
-        #instancia = QAP.new("../datos.qap/bur26a.dat")
-        puts "\nPermutación inicial: \n#{instancia}\n"
+        #file = gets.chomp
+        #problema = Instancia.new(file)
+        problema = Instancia.new("datos.qap/lipa50a.dat")
+        puts "\nPermutación inicial: \n#{problema}\n"
         
-        QAP.greedy_v1 instancia
-        puts "Instancia tras greedy: \n#{instancia}\n"
+        res = problema.deep_clone
+        Heuristicas.greedy_v1 res
+        puts "Instancia tras greedy: \n#{res}\n"
         
-        QAP.greedy_v2 instancia
-        puts "Instancia tras greedy 2: \n#{instancia}\n"
-        
-        QAP.opt2 instancia
-        puts "Instancia tras 2-opt: \n#{instancia}\n"
+        res = problema.deep_clone
+        Heuristicas.greedy_v2 res
+        puts "Instancia tras greedy 2: \n#{res}\n"
+
+        res = problema.deep_clone
+        Heuristicas.opt2 res
+        puts "Instancia tras 2-opt: \n#{res}\n"
     end
 end
