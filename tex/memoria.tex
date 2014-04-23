@@ -180,7 +180,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 		\REQUIRE \ \\
         	\texttt{grafo}, grafo inicial del que se calcula el árbol minimal \\\
 		\STATE{\texttt{árbol=}$\emptyset$}
-		\FORALL{\texttt{v} en \texttt{grafo.vértice}:}
+		\FORALL{\texttt{v} en \texttt{grafo.vértices}:}
 		   \STATE{Crea componente conexa \texttt{set(v)}}
 		\ENDFOR
 		\FORALL{arista \texttt{(u,v)} en \texttt{grafo.aristas}:}
@@ -192,7 +192,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 		\RETURN{\texttt{árbol}}
 	\end{algorithmic}
       \caption{Algoritmo de Kruskal}
-      \label{monedas}
+      \label{kruskal}
     \end{algorithm}
 
   
@@ -209,7 +209,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \begin{proof}
       Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
       Sea $(p,q)$ una arista arbitraria del árbol generador. 
-      Consideramos el círculo que tiene como diámetro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
+      Consideramos el círculo que tiene como diámetkruro $\overline{pq}$, si hubiera otro punto $r$ en este círculo, tendríamos:
       \begin{equation}
        \overrightarrow{pr} \leq \overrightarrow{pq} \qquad \overrightarrow{rq} \leq \overrightarrow{pq}
       \end{equation}
@@ -221,7 +221,19 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       por aplicación de la Condición de Delaunay.
     \end{proof}
     
-    Para encontrar la triangulación de Delaunay usar 
+    %Para encontrar la triangulación de Delaunay usaremos... 
+    
+    \begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{ciudades}, coordenadas de un conjunto de ciudades \\\
+		\STATE{\texttt{grafo.vértices} $=$ \texttt{ciudades}}
+		\STATE{\texttt{grafo.aristas}  $=$ $[\texttt{(u,v)} \quad | \quad \forall \texttt{(u,v)} \in Delaunay(\texttt{ciudades})]$}
+		\RETURN{$Kruskal(\texttt{grafo})$}
+	\end{algorithmic}
+      \caption{Red de comunicaciones}
+      \label{red}
+    \end{algorithm}
     
 \section{Segmentación de clientes}
   \subsection{Algoritmo}
