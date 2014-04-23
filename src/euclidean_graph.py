@@ -56,7 +56,7 @@ def plotGraph(graph, clr='k'):
         plot(x,y,'ro',markersize=15)
 
 
-def kruskal(graph):
+def kruskal(graph, limit=0):
     # Árbol generador minimal.
     minimum_spanning_tree = set()
 
@@ -70,8 +70,8 @@ def kruskal(graph):
     edgesList.sort(key=lambda edge:edge[2])
 
     # Considera cada arista del vértice.
-    for edge in edgesList:
-        node1, node2, weight = edge
+    for i in range(len(edgesList)-limit):
+        node1, node2, weight = edgesList[i]
         if components[node1] != components[node2]:
             # Realiza la unión de las componentes.
             # Los nodos del segundo componente pasan al primero.
