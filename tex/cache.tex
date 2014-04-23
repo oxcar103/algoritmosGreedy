@@ -1,50 +1,37 @@
 % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
 \noindent
-\mbox{}\textit{\textcolor{Brown}{\#!/usr/bin/env\ ruby}} \\
-\mbox{}\textit{\textcolor{Brown}{\#encoding\ utf8}} \\
+\mbox{}\textbf{\textcolor{Blue}{def}}\ cache\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Eliminamos\ repetidos\ consecutivos}} \\
+\mbox{}\ \ \ \ p$\_$reducido\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}chunk\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}x\textcolor{BrickRed}{$|$}\ x\textcolor{Red}{\}}\textcolor{BrickRed}{.}map\textcolor{BrickRed}{(\&:}first\textcolor{BrickRed}{)} \\
 \mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Búsqueda\ del\ elemento\ mayoritario.\ Un\ algoritmo:}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Escogemos\ parejas\ de\ elementos\ consecutivos\ repetidos}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ por\ ejemplo:}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ [1,1,2,3,3,3]\ =\textgreater{}\ \{(1,1),(2,3),(3,3)\}\ =\textgreater{}\ [1,3]}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ [3,1,1,2,3,3,3,3]\ =\textgreater{}\ \{(3,1),(1,2),(3,3),(3,3)\}\ =\textgreater{}\ [3,3]}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ No\ necesariamente\ el\ mayoritario\ en\ el\ nuevo\ es\ mayoritario\ en}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ el\ original,\ pero\ si\ existe\ mayoritario\ del\ original\ entonces}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ equivale\ al\ del\ nuevo.}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Caso\ base:\ En\ tamaño\ 2,\ hay\ elemento\ mayoritario\ si}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ ambos\ son\ iguales.}} \\
-\mbox{}\textit{\textcolor{Brown}{\#}} \\
-\mbox{}\textit{\textcolor{Brown}{\#\ Eficiencia:\ O(n)}} \\
-\mbox{} \\
-\mbox{}\textbf{\textcolor{Blue}{def}}\ farthest$\_$in$\_$future\textcolor{BrickRed}{(}p\textcolor{BrickRed}{,}\ k\textcolor{BrickRed}{)} \\
-\mbox{}\ \ \ \ p$\_$reducido\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{[]} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ La\ caché\ se\ inicia\ a\ los\ 'size'\ primeros\ datos\ (sin\ repetir)}} \\
+\mbox{}\ \ \ \ cache\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{.}uniq\textcolor{BrickRed}{.}slice\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{,}\ size\textcolor{BrickRed}{)} \\
 \mbox{}\ \ \ \ fallos\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
 \mbox{} \\
-\mbox{}\ \ \ \ p\textcolor{BrickRed}{.}each$\_$with$\_$index\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}element\textcolor{BrickRed}{,}index\textcolor{BrickRed}{$|$}\ p$\_$reducido\ \textcolor{BrickRed}{\textless{}\textless{}}\ element\ \textbf{\textcolor{Blue}{if}}\ element\ \textcolor{BrickRed}{!=}\ p\textcolor{BrickRed}{[}index\textcolor{BrickRed}{+}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Recorremos\ las\ peticiones\ y\ reemplazamos\ el\ elemento}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ conveniente\ cuando\ se\ produce\ un\ fallo\ de\ caché}} \\
+\mbox{}\ \ \ \ p\textcolor{BrickRed}{.}each$\_$with$\_$index\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}peticion\textcolor{BrickRed}{,}\ i\textcolor{BrickRed}{$|$}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{!}cache\textcolor{BrickRed}{.}member?\textcolor{BrickRed}{(}peticion\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ i$\_$a$\_$eliminar\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ i$\_$cache\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{nil}} \\
 \mbox{} \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#No\ funciona,\ por\ eso\ lo\ comenté}} \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#cache\ =\ p.uniq.resize(k)}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ cache\textcolor{BrickRed}{.}each$\_$with$\_$index\ \textcolor{Red}{\{}\ \textcolor{BrickRed}{$|$}e\textcolor{BrickRed}{,}\ j\textcolor{BrickRed}{$|$} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Si\ no\ se\ encuentra\ una\ próxima\ petición\ se\ escoge\ este}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ elemento\ (find$\_$index\ devuelve\ nil)}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ prox$\_$pet\ \textcolor{BrickRed}{=}\ p\textcolor{BrickRed}{[}i\ \textcolor{BrickRed}{..}\ p\textcolor{BrickRed}{.}size\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{].}find$\_$index\textcolor{BrickRed}{(}e\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{$|$$|$}\ p\textcolor{BrickRed}{.}size \\
 \mbox{} \\
-\mbox{}\ \ \ \ p\textcolor{BrickRed}{.}each\textcolor{Red}{\{}\textcolor{BrickRed}{$|$}petición\textcolor{BrickRed}{$|$}\  \\
-\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{!}cache\textcolor{BrickRed}{.}\textbf{\textcolor{Blue}{include}}\textcolor{BrickRed}{?(}petición\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#Falta\ traducir:}} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\textbackslash{}STATE\{Buscamos\ el\ elemento\ que\ está\ en\ caché\ que\ más\ tardará\ en\ volver\ a\ ser\ necesitado\}}} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\textbackslash{}STATE\{Sustituimos\ este\ elemento\ por\ el\ que\ necesitamos\ tener\ en\ caché\}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ prox$\_$pet\ \textcolor{BrickRed}{\textgreater{}}\ i$\_$a$\_$eliminar \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$cache\ \textcolor{BrickRed}{=}\ j \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i$\_$a$\_$eliminar\ \textcolor{BrickRed}{=}\ prox$\_$pet \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
 \mbox{} \\
-\mbox{}\ \ \ \ \ \ \ \ fallos\textcolor{BrickRed}{+=}\textcolor{Purple}{1} \\
-\mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ cache\textcolor{BrickRed}{[}i$\_$cache\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ peticion \\
 \mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ fallos\ \textcolor{BrickRed}{+=}\ \textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{end}} \\
 \mbox{}\ \ \ \ \textcolor{Red}{\}} \\
 \mbox{} \\
-\mbox{}\textbf{\textcolor{Blue}{return}}\ fallos \\
-\mbox{}\textbf{\textcolor{Blue}{end}} \\
-\mbox{} \\
-\mbox{} \\
-\mbox{}\textbf{\textcolor{Blue}{if}}\ \textbf{\textcolor{Blue}{$\_$$\_$FILE$\_$$\_$}}\ \textcolor{BrickRed}{==}\ \textcolor{ForestGreen}{\$0} \\
-\mbox{}puts\ \texttt{\textcolor{Red}{"{}Introduce\ array:\ "{}}} \\
-\mbox{}line\ \textcolor{BrickRed}{=}\ gets\textcolor{BrickRed}{.}chomp \\
-\mbox{}array\ \textcolor{BrickRed}{=}\ line\textcolor{BrickRed}{.}split\textcolor{BrickRed}{.}map\textcolor{BrickRed}{(\&:}to$\_$i\textcolor{BrickRed}{)} \\
-\mbox{} \\
-\mbox{}puts\ \texttt{\textcolor{Red}{"{}Elemento\ mayoritario:\ \#\{array.mayoritario\}."{}}} \\
+\mbox{}\ \ \ \ fallos \\
 \mbox{}\textbf{\textcolor{Blue}{end}} \\
 \mbox{}
