@@ -53,10 +53,10 @@ def plotGraph(graph, clr='k'):
     # Dibuja puntos
     for point in graph['vertices']:
         x,y = point
-        plot(x,y,'ro',markersize=20)
+        plot(x,y,'ro',markersize=15)
 
 
-def kruskal(graph):
+def kruskal(graph, limit=0):
     # Árbol generador minimal.
     minimum_spanning_tree = set()
 
@@ -65,14 +65,14 @@ def kruskal(graph):
     for v in graph['vertices']:
         components[v] = Set([v])
     
-    # Toma el mínimo de la lista de vértices.
+    # Toma el mínimo de la lista de aristas.
     edgesList = list(graph['edges'])
     edgesList.sort(key=lambda edge:edge[2])
 
     # Considera cada arista del vértice.
     for edge in edgesList:
         node1, node2, weight = edge
-        if components[node1] != components[node2]:
+        if components[node1] != components[node2] and len(minimum_spanning_tree) < len(graph['vertices'])-limit:
             # Realiza la unión de las componentes.
             # Los nodos del segundo componente pasan al primero.
             for node in components[node2]:
@@ -116,6 +116,6 @@ if __name__ == "__main__":
     graph = euclideanGraph(points)
     solution = kruskal(graph)
     
-    plotGraph(graph,'k')
-    plotGraph(solution,'g')
+    #plotGraph(graph,'k')
+    plotGraph(solution,'k')
     show()

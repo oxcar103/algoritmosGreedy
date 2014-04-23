@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import euclidean_graph as eg
+import sys
 
 def readKPoints():
     """
@@ -24,3 +25,13 @@ def readKPoints():
 
     return points
 
+if __name__ == "__main__":
+    points = readKPoints()
+    graph = eg.euclideanGraph(points)
+    
+    k = int(sys.argv[1])
+    solution = eg.kruskal(graph,k)
+
+    eg.plotGraph(solution,'k')
+    eg.show()
+    
