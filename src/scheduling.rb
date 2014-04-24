@@ -10,8 +10,10 @@ class Lesson < Array
     
     # Detecta si la clase actual y otra se solapan
     def solapa?(otra)
-        (self[0] <= otra[0] && otra[0] <= self[1]) || (self[0] <= otra[1] && otra[1] <= self[1]) ||
-        (self[0] >= otra[0] && otra[0] >= self[1]) || (self[0] >= otra[1] && otra[1] >= self[1])
+        (self[0] <= otra[0] && otra[0] <= self[1]) || 
+        (self[0] <= otra[1] && otra[1] <= self[1]) ||
+        (self[0] >= otra[0] && otra[0] >= self[1]) || 
+        (self[0] >= otra[1] && otra[1] >= self[1])
     end
 end
 
@@ -21,7 +23,8 @@ class Scheduling
     end
     
     def planifica
-        adyacentes = Array.new(@clases.size){Array.new(@clases.size)}
+        adyacentes = 
+            Array.new(@clases.size){Array.new(@clases.size)}
         
         @clases.each_index do |i|
             # Hacemos 0 en la diagonal de la matriz de adyacencia
@@ -29,7 +32,8 @@ class Scheduling
 
             # En el grafo, dos clases son adyacentes si se solapan
             (i+1 .. @clases.size-1).each do |j|
-                adyacentes[i][j] = adyacentes[j][i] = @clases[i].solapa? @clases[j]
+                adyacentes[i][j] = adyacentes[j][i] = 
+                        @clases[i].solapa? @clases[j]
             end
         end
         
@@ -43,8 +47,10 @@ class Scheduling
             actualizados = []
             
             sin_colorear.each do |v|
-                # Coloreamos la clase si no solapa con ninguna del color actual
-                if !(color[index].collect{ |u| adyacentes[v][u] }.member? true)
+                # Coloreamos la clase si no solapa 
+                # con ninguna del color actual
+                if !(color[index].collect{ |u| 
+                        adyacentes[v][u] }.member? true)
                     color[index] << v
                     actualizados << v
                 end
@@ -63,16 +69,12 @@ if __FILE__==$0
     # Forma de entrada de datos: 
     #           8:30 9:30
     #           10:50 11:50       
-#=begin
+
     while c=gets
         c = c.chomp.split(/[:," "]/)
         clases << Lesson.new(c[0],c[1],c[2],c[3])
     end
-#=end
     
-    # Línea de prueba para depuración:
-    # clases= [Lesson.new(7,30,10,30), Lesson.new(7,45,8,50), Lesson.new(11,30,12,45),Lesson.new(12,30,13,40)]
-        
     centro_educativo = Scheduling.new(clases)
-    p "Se necesitan  #{centro_educativo.planifica.size} aulas para albergar las clases"
+    p "Se necesitan #{centro_educativo.planifica.size} aulas para albergar las clases"
 end

@@ -14,10 +14,12 @@ Asignacion greedyTrabajador(double **m, int size){
     Asignacion asignacion_final; 
     vector<bool> trabajos_usados(size, false);  
     
-    for (int i = 0; i < size; i++){	        // Recorremos los trabajadores. 
+    // Recorremos los trabajadores
+    for (int i = 0; i < size; i++){
         int minimo = -1;
         int pos_trabajador, pos_trabajo; 
-        // Recorriendo por trabajador, buscamos el trabajo con coste mínimo que no esté ya ocupado.
+        // Recorriendo por trabajador, buscamos el trabajo 
+        // con coste mínimo que no esté ya ocupado.
         for (int j = 0; j < size; j++){
             if (!trabajos_usados[j]) 
                 if (minimo < 0 || m[i][j] < minimo){
@@ -26,7 +28,7 @@ Asignacion greedyTrabajador(double **m, int size){
                     minimo = m[i][j]; 
                 }    
         }
-        // Introducimos el par trabajador-trabajo al vector que los almacena. 
+        // Guardamos el par trabajador-trabajo
         pair<int,int> par; 
         par.first = pos_trabajador;  
         par.second = pos_trabajo; 
@@ -45,10 +47,12 @@ Asignacion greedyTrabajo(double **m, int size){
     Asignacion asignacion_final; 
     vector<bool> trabajadores_usados(size, false); 
     
-    for (int i = 0; i < size; i++){	        // Recorremos los trabajos. 
+    // Recorremos los trabajos. 
+    for (int i = 0; i < size; i++){
         int minimo = -1;
         int pos_trabajador, pos_trabajo; 
-        // Recorriendo por trabajo, buscamos el trabajador con coste mínimo que no esté ya ocupado.
+        // Recorriendo por trabajo, buscamos el trabajador 
+        // con coste mínimo que no esté ya ocupado.
         for (int j = 0; j < size; j++){
             if (!trabajadores_usados[j]) 
                 if (minimo < 0 || m[j][i] < minimo){
@@ -57,7 +61,7 @@ Asignacion greedyTrabajo(double **m, int size){
                     minimo = m[j][i]; 
                 }    
         }
-        // Introducimos el par trabajador-trabajo al vector que los almacena. 
+        // Guardamos el par trabajador-trabajo
         pair<int,int> par; 
         par.first = pos_trabajador; 
         par.second = pos_trabajo; 
@@ -81,7 +85,8 @@ Asignacion greedyGlobal(double **m, int size){
         int minimo = -1;
         int pos_trabajador, pos_trabajo; 
 
-        // Buscamos el mínimo en la matriz. Corresponderá a un trabajador y a un trabajo que aun estén libres. 
+        // Buscamos el mínimo en la matriz. Corresponderá
+        // a un trabajador y a un trabajo que aun estén libres. 
         for (int j = 0; j < size; j++){
             // Si el trabajador no está usado: 
             if (!trabajadores_usados[j])
@@ -97,8 +102,9 @@ Asignacion greedyGlobal(double **m, int size){
                         }
                 }
         }
-        // Introducimos el par trabajador-trabajo al vector que los almacena. 
-        asignacion_final.push_back(pair<int, int>(pos_trabajador, pos_trabajo));
+        // Guardamos el par trabajador-trabajo
+        asignacion_final.push_back
+            (pair<int, int>(pos_trabajador, pos_trabajo));
 
         trabajadores_usados[pos_trabajador] = true; 
         trabajos_usados[pos_trabajo] = true; 
@@ -168,15 +174,3 @@ int main(){
 
     return 0; 
 }
-    
-
-
-
-
-
-
-
-
-
-            
-
