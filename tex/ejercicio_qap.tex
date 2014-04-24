@@ -216,8 +216,12 @@ hasta que no se produzca mejora.
 \end{algorithm}  
 
 \subsubsection{Análisis de eficiencia}
-Las líneas 6-13 son \ef(1), y hay dos bucles anidados, que darán eficiencia:
-$\sum_{i=1}^{n} \sum_{j=i+1}^{n} 1 = \sum_{i=1}^{n} (n-i)= n^2-\frac{n^2}{2}=\mathcal{O}(n^2)$
+Las líneas 6-13 son \ef(1), y hay dos bucles anidados, que darán eficiencia 
+$\sum_{i=1}^{n} \sum_{j=i+1}^{n} 1 = \sum_{i=1}^{n} (n-i)= n^2-\frac{n^2}{2}=\mathcal{O}(n^2)$.
+
+El bloque \texttt{mientras} es $\mathcal{O}(n^2)$. Como sólo sigue el algoritmo si mejora el
+coste (menor estricto), 2-OPT no dará dos permutaciones iguales. Como hay $n!$ posibles
+permutaciones, el algoritmo realizará como mucho $n!$ etapas, lo que nos asegura que es finito.
 
 \subsubsection{Elección de la permutación inicial}
 Para realizar OPT-2, podríamos partir de una permutación inicial no trivial,
