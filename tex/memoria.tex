@@ -134,6 +134,7 @@ Algoritmos Greedy} % Subtitle
 \section{Terminales de venta}
 El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente.
 Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+
 \subsection{Algoritmo}
 La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
 
@@ -158,15 +159,19 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
 \end{algorithm}  
 
 \subsection{Contraejemplo}
-El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
-habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen.
+En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el 
+algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
 \begin{itemize}
 	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
 	\item Solución óptima: 0.17 + 0.17 (2 sellos)
 \end{itemize}
 
-Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
-  
+Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, 
+que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor 
+valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
+
+
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. 
@@ -216,8 +221,13 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
     
-    Sin embargo, podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
-    al subgrafo resultante de la triangulación.
+    \subsubsection{Condición de Delaunay}
+      Una triangulación es de Delaunay si y sólo si para cada triángulo de la misma, su círculo circunscrito no
+      contiene ningún otro punto.
+    
+    \subsubsection{Aplicación al árbol generador minimal euclídeo}
+    Podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay;
+    y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim al subgrafo resultante de la triangulación.
     
     \begin{proof}
       Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
