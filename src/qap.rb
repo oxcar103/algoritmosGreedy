@@ -204,7 +204,6 @@ module QAP
     if __FILE__ == $0
         file = ARGV[0] || gets.chomp
         problema = Instancia.new(file)
-        #problema = Instancia.new("datos.qap/bur26a.dat")
         puts "\nPermutación inicial: \n#{problema}\n"
         
         res = problema.deep_clone
