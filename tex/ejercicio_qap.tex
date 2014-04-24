@@ -1,0 +1,191 @@
+%%%%
+% Modificación de una plantilla de Latex para adaptarla al castellano.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Sectioned Essay
+% LaTeX Template
+% Version 1.0 (3/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original Author:
+% Nicolas Diaz (nsdiaz@uc.cl) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage[usenames,dvipsnames]{color} % Coloring code
+\usepackage{wrapfig} % Allows in-line images
+\usepackage[utf8]{inputenc}
+
+% Imágenes
+\usepackage{graphicx} 
+
+\usepackage{amsmath}
+% para importar svg
+%\usepackage[generate=all]{svgfig}
+
+% sudo apt-get install texlive-lang-spanish
+\usepackage[spanish]{babel} % English language/hyphenation
+\selectlanguage{spanish}
+% Hay que pelearse con babel-spanish para el alineamiento del punto decimal
+\decimalpoint
+\usepackage{dcolumn}
+\newcolumntype{d}[1]{D{.}{\esperiod}{#1}}
+\makeatletter
+\addto\shorthandsspanish{\let\esperiod\es@period@code}
+\makeatother
+
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{supertabular}
+
+\usepackage{multicol}
+\newsavebox\ltmcbox
+
+% Para algoritmos
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsthm}
+\input{spanishAlgorithmic.tex}
+
+% Para matrices
+\usepackage{amsmath}
+
+% Símbolos matemáticos
+\usepackage{amssymb}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\usepackage[section]{placeins} % Para gráficas en su sección.
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\newenvironment{allintypewriter}{\ttfamily}{\par}
+\setlength{\parindent}{0pt}
+\parskip=8pt
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\ef}[1]{$\mathcal{O}#1$}
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+\newcommand{\imagen}[2]{\begin{center} \includegraphics[width=90mm]{#1} \\#2 \end{center}}
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{50pt} % Some vertical space between the title and author name
+
+{\large\@author} % Author name
+\\\@date % Date
+
+\vspace{40pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Práctica 3}\\ % Title
+QAP: Asginación cuadrática} % Subtitle
+
+\author{\textsc{Óscar Bermúdez,\\Francisco David Charte,\\Ignacio Cordón,\\José Carlos Entrena,\\Mario Román} % Author
+\\{\textit{Universidad de Granada}}} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\renewcommand{\abstractname}{Resumen} % Uncomment to change the name of the abstract to something else
+\begin{abstract}
+\end{abstract}
+{\parskip=2pt
+\tableofcontents
+}
+\pagebreak
+
+
+\section{QAP}
+Dado un conjunto de $n$ instalaciones (p.e. fábricas), con un flujo de transporte y
+un conste asociado entre dichas instalaciones; y dadas $n$ posibles localizaciones,
+el problema consiste en buscar ubicación a cada una de las instalaciones
+de modo que siendo $d(i,j)$ la distancia entre la localización $i$ y la $j$
+y siendo $w(i,j)$ el peso asociado al flujo de materiales entre la instalación
+$i$ y la $j$, se consiga minimizar:
+\begin{equation}
+\sum_{i,j} w(i,j) d(p(i),p(j))
+\label{coste}
+\end{equation}
+
+donde $p()$ define una permutación sobre el conjunto de instalaciones
+
+El código que presentaremos en este ejercicio está escrito en Ruby.
+\subsection{Heurística greedy v1}
+
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{qap}, instancia del problema \\\
+     	\STATE{\texttt{min=qap.cost}, almacena \ref{coste} de la instancia}
+     	\STATE{\texttt{result=qap}}
+     	\STATE{\texttt{s = qap.size-1}, número de instalaciones}
+     	\FORALL{\texttt{k} $\in \{0\ldots s\}$}
+	  \STATE{\texttt{fab\_asignada}=[false\ldots false$_s$]}
+	  \STATE{\texttt{loc\_asignada}=[false\ldots false$_s$]}
+	  \STATE{\texttt{actual=qap}}
+	  \STATE{\texttt{i=k}}
+	  \FORALL{\texttt{i} $\in \{1\ldots s\}$}
+	    \STATE{\texttt{fab\_asignada[i]=true}}
+	    \STATE{\texttt{loc\_asignada[actual.permutacion[i]]=true}}
+	    \STATE{\texttt{max\_w\_index=j w(k,j):}$\max\{w(j,k)\texttt{!fab\_asignada[j]}\}$}
+	    \STATE{\texttt{min\_d\_index=j d(actual.permutacion[k],j):}
+	     \qquad$\min\{d(j,p(k))\texttt{!loc\_asignada[j]}\}$}
+	    \STATE{\texttt{actual.permutacion[max\_w\_index]=min\_d\_index}}
+	    \STATE{\texttt{i=max\_w\_index}}
+	  \ENDFOR
+	  
+	  \IF{\texttt{actual.cost < min}}
+	    \STATE{\texttt{min=actual.cost}}
+	    \STATE{\texttt{result=actual}}
+	  \ENDIF  
+	\ENDFOR
+	\STATE{\texttt{qap=result}}
+	\RETURN{qap}
+	\end{algorithmic}
+    \caption{Heurística greedy$\approx$Vecino más cercano}
+    \label{monedas}
+\end{algorithm}  
+\subsubsection{Análisis de eficiencia}
+Sea $n$ el número de instalaciones
+Las líneas 12 y 13 son \ef(n), y los fragmentos 10-11 y 14-15 son \ef(1)
+El bloque formado por las anteriores líneas se ejecuta $n-1$ veces\\
+
+Las inicializaciones de las líneas 5-8 son \ef(1), y las líneas 17-20 también\\
+
+Luego tenemos un bucle que se ejecuta $n$ veces desde 5 hasta 21, y por tanto
+es $n\cdot(n-1)\cdot n = \mathcal{O}(n^3)$
+
+\subsection{Opt-2}
+\subsubsection{Análisis de eficiencia}
+
+\end{document}

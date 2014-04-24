@@ -85,6 +85,8 @@ module QAP
     class Heuristicas
         # Heurística 2-opt.
         def self.opt2(qap)
+            # Partimos de una permutación generada por greedy
+            greedy_v1 qap
             continue = true
             
             while continue
