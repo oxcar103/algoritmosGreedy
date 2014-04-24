@@ -292,15 +292,16 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
 		\REQUIRE \ \\
         	\texttt{grafo}, grafo euclídeo generado por los vectores de características \\\
         	\texttt{k}, número de componentes conexas en las que se quiere partir el grafo \\\
-		\STATE{\texttt{componentes=}[[$v_1$],\ldots,[$v_{\#grafo.vertices}$]], diccionario de $\#V$ arrays,\\
-		\qquad $v_i\in$\texttt{grafo.vertices}}
+		\STATE{\texttt{componentes=}[[$v_1$],\ldots,[$v_{\#grafo.vertices}$]], diccionario de $\#grafo.vertices$ arrays, $v_i\in$\texttt{grafo.vertices}}
 		\STATE{\texttt{edge\_list=sort(grafo.edges)} en función del peso de cada arista, de menor a mayor}
 		\FORALL{\texttt{arista (u,v)} en \texttt{edge\_list}}
 		  \IF{\texttt{componente[u]} $\neq$ \texttt{componente[v]}}
 			\STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
 		      \ENDIF
-		  \ENDFOR
-		\RETURN{\texttt{componentes}}
+		  \IF{\texttt{\#componentes == k}}
+		    \RETURN{\texttt{componentes}}
+		  \ENDIF
+		\ENDFOR
 	\end{algorithmic}
       \caption{Algoritmo de Kruskal generalizado}
       \label{kruskal-generalizado}
@@ -328,11 +329,11 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
     la solución indicada).
     
     Veamos que esta matriz representa un caso real del problema donde la distancia euclídea entre los clientes
-    viene dada por $m_{i,j}$. Necesitamos algún $\frac{1}{3}<\alpha<1$\\
+    viene dada por $m_{i,j}$. Necesitamos algún $1<\alpha<3$\\
     
     Por ejemplo, en $\mathbb{R}^2$, tomamos: $\left\{\begin{array}{l}
                                                a=(0,0) \\
-                                               b=(0,3,0)
+                                               b=(0,3)
                                               \end{array}\right.$, de manera que
                                               
     $b\in \mathbb{S}_{a,3}$ (Esfera de centro $a$ y radio $3$).
@@ -469,7 +470,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 \begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\REQUIRE \ \\
-        	\texttt{clases}, array de $n$ objetos Clase, que almacena
+        	\texttt{clases}, array de $n$ objetos \texttt{Clase}, que almacena
 				 un tiempo de inicialización y otro de 
 				 finalización\\
      	\STATE{\texttt{adyadcentes}=$(\delta_{i,j})_{nxn}, i,j\in \{0\ldots \#clases - 1\}$}
@@ -484,7 +485,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 		\STATE{\texttt{sin\_colorear.delete(v)}}
 	      \ENDIF
 	    \ENDFOR
-	    
+	    \STATE{\texttt{indice++}}
 	  \ENDWHILE
 		\RETURN{$\#$\texttt{color}}
 	\end{algorithmic}
@@ -494,7 +495,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 
 
 \subsection{Contraejemplo}
-La existencia de grafos que no se pueden colorear mediante el algoritmo greedy, asegura que también existe una relación de clases para
+La existencia de grafos que no se pueden colorear de manera óptima mediante el algoritmo greedy, asegura que también existen clases para
 las que la heurística presentada no proporciona la solución óptima. De hecho, hay casos, como el que se presenta a cotinuación,
 en que el número de colores necesarios para colorear el grafo dependerá del orden de recorrido de sus nodos (esto se traduce en
 el problema de la asignación de aulas en un distinto orden en el input de las clases):
