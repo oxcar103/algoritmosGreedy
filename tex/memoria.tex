@@ -213,7 +213,10 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
       \label{kruskal}
     \end{algorithm}
 
-  
+    \begin{center}
+	\includegraphics[width=10cm]{figure_1.png} \\
+	\textit{Ejemplo de cálculo con el algoritmo de Kruskal sobre puntos aleatorios}
+     \end{center}  
     
   \subsection{Triangulación de Delaunay}
     Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal.
@@ -252,7 +255,6 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
     %Para encontrar la triangulación de Delaunay usaremos...
       Un algoritmo voraz para hallar la triangulación de Delaunay añadiría aristas a la triangulación y comprobaría si estas
       generan triángulos que satisfacen, a cada paso, la condición de Delaunay.
-      No estudiamos la implementación de este algoritmo.
     
     \begin{algorithm}[H]
 	\begin{algorithmic}[1]
