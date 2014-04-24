@@ -68,7 +68,6 @@ module QAP
             total_cost = 0
             @distances.each_index { |i|
                 @distances[i].each_index { |j|
-                    #puts "#{weight(i,j)}"
                     total_cost += weight(i,j)*distance(permutation[i], permutation[j])
                 }
             }

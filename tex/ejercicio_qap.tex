@@ -154,12 +154,12 @@ El código que presentaremos en este ejercicio está escrito en Ruby.
 	  \STATE{\texttt{loc\_asignada}=[false\ldots false$_s$]}
 	  \STATE{\texttt{actual=qap}}
 	  \STATE{\texttt{i=k}}
-	  \FORALL{\texttt{i} $\in \{1\ldots s\}$}
+	  \FOR{\texttt{p=0; p<s; p++}}
 	    \STATE{\texttt{fab\_asignada[i]=true}}
 	    \STATE{\texttt{loc\_asignada[actual.permutacion[i]]=true}}
-	    \STATE{\texttt{max\_w\_index=j : w(k,j)=}$\max\{\texttt{w(k,j)}\texttt{!fab\_asignada[j]}\}$}
-	    \STATE{\texttt{min\_d\_index=j : d(actual.permutacion[k],j)=}
-	     \qquad$\min\{\texttt{d(p(k),j)}\texttt{!loc\_asignada[j]}\}$}
+	    \STATE{\texttt{max\_w\_index=j} tal que \texttt{w(k,j)=}$\max\{\texttt{w(k,j)}\texttt{!fab\_asignada[j]}\}$}
+	    \STATE{\texttt{min\_d\_index=j} tal que\\ \texttt{d(actual.permutacion[k],j)=}
+	     $\min\{\texttt{d(p(k),j)}|\texttt{!loc\_asignada[j]}\}$}
 	    \STATE{\texttt{actual.permutacion[max\_w\_index]=min\_d\_index}}
 	    \STATE{\texttt{i=max\_w\_index}}
 	  \ENDFOR
@@ -267,4 +267,11 @@ Las líneas 11-13 son \ef(1), y la 9 y la 10 \ef(n) cada una. Están en un bucle
 las líneas 8-14 que se ejecuta n veces, y que por tanto es $\mathcal{O}(n^2)$.
 
 Luego la eficiencia del segundo greedy es $\mathcal{O}(\max(n,n^2))=\mathcal{O}(n^2)$ 
+
+\section{Comparativa de heurísticas}
+Se ha realizado la ejecución de las cuatro heurísticas con los distintos archivos de datos. En la siguiente tabla mostramos los costes obtenidos calculados mediante la función de coste de la ecuación \ref{coste}.
+
+Se puede observar que la mejor heurística es 2-opt, aunque es mucho menos eficiente como se ha visto antes. En general la heurística Greedy basada en \textit{Vecino más cercano} consigue en mejores resultados que la Greedy-v2, exceptuando algunos casos como \texttt{tai100b}, \texttt{tai150b}, \texttt{tho150}, \texttt{wil100}.
+
+\input{table_qap.tex}
 \end{document}
