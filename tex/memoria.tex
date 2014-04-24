@@ -365,9 +365,9 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
 				\STATE{\texttt{Crea una Asignacion vacía}}
 				\STATE{\texttt{Crea un vector trabajosUsados de tamaño $n$ y lo rellena a false}}
-				\STATE{\texttt{Minimo = -1}}
-				\STATE{\texttt{posTrabajo = 0}}
-		        \FORALL{Trabajador (i)}
+				\FORALL{Trabajador (i)}
+				  \STATE{\texttt{Minimo = -1}}
+				  \STATE{\texttt{posTrabajo = 0}}
 		          \FORALL{Trabajo (j)}
 		            \IF{!trabajosUsados[j]}
 		            	\IF{Minimo < 0 || m[i][j] < Minimo}
@@ -382,7 +382,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 		        
 				\RETURN{\texttt{Asignacion}}
 			\end{algorithmic}
-		    \caption{Asignación de trabajos}
+		    \caption{Asignación de trabajos por trabajador}
 		    \label{Asignación Trabajos}
 		\end{algorithm}
 		
@@ -403,28 +403,28 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 					\texttt{m}, matriz de costes, y $n$ orden de la matriz\\
 				\STATE{\texttt{Crea una Asignacion vacía}}
 				\STATE{\texttt{Crea dos vectores: trabajosUsados y trabajadoresUsados, de tamaño $n$ y los rellena a false}}
-				\STATE{\texttt{Minimo = -1}}
-				\STATE{\texttt{posTrabajo = 0\\ posTrabajador = 0}}
-			       \FORALL{Fila}
-			         \FORALL{Trabajador (j)}
-			           \IF{!trabajadoresUsados[j]}
-			           	 \FORALL{Trabajo (k)}
-			               \IF{!trabajosUsados[j]}
-			           	  	 \IF{Minimo < 0 || m[j][k] < Minimo}
-			           			\STATE{\texttt{posTrabajo = k \\ posTrabajador = j}}
-			           			\STATE{\texttt{Minimo = m[j][k]}}
-			           	     \ENDIF
-			           	   \ENDIF
-			             \ENDFOR
-			           \ENDIF
-			         \ENDFOR
-			       \STATE{\texttt{Asignacion.push(pair(posTrabajador,posTrabajo))}}
-			       \STATE{\texttt{trabajosUsados[posTrabajo] = true \\ trabajadoresUsados[posTrabajador] = true}}
-			       \ENDFOR  	
+				\FORALL{Fila}
+				  \STATE{\texttt{Minimo = -1}}
+				  \STATE{\texttt{posTrabajo = 0\\ posTrabajador = 0}}
+			      \FORALL{Trabajador (j)}
+			        \IF{!trabajadoresUsados[j]}
+			          \FORALL{Trabajo (k)}
+			            \IF{!trabajosUsados[j]}
+			           	  \IF{Minimo < 0 || m[j][k] < Minimo}
+			           	    \STATE{\texttt{posTrabajo = k \\ posTrabajador = j\\
+			           	    Minimo = m[j][k]}}
+			           	  \ENDIF
+			           	\ENDIF
+			          \ENDFOR
+			        \ENDIF
+			      \ENDFOR
+			      \STATE{\texttt{Asignacion.push(pair(posTrabajador,posTrabajo))}}
+			      \STATE{\texttt{trabajosUsados[posTrabajo] = true \\ trabajadoresUsados[posTrabajador] = true}}
+			    \ENDFOR  	
 				        
 				\RETURN{\texttt{Asignacion}}
 			\end{algorithmic}
-			   \caption{Asignación de trabajos}
+			   \caption{Asignación global de trabajos}
 			   \label{Asignación Global}
 		\end{algorithm}
 		
