@@ -246,7 +246,7 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     maximice la suma de distancias entre subconjuntos de la partición. Esto es, dado $C$ y una partición $P \subset \mathcal{P}(C)$,
     queremos maximizar:
     \begin{equation}
-     \sum_{A,B \in P} dist(A,B) = \sum_{A,B \in P} min_{a\in A, b\in B}(dist(a,b))
+     \sum_{A,B \in P} dist(A,B) = \sum_{A,B \in P} min_{a\in A, b\in B}(d(a,b))
     \end{equation}
 
     
@@ -254,9 +254,8 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     Agruparemos clientes según similitud por su vector de características. Dado un conjunto de vectores en $\mathbb{R}^n$
     queremos realizar una partición en $k$ subconjuntos tales que la suma de las distancias entre ellos sea máxima.
     
-    Usaremos el algoritmo de Kruskal para generar el árbol generador minimal, y, posteriormente, retiraremos las $k$
-    aristas de mayor peso, generando así $k$ componentes conexas que se corresponden con los $k$ grupos elegidos. Así,
-    generalizamos Kruskal para aplicarlo sólo hasta las $n-k$ primeras aristas, que unirán las $k$ componentes.
+    Usaremos el algoritmo de Kruskal, parando su ejecución justo cuando queden $k$ componentes conexas que se corresponden 
+    con los $k$ grupos elegidos. Así,generalizamos Kruskal para aplicarlo sólo hasta las $n-k$ primeras aristas, que unirán las $k$ componentes.
     
     Ahora no nos interesa obtener el árbol minimal, sino simplemente calcular las componentes conexas. Nótese además
     que debemos generalizar la dimensión del algoritmo a la que requieran los vectores de características.
@@ -266,15 +265,14 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 		\REQUIRE \ \\
         	\texttt{grafo}, grafo euclídeo generado por los vectores de características \\\
         	\texttt{k}, número de componentes conexas en las que se quiere partir el grafo \\\
-		\STATE{\texttt{componentes=}$\emptyset$}
-		\FORALL{\texttt{v} en \texttt{grafo.vértices}:}
-		   \STATE{\texttt{componentes.add(set(v))}}
-		\ENDFOR
-		\FORALL{arista \texttt{(u,v)} en \texttt{grafo.aristas}:}
-		\IF{\texttt{componente(u)} $\neq$ \texttt{componente(v)}}
-		      \STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
-		    \ENDIF
-		\ENDFOR
+		\STATE{\texttt{componentes=}[[$v_1$],\ldots,[$v_{\#grafo.vertices}$]], diccionario de $\#V$ arrays,\\
+		\qquad $v_i\in$\texttt{grafo.vertices}}
+		\STATE{\texttt{edge\_list=sort(grafo.edges)} en función del peso de cada arista, de menor a mayor}
+		\FORALL{\texttt{arista (u,v)} en \texttt{edge\_list}}
+		  \IF{\texttt{componente[u]} $\neq$ \texttt{componente[v]}}
+			\STATE{unir(\texttt{componente(u)},\texttt{componente(v)})}
+		      \ENDIF
+		  \ENDFOR
 		\RETURN{\texttt{componentes}}
 	\end{algorithmic}
       \caption{Algoritmo de Kruskal generalizado}
@@ -315,10 +313,13 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
 
   Así, $d(a,b)=\alpha^{-1} > \frac{1}{3}$ y $\alpha^{-1} < \frac{2}{3} < 1$ por ser perteneciente a
      $\mathbb{S}_{b,\frac{1}{3}}$
+
      \begin{center}
 	\includegraphics[width=10cm]{esferas.png}
      \end{center}  
+     
     Todo esto asegura que el contraejemplo encontrado es válido.
+    
 \section{Asignación de trabajos}
 Tenemos dos conjuntos, uno con $n$ trabajadores y otro con $n$ trabajos, y queremos asignar a cada trabajador un trabajo de forma
 que el coste de realizar todos los trabajos sea mínimo. Dichos costes estarán proporcionados en una matriz cuadrada
@@ -464,6 +465,17 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 \end{algorithm}
 
 
+\subsection{Contraejemplo}
+La existencia de grafos que no se pueden colorear mediante el algoritmo greedy, asegura que también existe una relación de clases para
+las que la heurística presentada no proporciona la solución óptima. De hecho, hay casos, como el que se presenta a cotinuación,
+en que el número de colores necesarios para colorear el grafo dependerá del orden de recorrido de sus nodos (esto se traduce en
+el problema de la asignación de aulas en un distinto orden en el input de las clases):
+
+     \begin{center}
+	\includegraphics[width=5cm]{ej51.png}
+	\includegraphics[width=5cm]{ej52.png}
+     \end{center}  
+     
 \section{Memorias caché}
 \label{cache}
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
