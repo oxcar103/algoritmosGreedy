@@ -394,8 +394,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 		
 		\subsubsection{Búsqueda de mínimos globales}
 		En este algoritmo, buscaremos el par trabajador-trabajo con coste mínimo en toda la matriz, siempre que los dos estén 
-		libres. De esta forma obtendremos un mínimo global. Nuevamente, el valor de retorno será un vector con las asociaciones
-		trabajador-trabajo. 
+		libres. De esta forma obtendremos el mínimo valor posible en cada iteración. Nuevamente, el valor de retorno será un vector con las asociaciones trabajador-trabajo. 
 		
 		\begin{algorithm}[H]
 			\begin{algorithmic}[1]
@@ -427,8 +426,8 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 			   \label{Asignación Global}
 		\end{algorithm}
 		
-	\subsection{Contraejemplos}
-	Podemos encontrar contraejemplos muy sencillos para todos los algoritmos. Si consideramos la matriz de costes:
+	\subsection{Contraejemplo}
+	Podemos encontrar un contraejemplo muy sencillo, que funciona para todos los algoritmos. Si consideramos la matriz de costes:
 	
 	\centering
 	M = $\begin{pmatrix}
