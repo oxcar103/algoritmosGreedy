@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+# qap.rb
+# Uso: qap.rb <archivo_datos>
+
 class Object
     # Copia profunda de objetos
     # http://stackoverflow.com/questions/8206523/how-to-create-a-deep-copy-of-an-object-in-ruby
@@ -48,7 +51,6 @@ module QAP
             @permutation = (0..(@size-1)).to_a  # Genera un array con valores de 0 a size-1
             @distances = distancedata.each_slice(@size).to_a  # Matriz de distancias
             @weights = weightdata.each_slice(@size).to_a  # Matriz de pesos
-            puts "#{@distances}\n#{@weights}"
         end
 
         # Acceso público a la permutación.
