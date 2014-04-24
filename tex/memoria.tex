@@ -539,7 +539,11 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
  
   \subsection{Teorema de Bélády}
   Veamos que este algoritmo es óptimo.
-  Primero, tenemos que definir lo que es una tabla de expulsiones/inserciones reducida.
+  Primero, tenemos que definir lo que es una tabla de expulsiones/inserciones y cuando es reducida.
+
+  \begin{mydef}
+    Una tabla de expulsiones/inserciones es una tabla que refleja el contenido de caché tras cada petición.
+  \end{mydef}
   
   \begin{mydef}
     Una tabla de expulsiones/inserciones reducida es aquella que sólo inserta un elemento en caché cuando dicho elemento es requerido.
@@ -576,7 +580,7 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
 	
 	\begin{proof}[\textbf{Invariante:}]
 	  \textit{
-	    Existe una tabla reducida óptima $S$ que tras las primeras $j$ peticiones produce la misma planificación de expulsiones que la asociada a Farthest-in-Future $S_{FF}$.
+	    Existe una tabla reducida asociada a la solución óptima $S$ que tras las primeras $j$ peticiones produce la misma planificación de expulsiones que la asociada a Farthest-in-Future $S_{FF}$.
 	  }
 	  
 	  Vamos a demostrarlo por inducción sobre la $j$
