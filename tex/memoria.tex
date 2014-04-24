@@ -221,9 +221,12 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
     
-    \subsubsection{Condición de Delaunay}
+    \subsubsection{Condición de Delaunay y relación con Voronoi}
       Una triangulación es de Delaunay si y sólo si para cada triángulo de la misma, su círculo circunscrito no
       contiene ningún otro punto.
+      
+      El grafo dual a la triangulación de Delaunay, tomando como nodos los circuncentros de los triángulos es el
+      diagrama de Voronoi de los puntos dados.
     
     \subsubsection{Aplicación al árbol generador minimal euclídeo}
     Podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay;
@@ -241,7 +244,8 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
       no pertenecería a él, llegando a contradicción.
 
       Así, no puede haber ningún punto en el círculo que tiene como diámetro a $\overline{pq}$. Una arista que cumple esto está forzosamente en el diagrama de Delaunay,
-      por aplicación de la Condición de Delaunay.
+      por aplicación de la Condición de Delaunay, el centro del círculo es punto medio entre ellos y no está más próximo a ningún otro punto que a $p$ y $q$, luego pertenece
+      a una arista del diagrama de Voronoi, y por dualidad de Delaunay, $\overline{pq}$ está en Delaunay.
     \end{proof}
     
     %Para encontrar la triangulación de Delaunay usaremos... 
