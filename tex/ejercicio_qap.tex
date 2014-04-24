@@ -159,7 +159,7 @@ El código que presentaremos en este ejercicio está escrito en Ruby.
 	    \STATE{\texttt{loc\_asignada[actual.permutacion[i]]=true}}
 	    \STATE{\texttt{max\_w\_index=j : w(k,j)=}$\max\{\texttt{w(k,j)}\texttt{!fab\_asignada[j]}\}$}
 	    \STATE{\texttt{min\_d\_index=j : d(actual.permutacion[k],j)=}
-	     \qquad$\min\{\texttt{d(p(k),j)}\texttt{!loc\_asignada[j]}\}$}
+	     \qquad$\min\{\texttt{d(p(k),j)}|\texttt{!loc\_asignada[j]}\}$}
 	    \STATE{\texttt{actual.permutacion[max\_w\_index]=min\_d\_index}}
 	    \STATE{\texttt{i=max\_w\_index}}
 	  \ENDFOR
