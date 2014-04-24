@@ -96,6 +96,14 @@
 \end{flushright}
 }
 
+
+%Basado en: http://en.wikibooks.org/wiki/LaTeX/Theorems
+\usepackage{amsthm}
+\newtheorem*{mydef}{Definición}
+\newtheorem{mydefn}{Definición}
+\newtheorem{theorem}{Teorema}
+\everymath{\displaystyle} % Displaystyle por defecto
+
 %----------------------------------------------------------------------------------------
 %	TITLE
 %----------------------------------------------------------------------------------------
@@ -509,7 +517,46 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
 
  El mayor inconveniente de esta heurística frente a las clásicas heurísticas FIFO(First In, First Out), LIFO(Last In, First Out), LRU(Least Recently Used) y LFU(Least Frequently Used) para asignación de memoria caché es que, dado que necesita conocer con anterioridad las peticiones que se le harán, no se puede implementar en un sistema de tiempo real.
  
-  \subsection{Contraejemplo}
+  \subsection{Teorema de Bélády}
+  Veamos que este algoritmo es óptimo.
+  Primero, tenemos que definir lo que es una tabla de expulsiones/inserciones reducida.
+  
+  \begin{mydef}
+    Una tabla de expulsiones/inserciones reducida es aquella que sólo inserta un elemento en caché cuando dicho elemento es requerido.
+  \end{mydef}
+  
+  \begin{theorem}[Teorema de Bélády]
+    Farthest-in-future es el algoritmo de expulsiones óptimo.
+  \end{theorem}
+
+  \begin{proof}[\textbf{Demostración:}]
+  	Previamente, vamos a probar un lema.
+  
+	  \begin{proof}[\textbf{Lema:}]
+	    \textit{
+	      Dada una tabla de expulsiones/inserciones no reducida $S$, se puede transformar en una reducida $S'$ sin añadir ninguna expulsión  
+	    }
+	    
+	    Lo probaremos por inducción sobre el número de elementos que no se insertan cuando se piden.
+	    
+	    Supongamos que $S$ inserta en la caché un elemento $d$ en un instante $t$(antes de ser requerido), y $c$
+	    es el elemento que $S$ saca.
+	    
+	    Pueden darse dos casos:
+	    \begin{itemize}
+	      \item \textbf{Caso 1: } $d$ es expulsado antes de su próxima petición.\\
+	      En este caso, anulamos la inserción de $d$ y la expulsión de $c$.
+	      \item \textbf{Caso 2: } $d$ es requerido antes de ser expulsado. \\
+	      En este caso, retrasamos la inserción de $d$ y la expulsión de $c$.
+	    \end{itemize}
+	    
+	    Y lo que nos queda, es la tabla de expulsiones/inserciones reducida $S'$.
+	    %Completo
+	  \end{proof}
+
+	%Incompleto
+  \end{proof}
+  
   
 \section{Implementaciones}
    \subsection{Terminales de venta}
