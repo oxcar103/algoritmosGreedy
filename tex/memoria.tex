@@ -509,7 +509,7 @@ el problema de la asignación de aulas en un distinto orden en el input de las c
 \section{Memorias caché}
 \label{cache}
 %Heurística "Farthest-In-Future" en: https://www.cs.princeton.edu/courses/archive/spring13/cos423/lectures/04GreedyAlgorithmsI-2x2.pdf:
-El problema de las memorias caché consiste en averiguar qué datos conviene eliminar en una caché, conociendo de antemano los datos que se van a pedir, para evitar lo máximo posible los fallos de caché.
+El problema de las memorias caché consiste en, conociendo de antemano los datos que se van a pedir, elegir qué dato conviene eliminar en una caché cuando se comete un fallo, para reducir al mínimo el número de fallos de caché.
   \subsection{Algoritmo}
 La estrategia utilizada es reemplazar siempre el elemento que más tarde se vaya a utilizar (\textit{Farthest-in-future}) cada vez que se produzca un fallo de caché. Los primeros datos que se incluyen en caché son los primeros $k$ datos (sin considerar repeticiones) de la lista de peticiones.
 
