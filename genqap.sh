@@ -1,8 +1,8 @@
-    TEXFILE="tex/table_qap2.tex"
+    TEXFILE="tex/table_qap_`date +%s`.tex"
     touch $TEXFILE || exit -1
 
     ALGORITHMS="inicial greedy-v1 greedy-v2 2-opt"
-    DATAFILES=`ls datos.qap/tai*`
+    DATAFILES="$1"
 
     echo -n "\\begin{center}
     \\begin{longtabu} to \linewidth{ l | *4{d{0}}}  % máx 10 decimales

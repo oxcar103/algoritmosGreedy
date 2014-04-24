@@ -134,6 +134,7 @@ Algoritmos Greedy} % Subtitle
 \section{Terminales de venta}
 El problema de los terminales de venta consiste en, dada una cantidad de dinero, conseguir el mínimo número de monedas posible para devolverlo al cliente.
 Diseñar un algoritmo Greedy que resuelva esta situación es sencillo, dados los siguientes valores de las monedas de euro: 0.01, 0.02, 0.05, 0.10, 0.20, 0.50 y 1 euro.
+
 \subsection{Algoritmo}
 La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del mayor valor posible sin superar la cantidad de dinero restante a cada momento:
 
@@ -158,15 +159,19 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
 \end{algorithm}  
 
 \subsection{Contraejemplo}
-El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen. En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros,
-habrá casos en los que el algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
+El buen funcionamiento del algoritmo dependerá de los valores de posibles monedas que se utilicen.
+En el ejemplo de los sellos de valores 0.54, 0.32, 0.17 y 0.01 euros, habrá casos en los que el 
+algoritmo no consiga el mínimo número de monedas. Por ejemplo, si queremos obtener un valor de 0.34 euros:
 \begin{itemize}
 	\item Solución del algoritmo: 0.32 + 0.01 + 0.01 (3 sellos)
 	\item Solución óptima: 0.17 + 0.17 (2 sellos)
 \end{itemize}
 
-Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
-  
+Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es decir, con dos sellos de 0.17 se consiguen 34 céntimos, 
+que es mayor que otro sello existente superior al de 17, el sello de 32 céntimos. Esto provoca que el algoritmo escoja un sello de mayor 
+valor de forma equivocada, ya que con dos sellos de menor valor se reduce más la distancia al objetivo, pudiendo llegar a una solución mejor.
+
+
 \section{Red de comunicaciones}
   \subsection{Algoritmo}
     Dado un conjunto de ciudades, buscamos interconectarlas con una red que minimice la longitud de red. 
@@ -208,7 +213,10 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       \label{kruskal}
     \end{algorithm}
 
-  
+    \begin{center}
+	\includegraphics[width=10cm]{figure_1.png} \\
+	\textit{Ejemplo de cálculo con el algoritmo de Kruskal sobre puntos aleatorios}
+     \end{center}  
     
   \subsection{Triangulación de Delaunay}
     Para reducir la carga del algoritmo, podemos reducir el grafo sobre el que buscamos el árbol generador minimal.
@@ -216,8 +224,16 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     ser un grafo completo sobre puntos en un plano euclídeo, podemos aprovechar las propiedades de la distancia para
     reducir el grafo sobre el que buscamos.
     
-    Sin embargo, podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay; y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim
-    al subgrafo resultante de la triangulación.
+    \subsubsection{Condición de Delaunay y relación con Voronoi}
+      Una triangulación es de Delaunay si y sólo si para cada triángulo de la misma, su círculo circunscrito no
+      contiene ningún otro punto.
+      
+      El grafo dual a la triangulación de Delaunay, tomando como nodos los circuncentros de los triángulos es el
+      diagrama de Voronoi de los puntos dados.
+    
+    \subsubsection{Aplicación al árbol generador minimal euclídeo}
+    Podemos demostrar que el árbol generador minimal está contenido en la triangulación de Delaunay;
+    y que, por tanto, sólo es necesario aplicar el algoritmo de Kruskal o Prim al subgrafo resultante de la triangulación.
     
     \begin{proof}
       Demostraremos que cada arista del árbol generador está contenida en la triangulación de Delaunay.
@@ -231,10 +247,14 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       no pertenecería a él, llegando a contradicción.
 
       Así, no puede haber ningún punto en el círculo que tiene como diámetro a $\overline{pq}$. Una arista que cumple esto está forzosamente en el diagrama de Delaunay,
-      por aplicación de la Condición de Delaunay.
+      por aplicación de la Condición de Delaunay, el centro del círculo es punto medio entre ellos y no está más próximo a ningún otro punto que a $p$ y $q$, luego pertenece
+      a una arista del diagrama de Voronoi, y por dualidad de Delaunay, $\overline{pq}$ está en Delaunay.
     \end{proof}
     
-    %Para encontrar la triangulación de Delaunay usaremos... 
+    \subsubsection{Hallar la triangulación de Delaunay}
+    %Para encontrar la triangulación de Delaunay usaremos...
+      Un algoritmo voraz para hallar la triangulación de Delaunay añadiría aristas a la triangulación y comprobaría si estas
+      generan triángulos que satisfacen, a cada paso, la condición de Delaunay.
     
     \begin{algorithm}[H]
 	\begin{algorithmic}[1]
@@ -249,7 +269,6 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     \end{algorithm}
     
 \section{Segmentación de clientes}
-  \subsection{Enunciado}
     Dado un conjunto de puntos en $\mathbb{R}^n$ dotado de la distancia euclídea, buscamos la partición de puntos que
     maximice la suma de distancias entre subconjuntos de la partición. Esto es, dado $C$ y una partición $P \subset \mathcal{P}(C)$,
     queremos maximizar:
@@ -287,6 +306,11 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
       \label{kruskal-generalizado}
     \end{algorithm}
 
+    \begin{center}
+	\includegraphics[width=10cm]{figure_2.png} \\
+	\textit{Ejemplo segmentando puntos aleatorios bidimensionales en 12 componentes}
+     \end{center}  
+    
     \subsection{Contraejemplo}
     Sea el grafo $G=(\{a,b,c,d\},E)$ generado por la matriz de costos:
   
