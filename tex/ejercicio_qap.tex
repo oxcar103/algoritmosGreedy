@@ -267,4 +267,11 @@ Las líneas 11-13 son \ef(1), y la 9 y la 10 \ef(n) cada una. Están en un bucle
 las líneas 8-14 que se ejecuta n veces, y que por tanto es $\mathcal{O}(n^2)$.
 
 Luego la eficiencia del segundo greedy es $\mathcal{O}(\max(n,n^2))=\mathcal{O}(n^2)$ 
+
+\section{Comparativa de heurísticas}
+Se ha realizado la ejecución de las cuatro heurísticas con los distintos archivos de datos. En la siguiente tabla mostramos los costes obtenidos calculados mediante la función de coste de la ecuación \ref{coste}.
+
+Se puede observar que la mejor heurística es 2-opt, aunque es mucho menos eficiente como se ha visto antes. En general la heurística Greedy basada en \textit{Vecino más cercano} consigue en mejores resultados que la Greedy-v2, exceptuando algunos casos como \texttt{tai100b}, \texttt{tai150b}, \texttt{tho150}, \texttt{wil100}.
+
+\input{table_qap.tex}
 \end{document}
