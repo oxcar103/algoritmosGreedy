@@ -108,7 +108,7 @@ module QAP
             end
         end
         
-        # Heurística Greedy basada en Vecino más cercano
+        # Heurística Greedy análoga a Vecino más cercano
         def self.greedy_v1(qap)
             min = qap.cost
             result = qap
@@ -195,9 +195,9 @@ module QAP
 
     if __FILE__ == $0
         puts "Introduce nombre de archivo: "
-        #file = gets.chomp
-        #problema = Instancia.new(file)
-        problema = Instancia.new("datos.qap/bur26a.dat")
+        file = gets.chomp
+        problema = Instancia.new(file)
+        #problema = Instancia.new("datos.qap/bur26a.dat")
         puts "\nPermutación inicial: \n#{problema}\n"
         
         res = problema.deep_clone

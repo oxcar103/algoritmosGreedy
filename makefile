@@ -18,6 +18,3 @@ tex:
 # Limpieza de los ejecutables
 clean:
 	rm $(BIN)/*
-
-cleanall: clean
-	rm *.jpg *.dat tex/*
