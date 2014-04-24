@@ -1,6 +1,6 @@
 % Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
 \noindent
-\mbox{}\textit{\textcolor{Brown}{//\ \ Problema\ 4:\ Asignación\ de\ trabajos.\ Utilizando\ heurística\ greedy.\ Se\ implementan\ 3\ heurísticas\ greedy.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{//\ \ Problema\ 4:\ Asignación\ de\ trabajos.\ Utilizando\ 3\ heurísticas\ greedy.\ }} \\
 \mbox{} \\
 \mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
 \mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}vector\textgreater{}}} \\
@@ -9,22 +9,19 @@
 \mbox{} \\
 \mbox{}\textbf{\textcolor{Blue}{typedef}}\ \textcolor{TealBlue}{vector\textless{}pair\textless{}int,\ int\textgreater{}\ \textgreater{}}\ Asignacion\textcolor{BrickRed}{;} \\
 \mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{/*\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Heurística\ greedyTrabajador.\ Recorre\ la\ matriz\ por\ trabajador\ (filas)\ y\ busca\ el\ trabajo\ que\ aun\ no\ esté\ asignado\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ a\ ningún\ trabajado\ con\ coste\ mínimo,\ y\ lo\ asigna\ al\ trabajador\ actual.\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Tiene\ una\ eficiencia\ cuadrática,\ pues\ consta\ de\ dos\ bucles\ for\ anidados.}} \\
-\mbox{}\textit{\textcolor{Brown}{*/}} \\
+\mbox{}\textit{\textcolor{Brown}{//\ \ Heurística\ greedyTrabajador,\ recorre\ la\ matriz\ por\ trabajadores.\ }} \\
+\mbox{} \\
 \mbox{}\textcolor{TealBlue}{Asignacion}\ \textbf{\textcolor{Black}{greedyTrabajador}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\ \textcolor{BrickRed}{**}m\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ size\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \  \\
 \mbox{}\ \ \ \ \textcolor{TealBlue}{Asignacion}\ asignacion$\_$final\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ \textcolor{ForestGreen}{bool}\ trabajos$\_$usados\textcolor{BrickRed}{[}size\textcolor{BrickRed}{];}\  \\
-\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
-\mbox{}\ \ \ \ \ \ \ \ trabajos$\_$usados\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ \textcolor{TealBlue}{vector\textless{}bool\textgreater{}}\ \textbf{\textcolor{Black}{trabajos$\_$usados}}\textcolor{BrickRed}{(}size\textcolor{BrickRed}{,}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{);}\ \  \\
 \mbox{}\ \ \ \  \\
-\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\textcolor{Red}{\{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorremos\ los\ trabajadores.\ }} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Recorremos\ los\ trabajadores}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ minimo\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ pos$\_$trabajador\textcolor{BrickRed}{,}\ pos$\_$trabajo\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorriendo\ por\ trabajador,\ buscamos\ el\ trabajo\ con\ coste\ mínimo\ que\ no\ esté\ ya\ ocupado.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorriendo\ por\ trabajador,\ buscamos\ el\ trabajo\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ con\ coste\ mínimo\ que\ no\ esté\ ya\ ocupado.}} \\
 \mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(!}trabajos$\_$usados\textcolor{BrickRed}{[}j\textcolor{BrickRed}{])}\  \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}minimo\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{$|$$|$}\ m\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}}\ minimo\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
@@ -33,7 +30,7 @@
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ minimo\ \textcolor{BrickRed}{=}\ m\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{];}\  \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}}\ \ \ \  \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Introducimos\ el\ par\ trabajador-trabajo\ al\ vector\ que\ los\ almacena.\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Guardamos\ el\ par\ trabajador-trabajo}} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{TealBlue}{pair\textless{}int,int\textgreater{}}\ par\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \ \ \ \ \ par\textcolor{BrickRed}{.}first\ \textcolor{BrickRed}{=}\ pos$\_$trabajador\textcolor{BrickRed}{;}\ \  \\
 \mbox{}\ \ \ \ \ \ \ \ par\textcolor{BrickRed}{.}second\ \textcolor{BrickRed}{=}\ pos$\_$trabajo\textcolor{BrickRed}{;}\  \\
@@ -45,22 +42,19 @@
 \mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ asignacion$\_$final\textcolor{BrickRed}{;}\  \\
 \mbox{}\textcolor{Red}{\}} \\
 \mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{/*\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Heurística\ greedyTrabajo.\ Recorre\ la\ matriz\ por\ trabajos\ (columnas)\ y\ busca\ el\ trabajador\ que\ aun\ no\ tenga\ asignado}} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ a\ ningún\ trabajo,\ y\ que\ haga\ mínimo\ el\ coste\ para\ ese\ trabajo,\ asignándolo\ al\ trabajo\ actual.\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Es\ análogo\ al\ anterior,\ por\ lo\ que\ también\ tiene\ eficiencia\ cuadrática.\ \ }} \\
-\mbox{}\textit{\textcolor{Brown}{*/}} \\
+\mbox{}\textit{\textcolor{Brown}{//\ \ Heurística\ greedyTrabajo,\ recorre\ la\ matriz\ por\ trabajos.\ }} \\
+\mbox{} \\
 \mbox{}\textcolor{TealBlue}{Asignacion}\ \textbf{\textcolor{Black}{greedyTrabajo}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\ \textcolor{BrickRed}{**}m\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ size\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \  \\
 \mbox{}\ \ \ \ \textcolor{TealBlue}{Asignacion}\ asignacion$\_$final\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ \textcolor{ForestGreen}{bool}\ trabajadores$\_$usados\textcolor{BrickRed}{[}size\textcolor{BrickRed}{];}\  \\
-\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
-\mbox{}\ \ \ \ \ \ \ \ trabajadores$\_$usados\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ \textcolor{TealBlue}{vector\textless{}bool\textgreater{}}\ \textbf{\textcolor{Black}{trabajadores$\_$usados}}\textcolor{BrickRed}{(}size\textcolor{BrickRed}{,}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{);}\  \\
 \mbox{}\ \ \ \  \\
-\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\textcolor{Red}{\{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorremos\ los\ trabajos.\ }} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Recorremos\ los\ trabajos.\ }} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ minimo\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ pos$\_$trabajador\textcolor{BrickRed}{,}\ pos$\_$trabajo\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorriendo\ por\ trabajo,\ buscamos\ el\ trabajador\ con\ coste\ mínimo\ que\ no\ esté\ ya\ ocupado.}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Recorriendo\ por\ trabajo,\ buscamos\ el\ trabajador\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ con\ coste\ mínimo\ que\ no\ esté\ ya\ ocupado.}} \\
 \mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(!}trabajadores$\_$usados\textcolor{BrickRed}{[}j\textcolor{BrickRed}{])}\  \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}minimo\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{$|$$|$}\ m\textcolor{BrickRed}{[}j\textcolor{BrickRed}{][}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}}\ minimo\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
@@ -69,7 +63,7 @@
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ minimo\ \textcolor{BrickRed}{=}\ m\textcolor{BrickRed}{[}j\textcolor{BrickRed}{][}i\textcolor{BrickRed}{];}\  \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}}\ \ \ \  \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Introducimos\ el\ par\ trabajador-trabajo\ al\ vector\ que\ los\ almacena.\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Guardamos\ el\ par\ trabajador-trabajo}} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{TealBlue}{pair\textless{}int,int\textgreater{}}\ par\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \ \ \ \ \ par\textcolor{BrickRed}{.}first\ \textcolor{BrickRed}{=}\ pos$\_$trabajador\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \ \ \ \ \ par\textcolor{BrickRed}{.}second\ \textcolor{BrickRed}{=}\ pos$\_$trabajo\textcolor{BrickRed}{;}\  \\
@@ -81,12 +75,8 @@
 \mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ asignacion$\_$final\textcolor{BrickRed}{;}\  \\
 \mbox{}\textcolor{Red}{\}} \\
 \mbox{} \\
-\mbox{}\textit{\textcolor{Brown}{/*}} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Heurística\ greedyGlobal.\ Busca\ costes\ trabajador-trabajo\ mínimos\ en\ la\ matriz,\ siempre\ que\ ambos\ estén\ libres.\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Una\ vez\ encontrados\ los\ asocia\ como\ pareja\ y\ los\ marca\ como\ utilizados.\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ Esta\ heurística\ tiene\ la\ desventaja\ de\ que\ recorre\ la\ matriz\ entera\ en\ cada\ búsqueda,\ por\ lo\ que\ es\ más\ costosa\ computacionalmente,\ }} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ siendo\ de\ un\ orden\ cúbico.\ }} \\
-\mbox{}\textit{\textcolor{Brown}{*/}}\  \\
+\mbox{}\textit{\textcolor{Brown}{//\ \ Heurística\ greedyGlobal.\ Busca\ mínimos\ globales.\ }} \\
+\mbox{} \\
 \mbox{}\textcolor{TealBlue}{Asignacion}\ \textbf{\textcolor{Black}{greedyGlobal}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\ \textcolor{BrickRed}{**}m\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ size\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \textcolor{TealBlue}{vector\textless{}bool\textgreater{}}\ \textbf{\textcolor{Black}{trabajadores$\_$usados}}\textcolor{BrickRed}{(}size\textcolor{BrickRed}{,}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{);} \\
 \mbox{}\ \ \ \ \textcolor{TealBlue}{vector\textless{}bool\textgreater{}}\ \textbf{\textcolor{Black}{trabajos$\_$usados}}\textcolor{BrickRed}{(}size\textcolor{BrickRed}{,}\ \textbf{\textcolor{Blue}{false}}\textcolor{BrickRed}{);} \\
@@ -97,7 +87,8 @@
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ minimo\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ pos$\_$trabajador\textcolor{BrickRed}{,}\ pos$\_$trabajo\textcolor{BrickRed}{;}\  \\
 \mbox{} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Buscamos\ el\ mínimo\ en\ la\ matriz.\ Corresponderá\ a\ un\ trabajador\ y\ a\ un\ trabajo\ que\ aun\ estén\ libres.\ }} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Buscamos\ el\ mínimo\ en\ la\ matriz.\ Corresponderá}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ a\ un\ trabajador\ y\ a\ un\ trabajo\ que\ aun\ estén\ libres.\ }} \\
 \mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ size\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Si\ el\ trabajador\ no\ está\ usado:\ }} \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(!}trabajadores$\_$usados\textcolor{BrickRed}{[}j\textcolor{BrickRed}{])} \\
@@ -113,8 +104,9 @@
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
 \mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
 \mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
-\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Introducimos\ el\ par\ trabajador-trabajo\ al\ vector\ que\ los\ almacena.\ }} \\
-\mbox{}\ \ \ \ \ \ \ \ asignacion$\_$final\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{push$\_$back}}\textcolor{BrickRed}{(}pair\textcolor{BrickRed}{\textless{}}\textcolor{ForestGreen}{int}\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\textcolor{BrickRed}{\textgreater{}(}pos$\_$trabajador\textcolor{BrickRed}{,}\ pos$\_$trabajo\textcolor{BrickRed}{));} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Guardamos\ el\ par\ trabajador-trabajo}} \\
+\mbox{}\ \ \ \ \ \ \ \ asignacion$\_$final\textcolor{BrickRed}{.}push$\_$back \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}pair\textcolor{BrickRed}{\textless{}}\textcolor{ForestGreen}{int}\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\textcolor{BrickRed}{\textgreater{}(}pos$\_$trabajador\textcolor{BrickRed}{,}\ pos$\_$trabajo\textcolor{BrickRed}{));} \\
 \mbox{} \\
 \mbox{}\ \ \ \ \ \ \ \ trabajadores$\_$usados\textcolor{BrickRed}{[}pos$\_$trabajador\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}}\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \ \ \ \ \ trabajos$\_$usados\textcolor{BrickRed}{[}pos$\_$trabajo\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{true}}\textcolor{BrickRed}{;}\  \\
@@ -129,24 +121,20 @@
 \mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ coste1\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{,}\ coste2\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{,}\ coste3\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ \  \\
 \mbox{} \\
 \mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ n$\_$trabajos\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{5}\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Creamos\ la\ matriz.\ }} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Creación\ de\ la\ matriz.\ }} \\
 \mbox{}\ \ \ \ \textcolor{ForestGreen}{double}\ \textcolor{BrickRed}{**}m\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \ m\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{new}}\ \textcolor{ForestGreen}{double}\textcolor{BrickRed}{*[}n$\_$trabajos\textcolor{BrickRed}{];}\  \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ n$\_$trabajos\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
 \mbox{}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{new}}\ \textcolor{ForestGreen}{double}\textcolor{BrickRed}{[}n$\_$trabajos\textcolor{BrickRed}{];}\  \\
 \mbox{} \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Inicializamos\ la\ matriz.\ }} \\
-\mbox{}\ \ \ \ \textit{\textcolor{Brown}{/*for\ (int\ i\ =\ 0;\ i\ \textless{}\ n$\_$trabajos;\ i++)}} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ \ for\ (int\ j\ =\ 0;\ j\ \textless{}\ n$\_$trabajos;\ j++)}} \\
-\mbox{}\textit{\textcolor{Brown}{\ \ \ \ \ \ \ \ \ \ \ \ m[i][j]\ =\ i+j;\ }} \\
-\mbox{}\textit{\textcolor{Brown}{*/}} \\
 \mbox{}\ \ \ \ \textit{\textcolor{Brown}{//-\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\ Prueba\ para\ una\ matriz\ 5x5\ -\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/--\/-\/-}} \\
 \mbox{} \\
-\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{23}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{12}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{15}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{24}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{10}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{8}\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{6}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{72}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{3}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{12}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{8}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{55}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{15}\textcolor{BrickRed}{;}\  \\
-\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{8}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{2}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{23}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{12}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{15}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{24}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{10}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{8}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{6}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{72}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{3}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{2}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{12}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{2}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{55}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{9}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{3}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{15}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{0}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{7}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{1}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{8}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{2}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{2}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{3}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ m\textcolor{BrickRed}{[}\textcolor{Purple}{4}\textcolor{BrickRed}{][}\textcolor{Purple}{4}\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{4}\textcolor{BrickRed}{;}\  \\
 \mbox{}\ \ \ \  \\
 \mbox{}\ \ \ \  \\
 \mbox{} \\
@@ -167,7 +155,7 @@
 \mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Coste\ total:\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ coste1\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
 \mbox{} \\
 \mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Greedy\ por\ trabajos\ \ }} \\
-\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Resultado\ con\ algoritmo\ greedy\ por\ trabajadores:\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}n}}\texttt{\textcolor{Red}{"{}}}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Resultado\ con\ algoritmo\ greedy\ por\ trabajos:\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}n}}\texttt{\textcolor{Red}{"{}}}\textcolor{BrickRed}{;}\  \\
 \mbox{} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ n$\_$trabajos\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\textcolor{Red}{\{} \\
 \mbox{}\ \ \ \ \ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Trabajador:\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ resultadoTrabajos\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{at}}\textcolor{BrickRed}{(}i\textcolor{BrickRed}{).}first\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}t}}\texttt{\textcolor{Red}{Trabajo:\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ resultadoTrabajos\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{at}}\textcolor{BrickRed}{(}i\textcolor{BrickRed}{).}second\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\  \\
@@ -187,5 +175,4 @@
 \mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Coste\ total:\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ coste3\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ \ \ \ \ \  \\
 \mbox{} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\  \\
-\mbox{}\textcolor{Red}{\}} \\
-\mbox{}
+\mbox{}\textcolor{Red}{\}}

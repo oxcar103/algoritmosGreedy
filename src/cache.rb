@@ -11,8 +11,8 @@ def cache(p, size)
             i_cache = nil
 
             cache.each_with_index { |e, j|
-                # Si no se encuentra una próxima petición se escoge este
-                # elemento (find_index devuelve nil)
+                # Si no se encuentra una próxima petición se escoge
+                # este elemento (find_index devuelve nil)
                 prox_pet = p[i .. p.size-1].find_index(e) || p.size
 
                 if prox_pet > i_a_eliminar
