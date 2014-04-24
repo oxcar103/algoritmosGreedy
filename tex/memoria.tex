@@ -372,6 +372,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 		            \IF{!trabajosUsados[j]}
 		            	\IF{Minimo < 0 || m[i][j] < Minimo}
 		            		\STATE{\texttt{posTrabajo = j}}
+		         			\STATE{\texttt{Minimo = m[i][j]}}
 		            	\ENDIF
 		            \ENDIF
 		          \ENDFOR
@@ -411,6 +412,7 @@ Para resolver este problema, hemos implementado tres algoritmos greedy que se ex
 			               \IF{!trabajosUsados[j]}
 			           	  	 \IF{Minimo < 0 || m[j][k] < Minimo}
 			           			\STATE{\texttt{posTrabajo = k \\ posTrabajador = j}}
+			           			\STATE{\texttt{Minimo = m[j][k]}}
 			           	     \ENDIF
 			           	   \ENDIF
 			             \ENDFOR
