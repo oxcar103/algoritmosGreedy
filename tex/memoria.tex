@@ -248,7 +248,11 @@ valor de forma equivocada, ya que con dos sellos de menor valor se reduce más l
       a una arista del diagrama de Voronoi, y por dualidad de Delaunay, $\overline{pq}$ está en Delaunay.
     \end{proof}
     
-    %Para encontrar la triangulación de Delaunay usaremos... 
+    \subsubsection{Hallar la triangulación de Delaunay}
+    %Para encontrar la triangulación de Delaunay usaremos...
+      Un algoritmo voraz para hallar la triangulación de Delaunay añadiría aristas a la triangulación y comprobaría si estas
+      generan triángulos que satisfacen, a cada paso, la condición de Delaunay.
+      No estudiamos la implementación de este algoritmo.
     
     \begin{algorithm}[H]
 	\begin{algorithmic}[1]
