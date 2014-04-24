@@ -48,7 +48,6 @@ module QAP
             @permutation = (0..(@size-1)).to_a  # Genera un array con valores de 0 a size-1
             @distances = distancedata.each_slice(@size).to_a  # Matriz de distancias
             @weights = weightdata.each_slice(@size).to_a  # Matriz de pesos
-            puts "#{@distances}\n#{@weights}"
         end
 
         # Acceso público a la permutación.
@@ -202,7 +201,6 @@ module QAP
     if __FILE__ == $0
         file = ARGV[0] || gets.chomp
         problema = Instancia.new(file)
-        #problema = Instancia.new("datos.qap/bur26a.dat")
         puts "\nPermutación inicial: \n#{problema}\n"
         
         res = problema.deep_clone
