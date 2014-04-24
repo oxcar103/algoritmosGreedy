@@ -303,27 +303,23 @@ Esto se debe a que hay valores de sellos cuyo doble es mayor que otro valor, es 
     $3+5+\alpha>9 $ y esto es válido $\forall \alpha\in \mathbb{R}:  1<\alpha<3 $ (menor que 3 para que Kruskal generalizado dé
     la solución indicada).
     
-    Esta matriz representa un caso real del problema donde la distancia euclídea entre los clientes
-    viene dada por $m_{i,j}^{-1}$. Así: $(D)_{i,j}=m_{i,j}^{-1}$ y necesitamos $\frac{1}{3}<\alpha<1$\\
+    Veamos que esta matriz representa un caso real del problema donde la distancia euclídea entre los clientes
+    viene dada por $m_{i,j}$. Necesitamos algún $\frac{1}{3}<\alpha<1$\\
     
-    Por ejemplo, en $\mathbb{R}^3$, tomamos: $\left\{\begin{array}{l}
-                                               a=(0,0,0) \\
-                                               b=(0,\frac{1}{3},0)
+    Por ejemplo, en $\mathbb{R}^2$, tomamos: $\left\{\begin{array}{l}
+                                               a=(0,0) \\
+                                               b=(0,3,0)
                                               \end{array}\right.$, de manera que
                                               
-    $b\in \mathbb{S}_{a,\frac{1}{3}}$ (Esfera de centro $a$ y radio $\frac{1}{3}$).
-    Además $\mathbb{S}_{a,\frac{1}{3}}\cap \mathbb{S}_{b,\frac{1}{3}}\neq \emptyset$
+    $b\in \mathbb{S}_{a,3}$ (Esfera de centro $a$ y radio $3$).
+    Además $\mathbb{S}_{a,3}\cap \mathbb{S}_{b,3}\neq \emptyset$
     y tomamos $c$ en dicha intersección\\
     
-    Ahora, como $\frac{2}{5}>\frac{1}{3}$, entonces $\mathbb{S}_{b,\frac{1}{3}}\supset\mathbb{S}_{b,\frac{1}{5}}\cap \mathbb{S}_{c,\frac{1}{5}}\neq \emptyset$
-    y también será $W=\mathbb{S}_{b,\frac{1}{5}}\cap \mathbb{S}_{c,\frac{1}{5}} - \mathbb{S}_{a,\frac{1}{3}}\neq
-\emptyset$, y podemos tomar $d$ en $W$.\\
-
-  Así, $d(a,b)=\alpha^{-1} > \frac{1}{3}$ y $\alpha^{-1} < \frac{2}{3} < 1$ por ser perteneciente a
-     $\mathbb{S}_{b,\frac{1}{3}}$
+    Asimismo $W=\mathbb{S}_{b,5}\cap \mathbb{S}_{c,5}\neq \emptyset$
+    y podemos tomar $d$ en $W$, de manera que $1<d(a,d)<3$.
 
      \begin{center}
-	\includegraphics[width=10cm]{esferas.png}
+	\includegraphics[width=10cm]{ej3.png}
      \end{center}  
      
     Todo esto asegura que el contraejemplo encontrado es válido.
