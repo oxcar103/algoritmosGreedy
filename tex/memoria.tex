@@ -537,11 +537,12 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
     \label{memory}
 \end{algorithm}
 
- El mayor inconveniente de esta heurística frente a las clásicas heurísticas FIFO(First In, First Out), LIFO(Last In, First Out), LRU(Least Recently Used) y LFU(Least Frequently Used) para asignación de memoria caché es que, dado que necesita conocer con anterioridad las peticiones que se le harán, no se puede implementar en un sistema de tiempo real.
+ El mayor inconveniente de esta heurística frente a las clásicas heurísticas FIFO (\textit{First In, First Out}), LIFO (\textit{Last In, First Out}), LRU (\textit{Least Recently Used}) y LFU (\textit{Least Frequently Used}) para asignación de memoria caché es que, dado que necesita conocer con anterioridad las peticiones que se le harán, no se puede implementar en un sistema de tiempo real.
  
   \subsection{Teorema de Bélády}
   Veamos que este algoritmo es óptimo.
   Primero, tenemos que definir lo que es una tabla de expulsiones/inserciones y cuando es reducida.
+
 
   \begin{mydef}
     Una tabla de expulsiones/inserciones es una tabla que refleja el contenido de caché tras cada petición.
