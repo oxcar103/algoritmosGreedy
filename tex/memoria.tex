@@ -497,7 +497,7 @@ clase $i-$ésima y la $j-$ésima no pueden impartirse en el mismo aula.
 
 \subsection{Contraejemplo}
 La existencia de grafos que no se pueden colorear de manera óptima mediante el algoritmo greedy, asegura que también existen clases para
-las que la heurística presentada no proporciona la solución óptima. De hecho, hay casos, como el que se presenta a cotinuación,
+las que la heurística presentada no proporciona la solución óptima. De hecho, hay casos, como el que se presenta a continuación,
 en que el número de colores necesarios para colorear el grafo dependerá del orden de recorrido de sus nodos (esto se traduce en
 el problema de la asignación de aulas en un distinto orden en el input de las clases):
 
@@ -540,8 +540,7 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
  El mayor inconveniente de esta heurística frente a las clásicas heurísticas FIFO (\textit{First In, First Out}), LIFO (\textit{Last In, First Out}), LRU (\textit{Least Recently Used}) y LFU (\textit{Least Frequently Used}) para asignación de memoria caché es que, dado que necesita conocer con anterioridad las peticiones que se le harán, no se puede implementar en un sistema de tiempo real.
  
   \subsection{Teorema de Bélády}
-  Veamos que este algoritmo es óptimo.
-  Primero, tenemos que definir lo que es una tabla de expulsiones/inserciones y cuándo es reducida.
+  Veamos que este algoritmo es óptimo. Para ello, definamos lo que es una tabla de expulsiones/inserciones y cuándo es reducida.
 
 
   \begin{mydef}
