@@ -176,18 +176,22 @@ module QAP
             }
             
             (s+1).times {
+                # Tomamos la ciudad con mayor suma de flujos
                 max_w_index = (0..s).each_with_index.select { |j|
                     !fab_asignada[j[0]]
                 }.collect { |j| 
                     [w[j[0]],j[-1]]
                 }.max[-1]
                 
+                # Tomamos la localización más céntrica
                 min_d_index = (0..s).each_with_index.select { |j|
                     !loc_asignada[j[0]]
                 }.collect { |j| 
                     [d[j[0]],j[-1]]
                 }.min[-1]
                 
+                # Colocamos la ciudad con mayor suma de flujos en
+                # la localización más céntrica
                 qap.permutation[max_w_index] = min_d_index
                 fab_asignada[max_w_index] = true
                 loc_asignada[min_d_index] = true
