@@ -542,11 +542,11 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
   \end{mydef}
   
   \begin{theorem}[Teorema de Bélády]
-    Farthest-in-future es el algoritmo de expulsiones óptimo.
+    Farthest-in-future es el algoritmo de expulsiones óptimo con las condiciones del problema.
   \end{theorem}
 
   \begin{proof}[\textbf{Demostración:}]
-  	Previamente, vamos a probar un lema.
+  	Previamente, vamos a probar un lema y un invariante.
   
 	  \begin{proof}[\textbf{Lema:}]
 	    \textit{
@@ -567,10 +567,60 @@ Asumiremos en el algoritmo que tenemos implementadas una función \texttt{elimin
 	    \end{itemize}
 	    
 	    Y lo que nos queda, es la tabla de expulsiones/inserciones reducida $S'$.
-	    %Completo
+	    
 	  \end{proof}
-
-	%Incompleto
+	
+	\begin{proof}[\textbf{Invariante:}]
+	  \textit{
+	    Existe una tabla reducida óptima $S$ que tras las primeras $j$ peticiones produce la misma planificación de expulsiones que la asociada a Farthest-in-Future $S_{FF}$.
+	  }
+	  
+	  Vamos a demostrarlo por inducción sobre la $j$
+	  
+	  Sea $S$ la tabla reducida óptima y $S_FF$ la asociada a la heurística Farthest-in-Future que satisfacen el invariante en las $j$ peticiones.
+	  Veamos que lo satisfacen en la petición $j+1$:
+	  
+	  \begin{itemize}
+	  	\item Llamemos $d$ al elemento de la petición $j+1$
+	  	\item Como hasta ahora se satisface el invariante, $S$ y $S_{FF}$ tienen el mismo contenido en caché antes de la petición $j+1$.
+	  
+	  	\item \textbf{Caso 1: } $d$ está en caché.\\
+	  	$S$ y $S_{FF}$ no varían, por tanto, se sigue cumpliendo el invariante.
+	  	
+	  	\item \textbf{Caso 2: } $d$ no está en caché pero $S$ y $S_{FF}$ expulsan el mismo elemento. \\
+	  	En este caso, como tenían el mismo contenido, expulsan el mismo elemento e insertan el mismo, claramente siguen cumpliendo el invariante.
+	  	
+	  	\item \textbf{Caso 3: } $d$ no está en caché $S$ expulsa a un elemento que llamaremos $e$ y $S_{FF}$ expulsa a un elemento que llamaremos $f$ con $f \neq e$
+	  	
+	  	Ahora tenemos que ver que tener a $e$ en caché no es peor que tener a $f$
+	  	
+	  	$S_{FF}$ se comporta como $S$ hasta que $S$ va a expulsa a $f$ o se requiere a $e$ o $f$
+	  	
+	  	Sea $k$ la petición que provoca el comportamiento diferente y $g$ el elemento que se requiere.
+	  	
+	  	\item \textbf{Caso 3a: } $g = f$
+	  	Esto es imposible ya que contradice a la heurística Farthest-in-Future.
+	  	
+	  	\item \textbf{Caso 3b: } $g = e$
+	  	El elemento $e$ está en $S$, por tanto, debe sacar un elemento $h$.
+	  	
+	  	\begin{itemize}
+	  	  \item Si $h = f$, $S$ y $S_{FF}$ tendrán la misma caché.
+	  	  
+	  	  \item Si $h \neq f$, podemos sacar $h$ de $S_{FF}$, traer a caché a $e$ y, por el lema previo, transformar la tabla resultante en una reducida. $S$ y $S_{FF}$ tendrán la misma caché.
+	  	\end{itemize}
+	  	\item \textbf{Caso 3c: } $g = e, f$
+	  	\begin{itemize}
+	 	  \item Si $S$ saca a $f$, $S_{FF}$ puede sacar a $e$. $S$ y $S_{FF}$ tendrán la misma caché.
+	 	  
+	 	  \item Si $S$ no saca a $f$, $S_{FF}$ puede comportarse igual que $S$. $S$ y $S_{FF}$ tendrán la misma caché.
+ 		\end{itemize}
+	  	
+	  \end{itemize}
+	  
+	\end{proof}
+	
+	La demostración deriva directamente del invariante.
   \end{proof}
   
   
