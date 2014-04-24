@@ -157,8 +157,8 @@ El código que presentaremos en este ejercicio está escrito en Ruby.
 	  \FORALL{\texttt{i} $\in \{1\ldots s\}$}
 	    \STATE{\texttt{fab\_asignada[i]=true}}
 	    \STATE{\texttt{loc\_asignada[actual.permutacion[i]]=true}}
-	    \STATE{\texttt{max\_w\_index=j w(k,j):}$\max\{w(j,k)\texttt{!fab\_asignada[j]}\}$}
-	    \STATE{\texttt{min\_d\_index=j d(actual.permutacion[k],j):}
+	    \STATE{\texttt{max\_w\_index=j : w(k,j)=}$\max\{w(j,k)\texttt{!fab\_asignada[j]}\}$}
+	    \STATE{\texttt{min\_d\_index=j : d(actual.permutacion[k],j)=}
 	     \qquad$\min\{d(j,p(k))\texttt{!loc\_asignada[j]}\}$}
 	    \STATE{\texttt{actual.permutacion[max\_w\_index]=min\_d\_index}}
 	    \STATE{\texttt{i=max\_w\_index}}
@@ -173,7 +173,7 @@ El código que presentaremos en este ejercicio está escrito en Ruby.
 	\RETURN{qap}
 	\end{algorithmic}
     \caption{Heurística greedy$\approx$Vecino más cercano}
-    \label{monedas}
+    \label{vecino}
 \end{algorithm}  
 \subsubsection{Análisis de eficiencia}
 Sea $n$ el número de instalaciones
@@ -186,6 +186,78 @@ Luego tenemos un bucle que se ejecuta $n$ veces desde 5 hasta 21, y por tanto
 es $n\cdot(n-1)\cdot n = \mathcal{O}(n^3)$
 
 \subsection{Opt-2}
-\subsubsection{Análisis de eficiencia}
+El algoritmo consiste en partir de una permutación, y va tomando todas las posibles
+combinaciones de aristas e intercambiándolas. El algoritmo se ejecutará
+hasta que no se produzca mejora.
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{qap}, instancia del problema \\\
+     	\STATE{\texttt{continue=true}}
+     	\WHILE{\texttt{continue}}
+	  \STATE{\texttt{continue}=true}
+	  \FORALL{\texttt{i} $\in \{0\ldots (\texttt{qap.size}-1)\}$}
+	    \FORALL{\texttt{j} $\in \{(i+1)\ldots (\texttt{qap.size}-1)\}$}
+	      \STATE{\texttt{old\_cost=qap.cost}}
+	      \STATE{\texttt{qap.permutacion[i]=qap.permutacion[j]}}
+	      \STATE{\texttt{qap.permutacion[j]=qap.permutacion[i]}}
+	      \IF{\texttt{old\_cost <= qap.cost}}
+		\STATE{\texttt{qap.permutacion[i]=qap.permutacion[j]}}
+		\STATE{\texttt{qap.permutacion[j]=qap.permutacion[i]}}
+	      \ELSE
+		\STATE{\texttt{continue=true}}
+	      \ENDIF  
+	  \ENDFOR
+	\ENDFOR
+	\ENDWHILE
+	\RETURN{qap}
+	\end{algorithmic}
+    \caption{Heurística 2-OPT}
+    \label{opt2}
+\end{algorithm}  
 
+\subsubsection{Análisis de eficiencia}
+Las líneas 6-13 son \ef(1), y hay dos bucles anidados, que darán eficiencia:
+$\sum_{i=1}^{n} \sum_{j=i+1}^{n} 1 = \sum{i=1}^{n} (n-i)= n^2-n=\mathcal{O}(n^2)$
+
+\subsubsection{Elección de la permutación inicial}
+Para realizar OPT-2, podríamos partir de una permutación inicial no trivial,
+que podríamos generar con cualquiera de las dos heurísticas greedy que se presentan
+en este documento. En ese caso, la eficiencia de OPT-2 sería $\mathcal{O}(\max(n^2,\texttt{eficiencia(greedy)}))$
+
+La idea de esta segunda heurística es colocar la instalación aún no asignada que tiene 
+mayor suma de flujos con el resto de instalaciones, en la localización más
+céntrica aún no asignada, esto es la que tenga menor suma de distancias al resto de 
+localizaciones.
+\subsection{Heurística greedy v2}
+\begin{algorithm}[H]
+	\begin{algorithmic}[1]
+		\REQUIRE \ \\
+        	\texttt{qap}, instancia del problema \\\
+     	\STATE{\texttt{w=[]}}
+     	\STATE{\texttt{d=[]}}
+     	\STATE{\texttt{s = qap.size-1}, número de instalaciones}
+     	\FORALL{\texttt{i} $\in \{0\ldots s\}$}
+	  \STATE{\texttt{w[i]=}$\sum_{j=0}^s\texttt{qap.weight(i,j)}$}
+	  \STATE{\texttt{d[i]=}$\sum_{j=0}^s\texttt{qap.distance(i,j)}$}
+	\ENDFOR
+	\FOR{\texttt{k=0;k<=s;k++}}
+	  \STATE{\texttt{max\_w\_index=j: w[j]=}$\max\{w[i]:\texttt{!fab\_asignada[i]}\}$}
+	  \STATE{\texttt{min\_d\_index=j: d[j]=}$\min\{d[i]:\texttt{!loc\_asignada[i]}\}$}
+	  \STATE{\texttt{qap.permutacion[max\_w\_index]=min\_d\_index}}
+	  \STATE{\texttt{fab\_asignada[max\_w\_index]=true}}
+	  \STATE{\texttt{loc\_asignada[max\_w\_index]=true}}
+	\ENDFOR
+	\RETURN{qap}
+	\end{algorithmic}
+    \caption{Heurística greedy$\approx$Vecino más cercano}
+    \label{greedy2}
+\end{algorithm}  
+\subsubsection{Análisis de eficiencia}
+Las inicializaciones de las líneas 5,6 son \ef(1), y el for 4-7, \ef(n).
+
+Las líneas 11-13 son \ef(1), y la 9 y la 10 \ef(n) cada una. Están en un bucle desde
+las líneas 8-14 que se ejecuta n veces, y que por tanto es $\mathcal{O}(n^2)$.
+
+Luego la eficiencia del segundo greedy es $\mathcal{O}(\max(n,n^2))=\mathcal{O}(n^2)$ 
 \end{document}
