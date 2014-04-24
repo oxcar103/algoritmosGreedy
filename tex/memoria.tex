@@ -147,8 +147,8 @@ La técnica que se seguirá es ir escogiendo la mayor cantidad de monedas del ma
      	%  un diccionario, si queréis lo cambio -David
      	\STATE{Crear un vector \texttt{vuelta}}
 		\FORALL{\texttt{moneda} en \texttt{monedas}}
-			\STATE{\texttt{cantidad} $\gets$ \texttt{precio} / \texttt{moneda}}
-			\STATE{\texttt{precio} $\gets$ \texttt{precio} $-$ \texttt{cantidad} $\times$ \texttt{moneda}}
+			\STATE{\texttt{cantidad} = \texttt{precio} / \texttt{moneda}}
+			\STATE{\texttt{precio} = \texttt{precio} $-$ \texttt{cantidad} $\times$ \texttt{moneda}}
 			\STATE{Añadir [\texttt{moneda}, \texttt{cantidad}] a \texttt{vuelta}}
 		\ENDFOR
 		\RETURN{vuelta}
